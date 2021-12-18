@@ -24,7 +24,7 @@ function randomColor() {
 }
 
 export default function Model(props) {
-  const [difuse, mixchannels] = useLoader(THREE.TextureLoader, ['/Textures/BuildingTexture.webp', '/Textures/Texture_b_mix.webp'])
+  const [difuse, mixchannels,normal] = useLoader(THREE.TextureLoader, ['/Textures/BuildingTexture.webp', '/Textures/Texture_b_mix.webp','/Textures/BuildingTexture.webp'])
 
   const boxHeight = 2
 
@@ -39,7 +39,7 @@ export default function Model(props) {
     []
   )
   const group = useRef()
-  const { nodes, materials } = useGLTF('/models/SMCastle.glb')
+  const { nodes, materials } = useGLTF('/models/Castle.glb')
   const color1 = new THREE.Color(0xffffff)
   color1.setHex(Math.random() * 0xffffff)
   const color2 = new THREE.Color(0xffffff)
@@ -49,9 +49,11 @@ export default function Model(props) {
 
   return (
     <group ref={group} {...props} dispose={null}>
-      <mesh geometry={nodes.SM_Castle.geometry}      castShadow
+      <mesh geometry={nodes.SM_Castle.geometry}    castShadow
           receiveShadow >
-        <standardNodeMaterial side={THREE.DoubleSide} castShadow>
+        <standardNodeMaterial side={THREE.DoubleSide} castShadow  opacity={0}>
+
+          <floatNode attack={'opacity'} value={1}></floatNode>
           <mathNode attach={"color"} method={Nodes.MathNode.MIX} >
             <textureNode attach={"a"} value={difuse} />
             <mathNode attach={"b"} method={Nodes.MathNode.MIX} >
@@ -74,6 +76,11 @@ export default function Model(props) {
               <vector4Node attach={"b"} value={[1, 1, 1, 0]} />
             </mathNode>
           </mathNode >
+          
+            <normalMapNode  value={normal} >
+              <textureNode attach={"a"} />
+            </normalMapNode>
+          
         </standardNodeMaterial>
         
       </mesh>
@@ -81,4 +88,4 @@ export default function Model(props) {
   )
 }
 
-useGLTF.preload('/models/SMCastle.glb')
+useGLTF.preload('/models/Castle.glb')
