@@ -24,7 +24,7 @@ function randomColor() {
 }
 
 export default function Model(props) {
-  const [difuse, mixchannels,normal] = useLoader(THREE.TextureLoader, ['/Textures/BuildingTexture.webp', '/Textures/Texture_b_mix.webp','/Textures/BuildingTexture.webp'])
+  const [difuse, mixchannels, flag, logo] = useLoader(THREE.TextureLoader, ['/Textures/BuildingTexture.webp', '/Textures/Texture_b_mix.webp', '/Textures/Flag.webp', '/Textures/Logo1.webp'])
 
   const boxHeight = 2
 
@@ -52,34 +52,41 @@ export default function Model(props) {
       <mesh geometry={nodes.SM_Castle.geometry}    castShadow
           receiveShadow >
         <standardNodeMaterial side={THREE.DoubleSide} castShadow  opacity={0}>
+        <mathNode attach={"color"} method={Nodes.MathNode.MIX} >
+            <textureNode attach={"b"} value={logo} />
+            <mathNode attach={"a"} method={Nodes.MathNode.MIX} >
+              <textureNode attach={"a"} value={difuse} />
+              <mathNode attach={"b"} method={Nodes.MathNode.MIX} >
+                <colorNode attach={"b"} value={color1} />
+                <operatorNode attach={"a"} op={"*"}>
+                  <mathNode attach={"a"} method={Nodes.MathNode.MIX} >
+                    <colorNode attach={"a"} value={color2} />
+                    <colorNode attach={"b"} value={color3} />
+                    <mathNode attach={"c"} method={Nodes.MathNode.DOT}    >
+                      <textureNode attach={"a"} value={mixchannels} />
+                      <vector4Node attach={"b"} value={[0, 1,0, 0]} />
+                    </mathNode>
+                  </mathNode>
+                  <textureNode attach={"b"} value={flag} />
+              </operatorNode>
 
-          <floatNode attack={'opacity'} value={1}></floatNode>
-          <mathNode attach={"color"} method={Nodes.MathNode.MIX} >
-            <textureNode attach={"a"} value={difuse} />
-            <mathNode attach={"b"} method={Nodes.MathNode.MIX} >
-              <colorNode attach={"b"} value={color1} />
-              <mathNode attach={"a"} method={Nodes.MathNode.MIX} >
-                <colorNode attach={"a"} value={color2} />
-                <colorNode attach={"b"} value={color3} />
+
+
                 <mathNode attach={"c"} method={Nodes.MathNode.DOT}    >
                   <textureNode attach={"a"} value={mixchannels} />
-                  <vector4Node attach={"b"} value={[0, 1,0, 0]} />
+                  <vector4Node attach={"b"} value={[1,0, 0, 0]} />
                 </mathNode>
               </mathNode>
               <mathNode attach={"c"} method={Nodes.MathNode.DOT}    >
                 <textureNode attach={"a"} value={mixchannels} />
-                <vector4Node attach={"b"} value={[1,0, 0, 0]} />
+                <vector4Node attach={"b"} value={[1, 1, 1, 0]} />
               </mathNode>
-            </mathNode>
+            </mathNode >
             <mathNode attach={"c"} method={Nodes.MathNode.DOT}    >
-              <textureNode attach={"a"} value={mixchannels} />
-              <vector4Node attach={"b"} value={[1, 1, 1, 0]} />
-            </mathNode>
-          </mathNode >
-          
-            <normalMapNode  value={normal} >
-              <textureNode attach={"a"} />
-            </normalMapNode>
+                <textureNode attach={"a"} value={logo} />
+                <vector4Node attach={"b"} value={[0, 0, 0, 1]} />
+              </mathNode>
+          </mathNode>
           
         </standardNodeMaterial>
         
