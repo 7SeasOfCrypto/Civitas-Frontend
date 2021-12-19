@@ -40,11 +40,11 @@ export default function Model(props) {
   )
   const group = useRef()
   const { nodes, materials } = useGLTF('/models/Castle.glb')
-  const color1 = new THREE.Color(0xffffff)
+  const color1 = new THREE.Color(0xf00000)
   color1.setHex(Math.random() * 0xffffff)
-  const color2 = new THREE.Color(0xffffff)
+  const color2 = new THREE.Color(0x00ff00)
   color2.setHex(Math.random() * 0xffffff)
-  const color3 = new THREE.Color(0xffffff)
+  const color3 = new THREE.Color(0x0000ff)
   color3.setHex(Math.random() * 0xffffff)
 
   return (
@@ -63,7 +63,7 @@ export default function Model(props) {
                 <colorNode attach={"b"} value={color3} />
                 <mathNode attach={"c"} method={Nodes.MathNode.DOT}    >
                   <textureNode attach={"a"} value={mixchannels} />
-                  <vector4Node attach={"b"} value={[0, 0, 1, 0]} />
+                  <vector4Node attach={"b"} value={[0, 1,0, 0]} />
                 </mathNode>
               </mathNode>
               <mathNode attach={"c"} method={Nodes.MathNode.DOT}    >
