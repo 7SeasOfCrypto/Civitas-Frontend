@@ -11,7 +11,7 @@ const Scene = () => {
     return (
         <>
             <Suspense fallback={null}>
-                <Buildings></Buildings>ººººº
+                <Buildings></Buildings>
             </Suspense>
             <Ground />
             <CreateBuilding />
