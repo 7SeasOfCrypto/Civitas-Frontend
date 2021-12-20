@@ -7,7 +7,7 @@ import { extend, useFrame, useLoader } from "@react-three/fiber"
 import { useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 import * as Nodes from "three/examples/jsm/nodes/Nodes.js"
-import { MeshStandardNodeMaterial } from 'three-stdlib'
+import { FloatNodeUniform, MeshStandardNodeMaterial } from 'three-stdlib'
 
 
 
@@ -24,7 +24,7 @@ function randomColor() {
 }
 
 export default function Model(props) {
-  const [difuse, mixchannels, flag, logo] = useLoader(THREE.TextureLoader, ['/Textures/BuildingTexture.webp', '/Textures/Texture_b_mix.webp', '/Textures/Flag.webp', '/Textures/Logo1.webp'])
+  const [difuse, mixchannels, flag, logo,opacity=1] = useLoader(THREE.TextureLoader, ['/Textures/BuildingTexture.webp', '/Textures/Texture_b_mix.webp', '/Textures/Flag.webp', '/Textures/Logo1.webp'])
 
   const boxHeight = 2
 
@@ -51,7 +51,8 @@ export default function Model(props) {
     <group ref={group} {...props} dispose={null}>
       <mesh geometry={nodes.SM_Castle.geometry}    castShadow
           receiveShadow >
-        <standardNodeMaterial side={THREE.DoubleSide} castShadow  opacity={0}>
+        <standardNodeMaterial side={THREE.DoubleSide} castShadow >
+          
         <mathNode attach={"color"} method={Nodes.MathNode.MIX} >
             <textureNode attach={"b"} value={logo} />
             <mathNode attach={"a"} method={Nodes.MathNode.MIX} >

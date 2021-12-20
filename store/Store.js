@@ -7,6 +7,7 @@ export const useStore = create(set => ({
     {x:20,y:20,Id:4,id_model:1,level:0,completed:true},
     
   ],
+  placeBuilding:{isAdding:true,model:0}
   
   
 }))

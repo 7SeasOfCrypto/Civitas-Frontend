@@ -12,7 +12,6 @@ const Ground = () => {
                 <meshBasicMaterial color="green" />
 
             </mesh>
-            <gridHelper position={[CELL_SIZE*25 , 0, CELL_SIZE*25]} args={[CELL_SIZE*50, 50, `white`, `gray`]} scale={1} divisions={50}/>
         </>
     )
 }
