@@ -13,7 +13,7 @@ const Scene = () => {
                 <Buildings></Buildings>
             </Suspense>
             <Ground />
-            <Controller></Controller>
+            {/*<Controller></Controller>*/}
         </>
 
     )
