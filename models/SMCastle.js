@@ -49,9 +49,10 @@ export default function Model(props) {
 
   return (
     <group ref={group} {...props} dispose={null}>
-      <mesh geometry={nodes.SM_Castle.geometry}    castShadow
+      <mesh geometry={nodes.SM_Castle.geometry}    castShadow transparent 
           receiveShadow >
-        <standardNodeMaterial side={THREE.DoubleSide} castShadow >
+        <standardNodeMaterial side={THREE.DoubleSide} castShadow>
+          <floatNode  attach={'opacity'} value={".4"}></floatNode>
           
         <mathNode attach={"color"} method={Nodes.MathNode.MIX} >
             <textureNode attach={"b"} value={logo} />
