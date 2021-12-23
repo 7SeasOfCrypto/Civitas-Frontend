@@ -7,10 +7,6 @@ import { extend, useFrame, useLoader } from "@react-three/fiber"
 import { useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 import * as Nodes from "three/examples/jsm/nodes/Nodes.js"
-import { FloatNodeUniform, MeshStandardNodeMaterial } from 'three-stdlib'
-
-
-
 
 extend(Nodes)
 function randomColor() {

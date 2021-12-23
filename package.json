@@ -21,9 +21,11 @@
     "use-sound": "^4.0.1"
   },
   "devDependencies": {
+    "babel-plugin-glsl": "^1.0.0",
     "eslint": "8.4.1",
     "eslint-config-next": "12.0.7",
     "file-loader": "^6.2.0",
+    "glslify": "^7.1.1",
     "url-loader": "^4.1.1"
   }
 }
