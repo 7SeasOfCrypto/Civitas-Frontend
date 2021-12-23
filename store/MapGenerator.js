@@ -1,15 +1,32 @@
+import { useStore } from "@react-three/fiber" // POR EL MOMENTO OCUPO LAS POSICIONES DE ESTAS CASAS:
+
 const drawLine =(array,origin,dest,material)=>{
 
     let tempArray=[...array]
     const dir={x:(dest.x-origin.x)>0?1:0,y:(dest.y-origin.y)>0?1:0}
     let point={...origin}
     const length= (dest.x-origin.x)*dir.x+(dest.y-origin.y)*dir.y
-    for (let z=0;z<= length;z++) {
+    for (let z=0 ; z<= length; z++) {
         tempArray[point.x+z*dir.x][point.y+z*dir.y]=material
     }
 
     return  tempArray
 
+}
+
+const isPositionAvailable = (array,builds) => {
+    let tempArray = [...array]
+    const positions = builds.map((build,i) => {
+        let x = build.x;
+        let y = build.y;
+        for(let j = x; j < build.size + x; j++){
+            for(let k = y; k < build.size + y; k++){
+                return tempArray[j][k] = 1;
+            }
+        }
+    })
+
+    return tempArray
 }
 
 const drawRect =(array,origin,dest,material)=>{
@@ -34,19 +51,27 @@ const drawRect =(array,origin,dest,material)=>{
 }
 const EmptyMap=(row,col)=>{
 
-    
-
     return new Array(row).fill().map((value,index)=> new Array(col).fill(0))
 }
 
+const testBuilds = [
+    {x:0,y:0,Id:1,id_model:0,level:0,completed:true,size:3},
+    {x:4,y:3,Id:2,id_model:0,level:0,completed:true,size:3},
+    {x:0,y:3,Id:3,id_model:0,level:0,completed:true,size:3},
+    {x:20,y:20,Id:4,id_model:1,level:0,completed:true,size:3},
+]
 
 export const mapGenerator=(row,col)=>{
 
     const map=EmptyMap(row,col)
-    
+    const newMap = EmptyMap(row,col)
+
     let maproad=drawRect(map,{x:0,y:0},{x:7,y:7},1)
     maproad=drawLine(maproad,{x:1,y:1},{x:1,y:10},2)
     
+    console.log(newMap)
+    const res = isPositionAvailable(newMap,testBuilds)
+
     return maproad
 
 }
