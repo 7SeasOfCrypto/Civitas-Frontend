@@ -3,7 +3,7 @@ import { Suspense } from 'react'
 import Controller from './controller'
 import Ground from './Ground'
 import Buildings from './Buildings'
-
+import Level from '@/models/level'
 
 
 const Scene = () => {
@@ -12,7 +12,9 @@ const Scene = () => {
             <Suspense fallback={null}>
                 <Buildings></Buildings>
             </Suspense>
-            <Ground />
+            <Suspense fallback={null}>
+                <Ground />
+                </Suspense>
             <Controller></Controller>
         </>
 
