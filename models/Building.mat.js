@@ -6,7 +6,7 @@ import * as Nodes from "three/examples/jsm/nodes/Nodes.js"
 
 const Material = () => {
 
-    const [difuse, mixchannels] = useLoader(THREE.TextureLoader, ['/Textures/BuildingTexture.webp', '/Textures/Texture_b_mix.webp'])
+    const [difuse, mixchannels] = useLoader(THREE.TextureLoader, ['/Textures/BuildingTexture.webp', '/Textures/Texture_b_mix.webp','/Textures/Flag.webp', '/Textures/Logo1.webp'])
 
     const boxHeight = 2
     const color1 = new THREE.Color(0xffffff)
@@ -32,12 +32,15 @@ const Material = () => {
                 <textureNode attach={"a"} value={difuse} />
                 <mathNode attach={"b"} method={Nodes.MathNode.MIX} >
                     <colorNode attach={"b"} value={color1} />
+                    
                     <mathNode attach={"a"} method={Nodes.MathNode.MIX} >
-                        <colorNode attach={"a"} value={color2} />
-                        <colorNode attach={"b"} value={color3} />
-                        <mathNode attach={"c"} method={Nodes.MathNode.DOT}    >
-                            <textureNode attach={"a"} value={mixchannels} />
-                            <vector4Node attach={"b"} value={[0, 0, 1, 0]} />
+                        <mathNode>
+                            <colorNode attach={"a"} value={color2} />
+                            <colorNode attach={"b"} value={color3} />
+                            <mathNode attach={"c"} method={Nodes.MathNode.DOT}    >
+                                <textureNode attach={"a"} value={mixchannels} />
+                                <vector4Node attach={"b"} value={[0, 0, 1, 0]} />
+                            </mathNode>
                         </mathNode>
                     </mathNode>
                     <mathNode attach={"c"} method={Nodes.MathNode.DOT}    >

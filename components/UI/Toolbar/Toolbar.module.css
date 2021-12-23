@@ -1,0 +1,44 @@
+
+.toolbarContainer {
+    display:flex;
+    position:absolute;
+    align-items: center;
+    border:1px solid black;
+    width:100%;
+    height: 10vw;
+    padding: 0 2rem;
+    background:white;
+    bottom:0rem;
+}
+
+.buildingOptionsContainer {
+    align-items: center;
+    text-align:center;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    border:1px solid black;
+    height:80%;
+    width:25%;
+}
+
+.buildingOptionsContainer button {
+    padding: .5rem 1rem;
+    cursor:pointer;
+    outline: none;
+    font-size: 1rem;
+}
+
+.buildingOptionsContainer > button {
+    padding: .5rem 1rem;
+    cursor:pointer;
+    margin: 0 .5rem;
+}
+
+.buildingOptionsContainer h4 {
+    margin-bottom: 1rem;
+    position: absolute;
+    top:0rem;
+    color:black;
+    background: white;
+}

@@ -1,10 +1,10 @@
 
 import { Suspense } from 'react'
 import Controller from './controller'
-import SMCastle from '@/models/SMCastle'
 import Ground from './Ground'
 import Buildings from './Buildings'
-import { CELL_SIZE } from 'constants'
+
+
 
 const Scene = () => {
     return (
@@ -13,7 +13,7 @@ const Scene = () => {
                 <Buildings></Buildings>
             </Suspense>
             <Ground />
-            {/*<Controller></Controller>*/}
+            <Controller></Controller>
         </>
 
     )

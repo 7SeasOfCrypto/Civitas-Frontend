@@ -7,7 +7,7 @@ import { extend, useFrame, useLoader } from "@react-three/fiber"
 import { useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 import * as Nodes from "three/examples/jsm/nodes/Nodes.js"
-import { MeshStandardNodeMaterial } from 'three-stdlib'
+import { FloatNodeUniform, MeshStandardNodeMaterial } from 'three-stdlib'
 
 
 
@@ -24,7 +24,7 @@ function randomColor() {
 }
 
 export default function Model(props) {
-  const [difuse, mixchannels,normal] = useLoader(THREE.TextureLoader, ['/Textures/BuildingTexture.webp', '/Textures/Texture_b_mix.webp','/Textures/BuildingTexture.webp'])
+  const [difuse, mixchannels, flag, logo,opacity=1] = useLoader(THREE.TextureLoader, ['/Textures/BuildingTexture.webp', '/Textures/Texture_b_mix.webp', '/Textures/Flag.webp', '/Textures/Logo1.webp'])
 
   const boxHeight = 2
 
@@ -49,37 +49,46 @@ export default function Model(props) {
 
   return (
     <group ref={group} {...props} dispose={null}>
-      <mesh geometry={nodes.SM_Castle.geometry}    castShadow
+      <mesh geometry={nodes.SM_Castle.geometry}    castShadow transparent 
           receiveShadow >
-        <standardNodeMaterial side={THREE.DoubleSide} castShadow  opacity={0}>
+        <standardNodeMaterial side={THREE.DoubleSide} castShadow>
+          <floatNode  attach={'opacity'} value={".4"}></floatNode>
+          
+        <mathNode attach={"color"} method={Nodes.MathNode.MIX} >
+            <textureNode attach={"b"} value={logo} />
+            <mathNode attach={"a"} method={Nodes.MathNode.MIX} >
+              <textureNode attach={"a"} value={difuse} />
+              <mathNode attach={"b"} method={Nodes.MathNode.MIX} >
+                <colorNode attach={"b"} value={color1} />
+                <operatorNode attach={"a"} op={"*"}>
+                  <mathNode attach={"a"} method={Nodes.MathNode.MIX} >
+                    <colorNode attach={"a"} value={color2} />
+                    <colorNode attach={"b"} value={color3} />
+                    <mathNode attach={"c"} method={Nodes.MathNode.DOT}    >
+                      <textureNode attach={"a"} value={mixchannels} />
+                      <vector4Node attach={"b"} value={[0, 1,0, 0]} />
+                    </mathNode>
+                  </mathNode>
+                  <textureNode attach={"b"} value={flag} />
+              </operatorNode>
 
-          <floatNode attack={'opacity'} value={1}></floatNode>
-          <mathNode attach={"color"} method={Nodes.MathNode.MIX} >
-            <textureNode attach={"a"} value={difuse} />
-            <mathNode attach={"b"} method={Nodes.MathNode.MIX} >
-              <colorNode attach={"b"} value={color1} />
-              <mathNode attach={"a"} method={Nodes.MathNode.MIX} >
-                <colorNode attach={"a"} value={color2} />
-                <colorNode attach={"b"} value={color3} />
+
+
                 <mathNode attach={"c"} method={Nodes.MathNode.DOT}    >
                   <textureNode attach={"a"} value={mixchannels} />
-                  <vector4Node attach={"b"} value={[0, 1,0, 0]} />
+                  <vector4Node attach={"b"} value={[1,0, 0, 0]} />
                 </mathNode>
               </mathNode>
               <mathNode attach={"c"} method={Nodes.MathNode.DOT}    >
                 <textureNode attach={"a"} value={mixchannels} />
-                <vector4Node attach={"b"} value={[1,0, 0, 0]} />
+                <vector4Node attach={"b"} value={[1, 1, 1, 0]} />
               </mathNode>
-            </mathNode>
+            </mathNode >
             <mathNode attach={"c"} method={Nodes.MathNode.DOT}    >
-              <textureNode attach={"a"} value={mixchannels} />
-              <vector4Node attach={"b"} value={[1, 1, 1, 0]} />
-            </mathNode>
-          </mathNode >
-          
-            <normalMapNode  value={normal} >
-              <textureNode attach={"a"} />
-            </normalMapNode>
+                <textureNode attach={"a"} value={logo} />
+                <vector4Node attach={"b"} value={[0, 0, 0, 1]} />
+              </mathNode>
+          </mathNode>
           
         </standardNodeMaterial>
         
