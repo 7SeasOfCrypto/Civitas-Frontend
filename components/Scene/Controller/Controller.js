@@ -1,8 +1,16 @@
-import { OrbitControls } from "@react-three/drei";
-
+import { MapControls } from "@react-three/drei";
+import {MOUSE} from 'three'
 const Controller = () => {
     return (
-        <OrbitControls> </OrbitControls>
+        <MapControls
+        mouseButtons={{
+            LEFT: MOUSE.LEFT,
+            RIGHT:MOUSE.RIGHT,
+        }}
+        enableZoom={true}
+        minPolarAngle={1}
+        maxPolarAngle={1}
+        />
     );
 };
 

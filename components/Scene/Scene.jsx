@@ -3,8 +3,8 @@ import { Suspense } from 'react'
 import Controller from './controller'
 import Ground from './Ground'
 import Buildings from './Buildings'
-
-
+import Level from '@/models/level'
+import Reference from '@/models/Sample_Map_Reference'
 
 const Scene = () => {
     return (
@@ -12,7 +12,10 @@ const Scene = () => {
             <Suspense fallback={null}>
                 <Buildings></Buildings>
             </Suspense>
-            <Ground />
+            <Suspense fallback={null}>
+                <Ground />
+                <Level></Level>
+                </Suspense>
             <Controller></Controller>
         </>
 

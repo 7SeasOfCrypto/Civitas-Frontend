@@ -1,7 +1,8 @@
 import { models } from 'models'
 import {useStore} from 'store'
+import {useSpring} from '@react-spring/three'
 import {CELL_SIZE} from 'constants'
-
+import {useGesture } from '@use-gesture/react'
 const Buildings = () => {
     const { listBuild } = useStore()
     
@@ -11,7 +12,6 @@ const Buildings = () => {
         const modelData= completed? complete[level]:build[level]
         const {size,model,colored} =modelData
         const Model=model
-
         return (<Model  position={[(x+size/2)*CELL_SIZE,0,(y+size/2)*CELL_SIZE]} key={index} />)
     })
     return(ArrayBuild)
