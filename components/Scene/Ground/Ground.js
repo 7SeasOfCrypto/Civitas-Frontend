@@ -6,10 +6,11 @@ import CreateBuilding from '../CreateBuilding'
 
 const tempObject = new THREE.Object3D()
 const tempColor = new THREE.Color()
+const colors = [0x00ff00, 0xffffff, 0xff0000]
 const Ground = ({ capture = false, setHover }) => {
     const [cellHover, setCellHover] = useState({ x: 0, z: 0 })
     const { map } = useStore()
-    const colors = [0x00ff00, 0xffffff, 0xff0000]
+    
 
     useEffect(() => {
         let i = 0
@@ -25,7 +26,7 @@ const Ground = ({ capture = false, setHover }) => {
 
         meshRef.current.instanceMatrix.needsUpdate = true
 
-    }, [colorArray])
+    }, [colorArray,map])
 
     const cellHoverHandler = (e) => {
         const cellid = e.instanceId
