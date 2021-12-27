@@ -9,7 +9,7 @@ export default function Model(props) {
   const group = useRef()
   const { nodes, materials } = useGLTF('/models/Sample_Map_Reference.glb')
   return (
-    <group ref={group} {...props} position={[100,0,70]} scale={} dispose={null}>
+    <group ref={group} {...props} position={[100,0,70]}  dispose={null}>
       <group position={[1, 7.3, -2]} rotation={[-2.72, 0.3, 2.09]} scale={2.5}>
         <directionalLight intensity={4} decay={2} rotation={[0, -1.57, 0]} />
       </group>

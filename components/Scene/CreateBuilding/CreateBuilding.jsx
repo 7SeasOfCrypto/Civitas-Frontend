@@ -19,7 +19,7 @@ const placeMarker = (size) => {
 const CreateBuilding = ({ cellHover }) => {
     const { isAdding, model } = useStore(state => state.placeBuilding)
     const [dragPosition, setDragPosition] = useState({ x: 1, z: 1 })
-    const size = { width: 4, height: 4 }
+    const size = { width: 3, height: 3 }
     const { width, height } = size
     const gridl = placeMarker(size)
     const minposX = width % 2 === 0 ? (width - 2) / 2 : (width - 1) / 2
