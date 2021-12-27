@@ -21,7 +21,7 @@ const isPositionAvailable = (array,builds) => {
         let y = build.y;
         for(let j = x; j < build.size + x; j++){
             for(let k = y; k < build.size + y; k++){
-                return tempArray[j][k] = 1;
+                tempArray[j][k] = 1;
             }
         }
     })
