@@ -15,8 +15,7 @@ const Scene = () => {
             <Suspense fallback={null}>
                 <Ground />
                 <Level></Level>
-                
-            </Suspense>
+                </Suspense>
             <Controller></Controller>
         </>
 

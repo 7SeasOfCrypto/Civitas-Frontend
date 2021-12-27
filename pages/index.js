@@ -1,7 +1,7 @@
-import Head from 'next/head'
-import Image from 'next/image'
+import isPositionAvailable from '../utils/isPositionAvailable'
 import styles from '../styles/Home.module.css'
-
+import Toolbar from '@/components/UI/Toolbar'
+import Head from 'next/head'
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -14,6 +14,7 @@ export default function Home() {
       
         
 
+      <Toolbar/>
     </div>
   )
 }
