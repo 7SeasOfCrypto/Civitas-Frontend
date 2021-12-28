@@ -1,3 +1,12 @@
+@font-face {
+  font-family: 'CivitaShape';
+  src: url('/fonts/icomoon.eot') format('embedded-opentype'), /* Internet Explorer */
+  url('/fonts/icomoon.woff') format('woff'), /* Pretty Modern Browsers */
+  url('/fonts/icomoon.ttf')  format('truetype'), /* Safari, Android, iOS */
+  url('/fonts/icomoon.svg') format('svg'); /* Legacy iOS */
+}
+
+
 html,
 body {
   padding: 0;
