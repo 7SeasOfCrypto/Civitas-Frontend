@@ -31,19 +31,19 @@ const EmptyMap=(row,col)=>{
 const testBuilds = [
     {x:0,y:0,Id:1,id_model:0,level:0,completed:true,size:3},
     {x:4,y:3,Id:2,id_model:0,level:0,completed:true,size:3},
-    {x:0,y:3,Id:3,id_model:0,level:0,completed:true,size:3},
+    {x:0,y:8,Id:3,id_model:0,level:0,completed:true,size:3},
     {x:20,y:20,Id:4,id_model:1,level:0,completed:true,size:3},
 ]
 
 export const mapGenerator=(row,col)=>{
 
     const map=EmptyMap(row,col)
-    const newMap = EmptyMap(row,col)
+ 
 
     let maproad=drawRect(map,{x:0,y:0},{x:7,y:7},1)
     maproad=drawLine(maproad,{x:1,y:1},{x:1,y:10},2)
-    
-    
+    maproad=drawLine(maproad,{x:2,y:2},{x:2,y:10},2)
+
     
     //const res = isPositionAvailable(newMap,testBuilds)
 
