@@ -10,6 +10,40 @@ const drawLine =(array,origin,dest,material)=>{
     }
     return  tempArray
 }
+
+
+const isPositionAvailable = (array,builds) => {
+    let tempArray = [...array]
+    builds.map((build,i) => {
+        let x = build.x;
+        let y = build.y;
+
+        for(let j = x; j < build.row + x; j++){
+            for(let k = y; k < build.col + y; k++){
+                tempArray[j][k] = 1;
+            }
+        }
+    })
+
+    return tempArray
+}
+/*const isPositionAvailable = (array,builds) => {
+    let tempArray = [...array]
+    const positions = builds.map((build,i) => {
+        let x = build.x;
+        let y = build.y;
+        for(let j = x; j < build.row + x; j++){
+            for(let k = y; k < build.col + y; k++){
+                tempArray[j][k] = 1;
+            }
+        }
+    })
+
+    return tempArray
+}*/
+
+
+
 const drawRect =(array,origin,dest,material)=>{
     let tempArray=[...array]
     const width=dest.x-origin.x
@@ -29,24 +63,37 @@ const EmptyMap=(row,col)=>{
 }
 
 const testBuilds = [
+<<<<<<< HEAD
+    {x:0,y:0,Id:1,id_model:0,level:0,completed:true,row:3,col:3},
+    {x:4,y:3,Id:2,id_model:0,level:0,completed:true,row:3,col:3},
+    {x:0,y:3,Id:3,id_model:0,level:0,completed:true,row:3,col:3},
+    {x:20,y:20,Id:4,id_model:1,level:0,completed:true,row:3,col:3},
+=======
     {x:0,y:0,Id:1,id_model:0,level:0,completed:true,size:3},
     {x:4,y:3,Id:2,id_model:0,level:0,completed:true,size:3},
-    {x:0,y:3,Id:3,id_model:0,level:0,completed:true,size:3},
+    {x:0,y:8,Id:3,id_model:0,level:0,completed:true,size:3},
     {x:20,y:20,Id:4,id_model:1,level:0,completed:true,size:3},
+>>>>>>> 66015af7b3e938cdf53ab7814ed6f5433b07a01c
 ]
 
 export const mapGenerator=(row,col)=>{
 
     const map=EmptyMap(row,col)
-    const newMap = EmptyMap(row,col)
+ 
 
     let maproad=drawRect(map,{x:0,y:0},{x:7,y:7},1)
     maproad=drawLine(maproad,{x:1,y:1},{x:1,y:10},2)
+<<<<<<< HEAD
     
-    
+    const res = isPositionAvailable(newMap,testBuilds)
+    console.log(res)
+=======
+    maproad=drawLine(maproad,{x:2,y:2},{x:2,y:10},2)
+
     
     //const res = isPositionAvailable(newMap,testBuilds)
 
+>>>>>>> 66015af7b3e938cdf53ab7814ed6f5433b07a01c
     return maproad
 
 }

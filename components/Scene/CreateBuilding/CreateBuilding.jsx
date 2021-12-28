@@ -23,9 +23,13 @@ const CreateBuilding = ({ cellHover }) => {
     const { width, height } = size
     const gridl = placeMarker(size)
     const minposX = width % 2 === 0 ? (width - 2) / 2 : (width - 1) / 2
+    const maxposX= width % 2 === 0 ? 49-(width - 2) / 2 : 49-(width - 1) / 2
+    console.log(maxposX)
+
     const minposZ = height % 2 === 0 ? (height - 2) / 2 : (height - 1) / 2
-    const pivotX = cellHover.x < minposX ? minposX * CELL_SIZE + CELL_SIZE / 2 : cellHover.x * CELL_SIZE + CELL_SIZE / 2
-    const pivotZ = cellHover.z < minposX ? minposZ * CELL_SIZE + CELL_SIZE / 2 : cellHover.z * CELL_SIZE + CELL_SIZE / 2
+    const maxposZ= height % 2 === 0 ? 49-(height - 2) / 2 : 49-(height - 1) / 2
+    const pivotX = cellHover.x < minposX ? minposX * CELL_SIZE + CELL_SIZE / 2 : cellHover.x>maxposX? maxposX* CELL_SIZE+CELL_SIZE / 2: cellHover.x * CELL_SIZE + CELL_SIZE / 2
+    const pivotZ = cellHover.z < minposX ? minposZ * CELL_SIZE + CELL_SIZE / 2 : cellHover.z>maxposZ? maxposZ*CELL_SIZE+CELL_SIZE/2 :cellHover.z * CELL_SIZE + CELL_SIZE / 2
 
     if (isAdding)
         return (
@@ -34,7 +38,7 @@ const CreateBuilding = ({ cellHover }) => {
                     {gridl}
                 </group>
                 <gridHelper
-                    position={[CELL_SIZE * 25, 0, CELL_SIZE * 25]}
+                    position={[CELL_SIZE * 25, 1, CELL_SIZE * 25]}
                     args={[CELL_SIZE * 50, 50, `white`, `gray`]}
                     scale={1}
                     divisions={50}

@@ -18,7 +18,7 @@ const Ground = ({ capture = false, setHover }) => {
             for (let k = 0; k < GRID_ROW; k++) {
                 const id = j * GRID_COL + k
                 tempObject.position.set(CELL_SIZE / 2 + j * CELL_SIZE, 0, CELL_SIZE / 2 + k * CELL_SIZE)
-                tempColor.set(colors[map[49 - j][k]]).toArray(colorArray, id * 3)
+                tempColor.set(colors[map[j][k]]).toArray(colorArray, id * 3)
                 tempObject.updateMatrix()
                 meshRef.current.setMatrixAt(id, tempObject.matrix)
             }
@@ -41,7 +41,7 @@ const Ground = ({ capture = false, setHover }) => {
         <>
             <CreateBuilding cellHover={cellHover} />
             <instancedMesh ref={meshRef} args={[null, null, 2500]} onPointerMove={cellHoverHandler}>
-                <boxGeometry args={[CELL_SIZE/2, .5, CELL_SIZE/2]}>
+                <boxGeometry args={[CELL_SIZE, .5, CELL_SIZE]}>
                     <instancedBufferAttribute attachObject={['attributes', 'color']} args={[colorArray, 3]} />
                 </boxGeometry>
                 <meshPhongMaterial vertexColors={THREE.VertexColors} />
