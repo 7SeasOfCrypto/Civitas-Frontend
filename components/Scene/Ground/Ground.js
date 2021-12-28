@@ -6,20 +6,19 @@ import CreateBuilding from '../CreateBuilding'
 
 const tempObject = new THREE.Object3D()
 const tempColor = new THREE.Color()
+const colors = [0x00ff00, 0xffffff, 0xff0000]
 const Ground = ({ capture = false, setHover }) => {
     const [cellHover, setCellHover] = useState({ x: 0, z: 0 })
-    const {map}=useStore()
-    const colors=[0x00ff00,0xffffff,0xff0000]
+    const { map } = useStore()
+    
 
     useEffect(() => {
         let i = 0
         for (let j = 0; j < GRID_COL; j++) {
             for (let k = 0; k < GRID_ROW; k++) {
-                //console.log(j, k)
                 const id = j * GRID_COL + k
                 tempObject.position.set(CELL_SIZE / 2 + j * CELL_SIZE, 0, CELL_SIZE / 2 + k * CELL_SIZE)
-                //tempColor.set((j + k) % 2 === 0 ? 0x00ff00 : 0xff0000).toArray(colorArray, id * 3)
-                tempColor.set(colors[map[49-j][k]]).toArray(colorArray, id * 3)
+                tempColor.set(colors[map[49 - j][k]]).toArray(colorArray, id * 3)
                 tempObject.updateMatrix()
                 meshRef.current.setMatrixAt(id, tempObject.matrix)
             }
@@ -27,7 +26,7 @@ const Ground = ({ capture = false, setHover }) => {
 
         meshRef.current.instanceMatrix.needsUpdate = true
 
-    }, [colorArray])
+    }, [colorArray,map])
 
     const cellHoverHandler = (e) => {
         const cellid = e.instanceId
@@ -42,31 +41,30 @@ const Ground = ({ capture = false, setHover }) => {
         <>
             <CreateBuilding cellHover={cellHover} />
             <instancedMesh ref={meshRef} args={[null, null, 2500]} onPointerMove={cellHoverHandler}>
-                <boxGeometry args={[CELL_SIZE, .5, CELL_SIZE]}>
-                    <instancedBufferAttribute 
-                    attachObject={['attributes', 'color']} 
-                    args={[colorArray, 3]} />
-                </boxGeometry>
-                <meshPhongMaterial vertexColors={THREE.VertexColors} />
-            </instancedMesh>
-        </>
-    )
-}
-
-
-function createInstance (material,array,matId){
-
-    return (
-
-        <instancedMesh ref={meshRef} args={[null, null, 2500]} onPointerMove={cellHoverHandler}>
-                <boxGeometry args={[CELL_SIZE, .5, CELL_SIZE]}>
+                <boxGeometry args={[CELL_SIZE/2, .5, CELL_SIZE/2]}>
                     <instancedBufferAttribute attachObject={['attributes', 'color']} args={[colorArray, 3]} />
                 </boxGeometry>
                 <meshPhongMaterial vertexColors={THREE.VertexColors} />
             </instancedMesh>
 
+        </>
     )
-    
+}
+
+
+function createInstance(material, array, matId) {
+
+    return (
+
+        <instancedMesh ref={meshRef} args={[null, null, 2500]} onPointerMove={cellHoverHandler}>
+            <boxGeometry args={[CELL_SIZE, .5, CELL_SIZE]}>
+                <instancedBufferAttribute attachObject={['attributes', 'color']} args={[colorArray, 3]} />
+            </boxGeometry>
+            <meshPhongMaterial vertexColors={THREE.VertexColors} />
+        </instancedMesh>
+
+    )
+
 
 
 }

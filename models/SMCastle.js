@@ -44,6 +44,10 @@ export default function Model(props) {
   color3.setHex(Math.random() * 0xffffff)
 
   return (
+
+
+
+
     <group ref={group} {...props} dispose={null}>
       <mesh geometry={nodes.SM_Castle.geometry}    castShadow transparent 
           receiveShadow >

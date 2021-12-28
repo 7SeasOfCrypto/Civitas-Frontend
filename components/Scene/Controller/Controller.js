@@ -1,6 +1,10 @@
 import { MapControls } from "@react-three/drei";
 import {MOUSE} from 'three'
+import { useThree } from "@react-three/fiber";
 const Controller = () => {
+    console.log(MOUSE)
+    const {camera} = useThree();
+    console.log(camera)
     return (
         <MapControls
         mouseButtons={{
