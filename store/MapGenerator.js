@@ -24,6 +24,14 @@ const drawRect =(array,origin,dest,material)=>{
     return  tempArray
 
 }
+const drawPoint=(array,point,material)=>{
+    let tempArray=[...array]
+    tempArray[point.x][point.y]=material
+    return tempArray
+
+
+}
+
 const EmptyMap=(row,col)=>{
     return new Array(row).fill().map((value,index)=> new Array(col).fill(0))
 }
