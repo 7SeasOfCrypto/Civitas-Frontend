@@ -1,22 +1,17 @@
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
-import * as Three from 'three'
+import * as three from 'three'
 
 
 export default function Model(props) {
   const group = useRef()
-  const { nodes, materials } = useGLTF('/models/levelmap.glb')
+  const { nodes, materials } = useGLTF('/models/map.glb')
+  materials.PipoMaterial.side = three.DoubleSide
   return (
-    <group ref={group} {...props} dispose={null}>
-      <mesh
-        geometry={nodes['0_SM_FloatingIsland_S2_26_StaticMeshComponent0'].geometry}
-        scale={[1.3,1,1.3 ]}
-        position={[100, -2.7, 120]}
-      >
-<meshStandardMaterial  color={'green'} side={Three.DoubleSide} />
-
-      </mesh>
-      
+    <group ref={group} {...props} position = {[40,-15,0]} dispose={null}>
+    <group rotation = {[0,-Math.PI/4,0]}>
+  <mesh geometry={nodes.PipoIsland.geometry} material={materials.PipoMaterial} />
+   </group>
     </group>
   )
 }

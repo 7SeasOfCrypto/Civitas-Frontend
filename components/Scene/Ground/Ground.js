@@ -38,7 +38,7 @@ const Ground = ({ capture = false, setHover }) => {
     }
 
     const meshRef = useRef(undefined)
-    const colorArray = useMemo(() => Float32Array.from(new Array(2500).fill().flatMap((_, i) => tempColor.set(0x00ff00).toArray())), [])
+    const colorArray = useMemo(() => Float32Array.from(new Array(2500).fill().flatMap((_, i) => tempColor.set(0xff0000).toArray())), [])
     return (
         <>
             <CreateBuilding cellHover={cellHover} />
