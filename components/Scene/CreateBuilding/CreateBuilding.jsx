@@ -38,8 +38,8 @@ const CreateBuilding = ({ cellHover }) => {
                     {gridl}
                 </group>
                 <gridHelper
-                    position={[CELL_SIZE * 25, 1, CELL_SIZE * 25]}
-                    args={[CELL_SIZE * 50, 50, `white`, `gray`]}
+                    position={[CELL_SIZE * 25, 0.3, CELL_SIZE * 25]}
+                    args={[CELL_SIZE * 50, 50, `white`, `black`]}
                     scale={1}
                     divisions={50}
                 />
