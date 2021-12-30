@@ -6,7 +6,7 @@ import CreateBuilding from '../CreateBuilding'
 
 const tempObject = new THREE.Object3D()
 const tempColor = new THREE.Color()
-const colors = [0x00ff00, 0xffffff, 0xff0000]
+const colors = [0xA0A0A0, 0x006CFF, 0xFF0000, 0x2AFF00, 0x00FFCD, 0xFF00E8, 0xFFC100, 0xA200FF]
 const Ground = ({ capture = false, setHover }) => {
     const [cellHover, setCellHover] = useState({ x: 0, z: 0 })
     const { map } = useStore()

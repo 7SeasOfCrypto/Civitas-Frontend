@@ -2,7 +2,7 @@ import create from 'zustand'
 import {mapGenerator} from './MapGenerator'
 export const useStore = create(set => ({
   listBuild:[
-    {x:1,y:1,Id:1,id_model:0,level:0,completed:true},
+    //{x:1,y:1,Id:1,id_model:0,level:0,completed:true},
 
   ],
 
