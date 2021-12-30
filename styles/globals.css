@@ -5,7 +5,7 @@
   url('/fonts/icomoon.ttf')  format('truetype'), /* Safari, Android, iOS */
   url('/fonts/icomoon.svg') format('svg'); /* Legacy iOS */
 }
-
+@import url('https://fonts.googleapis.com/css2?family=Carter+One&family=Quicksand:wght@500&display=swap');
 
 html,
 body {
@@ -24,4 +24,5 @@ a {
   box-sizing: border-box;
   padding: 0;
   margin:0;
+  user-select: none;
 }

@@ -58,11 +58,12 @@ const drawRect =(array,origin,dest,material)=>{
     return  tempArray
 
 }
-
-const drawPoint =(array,point,material)=>{
+const drawPoint=(array,point,material)=>{
     let tempArray=[...array]
     tempArray[point.x][point.y]=material
     return tempArray
+
+
 }
 
 const EmptyMap=(row,col)=>{
@@ -80,7 +81,7 @@ export const mapGenerator=(row,col)=>{
 
     const map=EmptyMap(row,col)
  
-    //=============
+   //=============
     //Ground IDs:
     //0 (Null):    None - grey - A0A0A0
     //1:    Edificable, movible, null. Color: Blue - 006CFF
@@ -235,6 +236,10 @@ export const mapGenerator=(row,col)=>{
 
     //4
     maproad=drawRect(maproad,{x:17,y:44},{x:19,y:49},4) //Camino Castillo
+    
+    //const res = isPositionAvailable(newMap,testBuilds)
+
+    return maproad
     
     //const res = isPositionAvailable(newMap,testBuilds)
 

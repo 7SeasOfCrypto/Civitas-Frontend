@@ -2,6 +2,30 @@ import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import * as Three from 'three'
 
+
+export default function Model(props) {
+  const group = useRef()
+  const { nodes, materials } = useGLTF('/models/levelmap.glb')
+  return (
+    <group ref={group} {...props} dispose={null}>
+      <mesh
+        geometry={nodes['0_SM_FloatingIsland_S2_26_StaticMeshComponent0'].geometry}
+        scale={[1.3,1,1.3 ]}
+        position={[100, -2.7, 120]}
+      >
+<meshStandardMaterial  color={'green'} side={Three.DoubleSide} />
+
+      </mesh>
+      
+    </group>
+  )
+}
+
+useGLTF.preload('/models/levelmap.glb')
+
+
+
+/*
 export default function Model(props) {
   const group = useRef()
   const { nodes, materials } = useGLTF('/models/Map.glb')
@@ -30,6 +54,7 @@ export default function Model(props) {
 }
 
 useGLTF.preload('/models/Map.glb')
+*/
 //material={materials.BasicAsset03}
 
 

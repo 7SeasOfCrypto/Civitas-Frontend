@@ -19,8 +19,10 @@ const Ground = ({ capture = false, setHover }) => {
                 const id = j * GRID_COL + k
                 tempObject.position.set(CELL_SIZE / 2 + j * CELL_SIZE, 0, CELL_SIZE / 2 + k * CELL_SIZE)
                 tempColor.set(colors[map[j][k]]).toArray(colorArray, id * 3)
+                
                 tempObject.updateMatrix()
                 meshRef.current.setMatrixAt(id, tempObject.matrix)
+                
             }
         }
 
