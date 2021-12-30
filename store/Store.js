@@ -11,7 +11,11 @@ export const useStore = create(set => ({
 
 
   map:mapGenerator(50,50),
-  placeBuilding:{isAdding:true,model:0}
+  placeBuilding:{isAdding:true,model:0},
+  addBuilding: (coords) => set(state => ({listBuild: [...state.listBuild,{
+    x:coords.x, 
+    y:coords.y,
+  }]}))
 }))
 
 /*
