@@ -6,7 +6,7 @@ import CreateBuilding from '../CreateBuilding'
 
 const tempObject = new THREE.Object3D()
 const tempColor = new THREE.Color()
-const colors = [0x00ff00, 0xffffff, 0xff0000]
+const colors = [0xA0A0A0, 0x006CFF, 0xFF0000, 0x2AFF00, 0x00FFCD, 0xFF00E8, 0xFFC100, 0xA200FF]
 const Ground = ({ capture = false, setHover }) => {
     const [cellHover, setCellHover] = useState({ x: 0, z: 0 })
     const { map } = useStore()
@@ -19,8 +19,10 @@ const Ground = ({ capture = false, setHover }) => {
                 const id = j * GRID_COL + k
                 tempObject.position.set(CELL_SIZE / 2 + j * CELL_SIZE, 0, CELL_SIZE / 2 + k * CELL_SIZE)
                 tempColor.set(colors[map[j][k]]).toArray(colorArray, id * 3)
+                
                 tempObject.updateMatrix()
                 meshRef.current.setMatrixAt(id, tempObject.matrix)
+                
             }
         }
 

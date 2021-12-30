@@ -12,7 +12,7 @@ extend(Nodes)
 function randomColor() {
   var color = "#"
   var randomHex = "123456ABCDEF"
-  for (var i = 0; i < 6; i++) {
+  for (let i = 0; i < 6; i++) {
     color += randomHex[Math.floor(Math.random() * 16)]
   }
 
@@ -71,9 +71,6 @@ export default function Model(props) {
                   </mathNode>
                   <textureNode attach={"b"} value={flag} />
               </operatorNode>
-
-
-
                 <mathNode attach={"c"} method={Nodes.MathNode.DOT}    >
                   <textureNode attach={"a"} value={mixchannels} />
                   <vector4Node attach={"b"} value={[1,0, 0, 0]} />

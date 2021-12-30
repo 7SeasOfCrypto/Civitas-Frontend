@@ -79,14 +79,8 @@
     top:0;
     left:0;
     background: #FDC830;  /* fallback for old browsers */
-    //background: -webkit-linear-gradient(to top, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
-    //background: linear-gradient(to top, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: rgb(253,200,48);
     background: -webkit-linear-gradient(-180deg, rgba(243,115,53,1) 0%,rgba(253,200,48,1)  33%, rgba(178,255,138,1) 66%, rgb(8, 153, 1) 100%);
     background: linear-gradient(-180deg, rgba(243,115,53,1) 0%,rgba(253,200,48,1)  33%, rgba(178,255,138,1) 66%, rgb(8, 153, 1) 100%);
-    
-    
-    
     background-size:100% 300%;
     background-position:0% 0%;
     transition:background-position .2s ease-out;

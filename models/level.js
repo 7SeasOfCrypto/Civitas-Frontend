@@ -11,7 +11,7 @@ export default function Model(props) {
       <mesh
         geometry={nodes['0_SM_FloatingIsland_S2_26_StaticMeshComponent0'].geometry}
         scale={[1.3,1,1.3 ]}
-        position={[100, -2, 120]}
+        position={[100, -2.7, 120]}
       >
 <meshStandardMaterial  color={'green'} side={Three.DoubleSide} />
 
