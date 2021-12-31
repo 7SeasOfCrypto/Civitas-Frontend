@@ -10,11 +10,7 @@ export default function Model({ ...props }) {
   const { nodes, materials } = useGLTF('/Map-v0.2.3-transformed.glb')
   return (
     <group ref={group} {...props} dispose={null}>
-      <mesh
-        geometry={nodes.SM_FloatingIsland_S_2_StaticMeshComponent0.geometry}
-        material={materials.BasicAsset03}
-        position={[0, 1, -1]}
-      />
+      <mesh geometry={nodes.PipoIsland.geometry} material={materials.PipoMaterial} />
     </group>
   )
 }
