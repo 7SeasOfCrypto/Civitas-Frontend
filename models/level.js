@@ -8,8 +8,8 @@ export default function Model(props) {
   const { nodes, materials } = useGLTF('/models/map.glb')
   materials.PipoMaterial.side = three.DoubleSide
   return (
-    <group ref={group} {...props} position = {[40,-15,0]} dispose={null}>
-    <group rotation = {[0,-Math.PI/4,0]}>
+    <group ref={group} {...props} position = {[151.5,-15,45]} dispose={null}>
+    <group rotation = {[0,Math.PI/4*6,0]}>
   <mesh geometry={nodes.PipoIsland.geometry} material={materials.PipoMaterial} />
    </group>
     </group>
