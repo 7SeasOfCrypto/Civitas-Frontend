@@ -5,7 +5,7 @@ import {CELL_SIZE} from 'constants'
 import {useGesture } from '@use-gesture/react'
 const Buildings = () => {
     const { listBuild } = useStore()
-    console.log(listBuild)
+    
     const ArrayBuild= listBuild.map((value,index)=> {
         const {x,y,Id,id_model,level,completed}=value
         
@@ -17,7 +17,7 @@ const Buildings = () => {
         const posX= width%2===0? ( x)*CELL_SIZE       :(.5 +x)*CELL_SIZE
         const posZ= height%2===0? ( y)*CELL_SIZE   : (.5 +y)*CELL_SIZE
         return (
-            <group key={Id}>
+            <group key={index}>
             <mesh  position={[posZ,0,posX]} >
                 <boxGeometry args={[.4, 20, .4]} />
                 <meshStandardMaterial color='red' transparent opacity={1} />

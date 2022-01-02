@@ -19,7 +19,7 @@ const Ground = ({ capture = false, setHover }) => {
 
     const { map,mapMaterial } = useStore(state=>state.maps)
     const  maps  = useStore(state=>state.maps)
-
+  console.log(maps)
     
     const [difuse] = useLoader(THREE.TextureLoader, ['/Textures/floorTile.webp'])
     useEffect(()=>{
@@ -38,7 +38,7 @@ const Ground = ({ capture = false, setHover }) => {
     },[difuse])
     
 
-    
+    console
     
     
     const materials=colors.map((value,index)=> new THREE.MeshStandardMaterial({map:textures[index]}))

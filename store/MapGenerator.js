@@ -246,7 +246,7 @@ export const mapGenerator=(row,col)=>{
 
 }
 
-const materialGenerator=(map)=>{
+export const materialGenerator=(map)=>{
         
       let matsMap=new Array(colors.length).map((value,index)=> new Array())
         for (let j = 0; j < GRID_COL; j++) {

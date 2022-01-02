@@ -22,10 +22,8 @@ const placeMarker = (size,map,collision) => {
 
 }
 
-const checkPlacement=({cursorPoint,map,rotation,size})=>{
+const checkPlacement=({cursorPoint,map,rotation,size,setMaterial})=>{
 
-    
-    
     const bottom= size.width%2===0?  (cursorPoint.x -(size.width)/2):(cursorPoint.x -(size.width-1)/2)
     const left= size.height%2===0?(cursorPoint.z - (size.height-2)/2):(cursorPoint.z - (size.height-1)/2)
     const collision=new Array(size.width).fill().map((value,index)=>new Array(size.height).fill(false) )
@@ -33,22 +31,29 @@ const checkPlacement=({cursorPoint,map,rotation,size})=>{
     
     for (let i=0;i<3;i++)
     {
-
-        
         for(let j=0;j<3;j++)
         {
-            
             collision[i][j]=map[bottom+i][j+left]
-            //console.log(top-i,j+left)
-            //isCollision= isCollision || map[i+top][i+left]!==0 
-
         }
-    
     }
     return collision
-    
-    
-    
+}
+const createNewMap=({cursorPoint,map,rotation,size})=>{
+
+    const bottom= size.width%2===0?  (cursorPoint.x -(size.width)/2):(cursorPoint.x -(size.width-1)/2)
+    const left= size.height%2===0?(cursorPoint.z - (size.height-2)/2):(cursorPoint.z - (size.height-1)/2)
+    const collision=new Array(size.width).fill().map((value,index)=>new Array(size.height).fill(false) )
+
+    let newMap= [...map]
+    for (let i=0;i<3;i++)
+    {
+        for(let j=0;j<3;j++)
+        {
+            collision[i][j]=map[bottom+i][j+left]
+            newMap[bottom+i][left+j]=3
+        }
+    }
+    return newMap
 }
 
 
@@ -75,7 +80,7 @@ const CreateBuilding = ({ cellHover }) => {
     
 
     const { isAdding, model } = useStore(state => state.placeBuilding)
-    const {addBuilding}=useStore()
+    const {addBuilding,updateMap}=useStore()
 
     
 
@@ -89,7 +94,7 @@ const CreateBuilding = ({ cellHover }) => {
     const pivotZ = cellHover.z < minposZ ? minposZ * CELL_SIZE + CELL_SIZE / 2 : cellHover.z>maxposZ? maxposZ*CELL_SIZE+CELL_SIZE/2 :cellHover.z * CELL_SIZE + CELL_SIZE / 2
     
     useEffect(() =>{
-        console.log('check')
+        
         setCollision(checkPlacement({cursorPoint, map,size}))
         
     },[cursorPoint,map,size])
@@ -102,6 +107,7 @@ const CreateBuilding = ({ cellHover }) => {
         if (canAdd)
         {
             addBuilding({x:cursorPoint.z,y:cursorPoint.x})
+            updateMap(createNewMap({cursorPoint, map,size}))
         }
     }
 
@@ -112,12 +118,7 @@ const CreateBuilding = ({ cellHover }) => {
                 <group position={[pivotX, 0, pivotZ]} onPointerDown={onAddBuilding}>
                     {gridl}
                 </group>
-                <gridHelper
-                    position={[CELL_SIZE * 25, .5, CELL_SIZE * 25]}
-                    args={[CELL_SIZE * 50, 50, `white`, `gray`]}
-                    scale={1}
-                    divisions={50}
-                />
+                
             </>
         )
     return null
