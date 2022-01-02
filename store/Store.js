@@ -3,9 +3,8 @@ import {mapGenerator} from './MapGenerator'
 export const useStore = create(set => ({
   listBuild:[
     {x:1,y:1,Id:1,id_model:0,level:0,completed:true},
-
   ],
-
+  hasPlaceMarker:false,
 
 
 
@@ -14,7 +13,8 @@ export const useStore = create(set => ({
   addBuilding: (coords) => set(state => ({listBuild: [...state.listBuild,{
     x:coords.x, 
     y:coords.y,
-  }]}))
+  }]})),
+  showPlaceMarker: (value) => set({hasPlaceMarker:value})
 }))
 
 /*

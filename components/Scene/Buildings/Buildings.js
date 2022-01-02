@@ -18,7 +18,7 @@ const Buildings = () => {
         const posZ= height%2===0? ( y)*CELL_SIZE   : (.5 +y)*CELL_SIZE
         return (
             <group key={Id}>
-            <mesh  position={[posZ,0,posX]} >
+            <mesh  position={[posZ,0,posX]}>
                 <boxGeometry args={[.4, 20, .4]} />
                 <meshStandardMaterial color='red' transparent opacity={1} />
             </mesh>

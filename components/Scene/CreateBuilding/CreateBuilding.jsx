@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { ORIGIN_GRID, GRID_COL, GRID_ROW, CELL_SIZE } from 'constants'
 import { useStore } from 'store'
+import SMCastle from '@/models/SMCastle'
 
 const placeMarker = (size) => {
     const { width, height } = size
@@ -18,6 +19,7 @@ const placeMarker = (size) => {
 
 const CreateBuilding = ({ cellHover }) => {
     const { isAdding, model } = useStore(state => state.placeBuilding)
+    const {hasPlaceMarker} = useStore()
     const [dragPosition, setDragPosition] = useState({ x: 1, z: 1 })
     const size = { width: 3, height: 3 }
     const { width, height } = size
@@ -30,12 +32,13 @@ const CreateBuilding = ({ cellHover }) => {
     const maxposZ= height % 2 === 0 ? 49-(height - 2) / 2 : 49-(height - 1) / 2
     const pivotX = cellHover.x < minposX ? minposX * CELL_SIZE + CELL_SIZE / 2 : cellHover.x>maxposX? maxposX* CELL_SIZE+CELL_SIZE / 2: cellHover.x * CELL_SIZE + CELL_SIZE / 2
     const pivotZ = cellHover.z < minposX ? minposZ * CELL_SIZE + CELL_SIZE / 2 : cellHover.z>maxposZ? maxposZ*CELL_SIZE+CELL_SIZE/2 :cellHover.z * CELL_SIZE + CELL_SIZE / 2
-
+    
+    const Model = SMCastle
     if (isAdding)
         return (
             <>
                 <group position={[pivotX, 0, pivotZ]}>
-                    {gridl}
+                    { hasPlaceMarker ? gridl : null}
                 </group>
                 <gridHelper
                     position={[CELL_SIZE * 25, 1, CELL_SIZE * 25]}
@@ -43,6 +46,7 @@ const CreateBuilding = ({ cellHover }) => {
                     scale={1}
                     divisions={50}
                 />
+                { hasPlaceMarker ? <Model position={[pivotX, 1, pivotZ]}/> : ''}
             </>
         )
     return null

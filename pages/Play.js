@@ -14,6 +14,7 @@ export default function Play() {
       <div className={styles.canvasContainer}>
         <Stage></Stage>
       </div>
+      <Toolbar/>
       <ScreenUI></ScreenUI>
     </div>
   )

@@ -14,6 +14,9 @@ const Controller = () => {
         enableZoom={true}
         minPolarAngle={1}
         maxPolarAngle={1}
+        zoomSpeed={10}
+        minZoom={10}
+        maxZoom={30}
         />
     );
 };
