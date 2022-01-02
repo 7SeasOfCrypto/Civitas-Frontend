@@ -1,7 +1,29 @@
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
-import * as Three from 'three'
+import * as three from 'three'
 
+
+export default function Model(props) {
+  const group = useRef()
+  const { nodes, materials } = useGLTF('/models/map.glb')
+  materials.PipoMaterial.side = three.DoubleSide
+  return (
+    <group ref={group} {...props} position={[158, -13.7, 45]} dispose={null}>
+      <group rotation={[0, Math.PI / 4 * 6, 0]} >
+        <group scale={[1.06, 1, 1.06]}>
+          <mesh geometry={nodes.PipoIsland.geometry} material={materials.PipoMaterial} />
+          
+        </group>
+      </group>
+    </group>
+  )
+}
+
+useGLTF.preload('/models/levelmap.glb')
+
+
+
+/*
 export default function Model(props) {
   const group = useRef()
   const { nodes, materials } = useGLTF('/models/Map.glb')
@@ -10,7 +32,7 @@ export default function Model(props) {
     <group ref={group} {...props} dispose={null}>
       <mesh
         geometry={nodes.SM_FloatingIsland_S_2_StaticMeshComponent0.geometry}
-        
+
         position={[102, -3, 110]}
         scale={[1.15, 1.15, 1.15 ]}
       >
@@ -18,9 +40,9 @@ export default function Model(props) {
       </mesh>
       <mesh
       position={[0,-7,0]}
-      
-      
-      
+
+
+
       >
       <boxGeometry args={[1500, .1, 1500]} />
       <meshStandardMaterial color={'blue'} />
@@ -30,7 +52,7 @@ export default function Model(props) {
 }
 
 useGLTF.preload('/models/Map.glb')
+*/
 //material={materials.BasicAsset03}
 
 
-      

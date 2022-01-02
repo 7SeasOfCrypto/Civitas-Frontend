@@ -1,10 +1,11 @@
 
 import { Suspense } from 'react'
-import Controller from './controller'
+import Controller from './Controller'
 import Ground from './Ground'
 import Buildings from './Buildings'
 import Level from '@/models/level'
-import Reference from '@/models/Sample_Map_Reference'
+import FloorController from './FloorController'
+import {Sky} from '@react-three/drei'
 
 const Scene = () => {
     return (
@@ -13,9 +14,11 @@ const Scene = () => {
                 <Buildings></Buildings>
             </Suspense>
             <Suspense fallback={null}>
-                <Ground />
+                <FloorController/>
+                <Ground></Ground>
                 <Level></Level>
                 </Suspense>
+                <Sky distance={45000} sunPosition={[0, 1, 0]} inclination={0} azimuth={0.5}    />
             <Controller></Controller>
         </>
 

@@ -1,18 +1,22 @@
 import create from 'zustand'
 import {mapGenerator} from './MapGenerator'
+
+
+
 export const useStore = create(set => ({
   listBuild:[
     {x:1,y:1,Id:1,id_model:0,level:0,completed:true},
   ],
   hasPlaceMarker:false,
-
-
-
-  map:mapGenerator(50,50),
+  maps:mapGenerator(50,50),
   placeBuilding:{isAdding:true,model:0},
   addBuilding: (coords) => set(state => ({listBuild: [...state.listBuild,{
+    Id:state.listBuild.length + 1,
+    id_model:0,
+    level:0,
+    completed:true,
     x:coords.x, 
-    y:coords.y,
+    y:coords.z,
   }]})),
   showPlaceMarker: (value) => set({hasPlaceMarker:value})
 }))

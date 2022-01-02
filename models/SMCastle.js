@@ -12,7 +12,7 @@ extend(Nodes)
 function randomColor() {
   var color = "#"
   var randomHex = "123456ABCDEF"
-  for (var i = 0; i < 6; i++) {
+  for (let i = 0; i < 6; i++) {
     color += randomHex[Math.floor(Math.random() * 16)]
   }
 
@@ -20,7 +20,7 @@ function randomColor() {
 }
 
 export default function Model(props) {
-  const [difuse, mixchannels, flag, logo,opacity=1] = useLoader(THREE.TextureLoader, ['/Textures/BuildingTexture.webp', '/Textures/Texture_b_mix.webp', '/Textures/Flag.webp', '/Textures/Logo1.webp'])
+  const [difuse, mixchannels, flag, logo, opacity = 1] = useLoader(THREE.TextureLoader, ['/Textures/BuildingTexture.webp', '/Textures/Texture_b_mix.webp', '/Textures/Flag.webp', '/Textures/Logo1.webp'])
 
   const boxHeight = 2
 
@@ -49,12 +49,10 @@ export default function Model(props) {
 
 
     <group ref={group} {...props} dispose={null}>
-      <mesh geometry={nodes.SM_Castle.geometry}    castShadow transparent 
-          receiveShadow >
+      <mesh geometry={nodes.SM_Castle.geometry} castShadow transparent
+        receiveShadow >
         <standardNodeMaterial side={THREE.DoubleSide} castShadow>
-          <floatNode  attach={'opacity'} value={".4"}></floatNode>
-          
-        <mathNode attach={"color"} method={Nodes.MathNode.MIX} >
+          <mathNode attach={"color"} method={Nodes.MathNode.MIX} >
             <textureNode attach={"b"} value={logo} />
             <mathNode attach={"a"} method={Nodes.MathNode.MIX} >
               <textureNode attach={"a"} value={difuse} />
@@ -66,17 +64,14 @@ export default function Model(props) {
                     <colorNode attach={"b"} value={color3} />
                     <mathNode attach={"c"} method={Nodes.MathNode.DOT}    >
                       <textureNode attach={"a"} value={mixchannels} />
-                      <vector4Node attach={"b"} value={[0, 1,0, 0]} />
+                      <vector4Node attach={"b"} value={[0, 1, 0, 0]} />
                     </mathNode>
                   </mathNode>
                   <textureNode attach={"b"} value={flag} />
-              </operatorNode>
-
-
-
+                </operatorNode>
                 <mathNode attach={"c"} method={Nodes.MathNode.DOT}    >
                   <textureNode attach={"a"} value={mixchannels} />
-                  <vector4Node attach={"b"} value={[1,0, 0, 0]} />
+                  <vector4Node attach={"b"} value={[1, 0, 0, 0]} />
                 </mathNode>
               </mathNode>
               <mathNode attach={"c"} method={Nodes.MathNode.DOT}    >
@@ -85,13 +80,13 @@ export default function Model(props) {
               </mathNode>
             </mathNode >
             <mathNode attach={"c"} method={Nodes.MathNode.DOT}    >
-                <textureNode attach={"a"} value={logo} />
-                <vector4Node attach={"b"} value={[0, 0, 0, 1]} />
-              </mathNode>
+              <textureNode attach={"a"} value={logo} />
+              <vector4Node attach={"b"} value={[0, 0, 0, 1]} />
+            </mathNode>
           </mathNode>
-          
+
         </standardNodeMaterial>
-        
+
       </mesh>
     </group>
   )
