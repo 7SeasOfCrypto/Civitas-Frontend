@@ -1,6 +1,6 @@
 
 import { Suspense } from 'react'
-import Controller from './controller'
+import Controller from './Controller'
 import Ground from './Ground'
 import Buildings from './Buildings'
 import Level from '@/models/level'
