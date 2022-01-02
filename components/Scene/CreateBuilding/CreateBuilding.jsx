@@ -16,7 +16,7 @@ const placeMarker = (size,map,collision) => {
     return arrayPos.flat().map((value, index) =>
         <mesh position={[value[0] * CELL_SIZE, .4, value[1] * CELL_SIZE]} key={index}>
             <boxGeometry args={[3, .7, 3]} />
-            <meshStandardMaterial color={CollFlat[index]===true?'red':'blue'} transparent opacity={1} />
+            <meshStandardMaterial color={CollFlat[index]!==0?'red':'blue'} transparent opacity={1} />
         </mesh>)
 
 
@@ -38,7 +38,7 @@ const checkPlacement=({cursorPoint,map,rotation,size})=>{
         for(let j=0;j<3;j++)
         {
             
-            collision[i][j]=map[bottom+i][j+left]!==0
+            collision[i][j]=map[bottom+i][j+left]
             //console.log(top-i,j+left)
             //isCollision= isCollision || map[i+top][i+left]!==0 
 
@@ -66,27 +66,25 @@ const CreateBuilding = ({ cellHover }) => {
         const maxposZ= height % 2 === 0 ? 49-(height - 2) / 2 : 49-(height - 1) / 2
         const PivoteX = cellHover.x < minposX ? minposX : cellHover.x>maxposX? maxposX: cellHover.x 
         const PivoteZ = cellHover.z < minposZ ? minposZ : cellHover.z>maxposZ? maxposZ: cellHover.z 
-        if(PivoteX!==cursorPoint.x || PivoteZ!==cursorPoint.x)
-        {
+    
             setCursorPoint({x:PivoteX,z:PivoteZ})
-        }
+    
 
-    },[cellHover,height,width])
+    },[cellHover,height,width ])
 
     
 
     const { isAdding, model } = useStore(state => state.placeBuilding)
-    
-    
+    const {addBuilding}=useStore()
 
     
 
     const { width, height } = size
     const gridl = placeMarker(size,map,collision)
     const minposX = width % 2 === 0 ? (width - 2) / 2 : (width - 1) / 2
-        const maxposX= width % 2 === 0 ? 49-(width - 2) / 2 : 49-(width - 1) / 2
-        const minposZ = height % 2 === 0 ? (height - 2) / 2 : (height - 1) / 2
-        const maxposZ= height % 2 === 0 ? 49-(height - 2) / 2 : 49-(height - 1) / 2
+    const maxposX= width % 2 === 0 ? 49-(width - 2) / 2 : 49-(width - 1) / 2
+    const minposZ = height % 2 === 0 ? (height - 2) / 2 : (height - 1) / 2
+    const maxposZ= height % 2 === 0 ? 49-(height - 2) / 2 : 49-(height - 1) / 2
     const pivotX = cellHover.x < minposX ? minposX * CELL_SIZE + CELL_SIZE / 2 : cellHover.x>maxposX? maxposX* CELL_SIZE+CELL_SIZE / 2: cellHover.x * CELL_SIZE + CELL_SIZE / 2
     const pivotZ = cellHover.z < minposZ ? minposZ * CELL_SIZE + CELL_SIZE / 2 : cellHover.z>maxposZ? maxposZ*CELL_SIZE+CELL_SIZE/2 :cellHover.z * CELL_SIZE + CELL_SIZE / 2
     
@@ -95,12 +93,23 @@ const CreateBuilding = ({ cellHover }) => {
         setCollision(checkPlacement({cursorPoint, map,size}))
         
     },[cursorPoint,map,size])
+    const onAddBuilding=()=>{
+
+        let canAdd=collision.reduce((rowbuild,row)=>{
+            const cellCol=row.reduce((cellbuild,cell)=> cell===0 && cellbuild ,true)
+            return rowbuild && cellCol
+        },true)
+        if (canAdd)
+        {
+            addBuilding({x:cursorPoint.z,y:cursorPoint.x})
+        }
+    }
 
 
     if (isAdding)
         return (
             <>
-                <group position={[pivotX, 0, pivotZ]}>
+                <group position={[pivotX, 0, pivotZ]} onPointerDown={onAddBuilding}>
                     {gridl}
                 </group>
                 <gridHelper

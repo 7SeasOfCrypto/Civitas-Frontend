@@ -16,6 +16,7 @@ const tempUV = new THREE.Vector2()
 const colors = [0xffffff, 0xffffff, 0xffffff, 0xffffff, 0xffffff, 0xffffff, 0xffffff, 0xffffff]
 
 const FloorController = ({ capture = false, setHover }) => {
+    
     const [cellHover, setCellHover] = useState({ x: 0, z: 0 })
     const { map } = useStore()
     useEffect(() => {

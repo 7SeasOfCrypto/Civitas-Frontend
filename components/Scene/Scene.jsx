@@ -16,7 +16,7 @@ const Scene = () => {
             <Suspense fallback={null}>
                 <FloorController/>
                 <Ground></Ground>
-                <Level></Level>
+                
                 </Suspense>
                 <Sky distance={45000} sunPosition={[0, 1, 0]} inclination={0} azimuth={0.5}    />
             <Controller></Controller>
