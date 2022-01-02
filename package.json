@@ -19,6 +19,7 @@
     "sass": "^1.45.0",
     "simplex-noise": "^3.0.0",
     "three": "^0.135.0",
+    "three-landscape": "^0.4.0",
     "three-stdlib": "^2.6.1",
     "use-sound": "^4.0.1"
   },

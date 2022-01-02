@@ -10,7 +10,7 @@ const placeMarker = (size) => {
         return [row - displaceW + 1, col - displaceH + 1]
     }))
     return arrayPos.flat().map((value, index) =>
-        <mesh position={[value[0] * CELL_SIZE, 1, value[1] * CELL_SIZE]} key={index}>
+        <mesh position={[value[0] * CELL_SIZE, .4, value[1] * CELL_SIZE]} key={index}>
             <boxGeometry args={[3, .2, 3]} />
             <meshStandardMaterial color='blue' transparent opacity={1} />
         </mesh>)
@@ -24,8 +24,6 @@ const CreateBuilding = ({ cellHover }) => {
     const gridl = placeMarker(size)
     const minposX = width % 2 === 0 ? (width - 2) / 2 : (width - 1) / 2
     const maxposX= width % 2 === 0 ? 49-(width - 2) / 2 : 49-(width - 1) / 2
-    
-
     const minposZ = height % 2 === 0 ? (height - 2) / 2 : (height - 1) / 2
     const maxposZ= height % 2 === 0 ? 49-(height - 2) / 2 : 49-(height - 1) / 2
     const pivotX = cellHover.x < minposX ? minposX * CELL_SIZE + CELL_SIZE / 2 : cellHover.x>maxposX? maxposX* CELL_SIZE+CELL_SIZE / 2: cellHover.x * CELL_SIZE + CELL_SIZE / 2
