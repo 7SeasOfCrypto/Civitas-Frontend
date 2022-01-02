@@ -1,5 +1,8 @@
 import create from 'zustand'
 import {mapGenerator} from './MapGenerator'
+
+
+
 export const useStore = create(set => ({
   listBuild:[
     {x:1,y:1,Id:1,id_model:0,level:0,completed:true},
@@ -10,7 +13,7 @@ export const useStore = create(set => ({
 
 
 
-  map:mapGenerator(50,50),
+  maps:mapGenerator(50,50),
   placeBuilding:{isAdding:true,model:0},
   addBuilding: (coords) => set(state => ({listBuild: [...state.listBuild,{
     x:coords.x, 

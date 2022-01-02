@@ -8,10 +8,13 @@ export default function Model(props) {
   const { nodes, materials } = useGLTF('/models/map.glb')
   materials.PipoMaterial.side = three.DoubleSide
   return (
-    <group ref={group} {...props} position = {[151.5,-15,45]} dispose={null}>
-    <group rotation = {[0,Math.PI/4*6,0]}>
-  <mesh geometry={nodes.PipoIsland.geometry} material={materials.PipoMaterial} />
-   </group>
+    <group ref={group} {...props} position={[158, -13.7, 45]} dispose={null}>
+      <group rotation={[0, Math.PI / 4 * 6, 0]} >
+        <group scale={[1.06, 1, 1.06]}>
+          <mesh geometry={nodes.PipoIsland.geometry} material={materials.PipoMaterial} />
+          
+        </group>
+      </group>
     </group>
   )
 }
@@ -29,7 +32,7 @@ export default function Model(props) {
     <group ref={group} {...props} dispose={null}>
       <mesh
         geometry={nodes.SM_FloatingIsland_S_2_StaticMeshComponent0.geometry}
-        
+
         position={[102, -3, 110]}
         scale={[1.15, 1.15, 1.15 ]}
       >
@@ -37,9 +40,9 @@ export default function Model(props) {
       </mesh>
       <mesh
       position={[0,-7,0]}
-      
-      
-      
+
+
+
       >
       <boxGeometry args={[1500, .1, 1500]} />
       <meshStandardMaterial color={'blue'} />
@@ -53,4 +56,3 @@ useGLTF.preload('/models/Map.glb')
 //material={materials.BasicAsset03}
 
 
-      
