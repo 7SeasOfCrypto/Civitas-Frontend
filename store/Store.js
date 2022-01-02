@@ -6,18 +6,23 @@ import {mapGenerator} from './MapGenerator'
 export const useStore = create(set => ({
   listBuild:[
     {x:1,y:1,Id:1,id_model:0,level:0,completed:true},
-    
+
 
   ],
 
 
 
-
+  
   maps:mapGenerator(50,50),
   placeBuilding:{isAdding:true,model:0},
   addBuilding: (coords) => set(state => ({listBuild: [...state.listBuild,{
     x:coords.x, 
     y:coords.y,
+    id:2,
+    id_model:0,
+    level:0,
+    completed:true
+
   }]}))
 }))
 
