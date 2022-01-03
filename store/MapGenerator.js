@@ -87,24 +87,23 @@ export const mapGenerator=(row,col)=>{
  
    //=============
     //Ground IDs:
-    //0 (Null):    None - grey - A0A0A0
-    //1:    Edificable, movible, null. Color: Blue - 006CFF
-    //2:    No Edificable, movible, null. Color: Red - FF0000
-    //3:    No edificable, movible, genera camino. Color: Green - 2AFF00
-    //4:    No edificable, movible, lleva al castillo??. Color: Light Blue - 00FFCD
-    //5:    No edificable, no movible, llama a un menú. Color: Pink - FF00E8
-    //6:    No edificable, no movible, decoraciones (fijas o modificables?). Color: Yellow - FFC100
-    //7:    No edificable, movible, Línea de corte izquierda-derecha (No permite contruir más a la derecha) Color: Purple - A200FF
+    //0:    Edificable, movible, null. Color: Blue - 006CFF
+    //1:    No Edificable, movible, null. Color: Red - FF0000
+    //2:    No edificable, movible, genera camino. Color: Green - 2AFF00
+    //3:    No edificable, movible, lleva al castillo??. Color: Light Blue - 00FFCD
+    //4:    No edificable, no movible, llama a un menú. Color: Pink - FF00E8
+    //5:    No edificable, no movible, decoraciones (fijas o modificables?). Color: Yellow - FFC100
+    //6:    No edificable, movible, Línea de corte izquierda-derecha (No permite contruir más a la derecha) Color: Purple - A200FF
 
     //Drawing:
     //===Toolbox
     //maproad=drawRect(map,{x:0,y:0},{x:7,y:7},1)
     //maproad=drawLine(maproad,{x:1,y:1},{x:1,y:10},2)
     
-    //1
+    //0
     let maproad=drawRect(map,{x:0,y:0},{x:49,y:49},0)         
 
-    //2
+    //1
     maproad=drawRect(maproad,{x:5,y:0},{x:8,y:44},1)    //Línea horizontal inferior
     maproad=drawRect(maproad,{x:3,y:1},{x:10,y:3},1)    //Línea horizontal inferior Ala izq - 1
     maproad=drawLine(maproad,{x:2,y:2},{x:11,y:2},1)    //Línea horizontal inferior Ala izq - 2
@@ -156,7 +155,7 @@ export const mapGenerator=(row,col)=>{
     maproad=drawLine(maproad,{x:1,y:22},{x:1,y:28},1)   //Ed Inferior Abajo
     maproad=drawRect(maproad,{x:0,y:46},{x:49,y:49},1)  //Parte Final
 
-    //3
+    //2
     maproad=drawRect(maproad,{x:6,y:0},{x:7,y:44},2)    //Road Horizontal
     maproad=drawRect(maproad,{x:29,y:13},{x:30,y:30},2) //Road Horizontal medio
     maproad=drawLine(maproad,{x:29,y:31},{x:29,y:41},2) //Road Horizontal medio 2
@@ -184,13 +183,13 @@ export const mapGenerator=(row,col)=>{
     maproad=drawRect(maproad,{x:14,y:35},{x:22,y:37},2) //Road plaza derecha superior inferior
     maproad=drawRect(maproad,{x:16,y:39},{x:20,y:44},2) //Road plaza derecha - derecha
     
-    //5
+    //4
     maproad=drawRect(maproad,{x:16,y:0},{x:20,y:3},4)   //Ed Izquierda
     maproad=drawRect(maproad,{x:44,y:6},{x:47,y:12},4)  //Ed Superior Izquierdo
     maproad=drawRect(maproad,{x:2,y:22},{x:4,y:28},4)   //Ed Inferior
     maproad=drawRect(maproad,{x:39,y:41},{x:43,y:43},4) //Ed Superior Derecho
 
-    //6
+    //5
     maproad=drawLine(maproad,{x:3,y:2},{x:5,y:2},5)     //Inicio 1
     maproad=drawLine(maproad,{x:5,y:3},{x:5,y:5},5)     //Inicio 2
     maproad=drawLine(maproad,{x:8,y:2},{x:10,y:2},5)    //Inicio 3
@@ -234,11 +233,11 @@ export const mapGenerator=(row,col)=>{
 
 
 
-    //7
+    //6
     maproad=drawLine(maproad,{x:0,y:45},{x:49,y:45},6)  //Línea final
 
 
-    //4
+    //3
     maproad=drawRect(maproad,{x:17,y:44},{x:19,y:49},3) //Camino Castillo
     const mapMaterial=materialGenerator(maproad)    
     
