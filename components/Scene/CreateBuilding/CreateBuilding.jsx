@@ -118,7 +118,11 @@ const CreateBuilding = ({ cellHover }) => {
     if (isAdding)
         return (
             <>
-                <group position={[pivotX, 0, pivotZ]} onPointerDown={onAddBuilding}>
+                <group position={[pivotX, 0, pivotZ]} onPointerDown={(e) => {
+                    e.button === 0 
+                    ? onAddBuilding()
+                    : null
+                }}>
                     {gridl}
                 </group>
                 

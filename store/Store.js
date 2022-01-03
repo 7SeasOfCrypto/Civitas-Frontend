@@ -29,7 +29,16 @@ export const useStore = create(set => ({
     level:0,
     completed:false
 
-  }]}))
+  }]})),
+  myBuildings:[{
+    
+  },
+  {
+
+  },
+  {
+
+  }]
 }))
 
 /*
