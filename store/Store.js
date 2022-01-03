@@ -6,7 +6,7 @@ const enterAddMode=(set)=>{
 
   set(state=>{
         console.log(state)
-    return({placeBuilding:{isAdding:true,isPlaced:false,model:0}})
+    return({placeBuilding:{isAdding:true,isPlaced:false,model:1}})
   })
 
 
@@ -15,7 +15,7 @@ const enterAddMode=(set)=>{
 
 export const useStore = create(set => ({
   listBuild:[],
-
+  colors:{roof:0xff0000,flag1:0x00ff00,flag2:0x0000ff},
   maps:mapGenerator(50,50),
   placeBuilding:{isAdding:false,isPlaced:false,model:0},
   enterAddMode:()=>enterAddMode(set),
@@ -25,7 +25,7 @@ export const useStore = create(set => ({
     x:coords.x, 
     y:coords.y,
     id:2,
-    id_model:0,
+    id_model:state.placeBuilding.model,
     level:0,
     completed:false
 
