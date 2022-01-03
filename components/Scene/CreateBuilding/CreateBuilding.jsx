@@ -60,8 +60,11 @@ const createNewMap=({cursorPoint,map,rotation,size})=>{
     {
         for(let j=-1;j<=size.height;j++)
         {
+            if(bottom+i>=0 && bottom+i<=49 && left+j>=0 && left+i<=49 )
+            {
+                n   
+            }
             
-            newMap[bottom+i][left+j]=1
         }
     }
     return newMap
