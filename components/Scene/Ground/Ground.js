@@ -1,60 +1,67 @@
-import {useState,useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import { extend, useFrame, useLoader } from "@react-three/fiber"
 import * as THREE from 'three'
 import { useStore } from '@/store/Store'
 import InstancedFloor from './InstancedFloor'
+import { ORIGIN_GRID, GRID_COL, GRID_ROW, CELL_SIZE } from 'constants'
 
 
 
 
-const tempObject = new THREE.Object3D()
-const tempColor = new THREE.Color()
-const tempUV = new THREE.Vector2()
-const colors = [ 0x006CFF, 0xFF0000, 0x2AFF00, 0x00FFCD, 0xFF00E8, 0xFFC100, 0xA200FF]
-//const colors = [0xffffff, 0xffffff, 0xffffff, 0xffffff, 0xffffff, 0xffffff, 0xffffff, 0xffffff]
+const colors = [0x006CFF, 0xFF0000, 0x2AFF00, 0x00FFCD, 0xFF00E8, 0xFFC100, 0xA200FF]
+
 
 const Ground = ({ capture = false, setHover }) => {
 
-  const [textures,setTextures]=useState([])
+  const [textures, setTextures] = useState([])
 
-    const { map,mapMaterial } = useStore(state=>state.maps)
-    const  maps  = useStore(state=>state.maps)
+  const { map, mapMaterial } = useStore(state => state.maps)
+  const maps = useStore(state => state.maps)
 
-    
-    const [difuse] = useLoader(THREE.TextureLoader, ['/Textures/floorTile.webp'])
-    useEffect(()=>{
-      const Textures=colors.map((value,index)=>{ 
-       const newTexture= difuse.clone()
-       newTexture.wrapS = difuse.wrapT = THREE.RepeatWrapping
-       newTexture.repeat.set(1/8, 1)
-       newTexture.offset.set(index/8,0)
-       newTexture.needsUpdate=true
-        return newTexture
-      
-      })
-      
-      setTextures(Textures)
 
-    },[difuse])
-    
+  const [difuse, grass] = useLoader(THREE.TextureLoader, ['/Textures/floorTile.webp', '/Textures/Grass.webp'])
+  
 
+  useEffect(() => {
+      const Textures = colors.map((value, index) => {
+        if (index !== 0) {
+          const newTexture = difuse.clone()
+          newTexture.wrapS = difuse.wrapT = THREE.RepeatWrapping
+        
+          newTexture.repeat.set(1 / 8, 1)
+          newTexture.offset.set(index / 8, 0)
+          newTexture.needsUpdate = true
+          return newTexture
+        }
+        const newTexture = grass
+        grass.wrapS = grass.wrapT =THREE.RepeatWrapping
+        grass.repeat.set(25,25)
+        grass.needsUpdate = true
+    })
     
     
     
-    const materials=colors.map((value,index)=> new THREE.MeshStandardMaterial({map:textures[index]}))
-    const GroundTile= mapMaterial.map((value,index)=> <InstancedFloor key={index} matMap={value} material={materials[index]}/>)
+    setTextures(Textures)
 
-    
-    return (
-        <>
-        <group renderOrder={1}>
-            
+  }, [difuse,grass])
 
-            {textures.length!==0 ?GroundTile:null}
-            
-        </group>
-        </>
-    )
+  const materials = colors.map((value, index) => new THREE.MeshPhysicalMaterial({ map:index!==0? textures[index]:grass }))
+  const GroundTile = mapMaterial.map((value, index) => index !== 0 ? <InstancedFloor key={index} matMap={value} material={materials[index]} index={index} /> : null)
+  return (
+    <>
+      <group renderOrder={1}>
+        <mesh position={[CELL_SIZE*25,0,CELL_SIZE*25]} material={materials[0]}>
+
+          <boxGeometry args={[CELL_SIZE * 50, .5  , CELL_SIZE * 50]}>
+          </boxGeometry>
+          
+
+        </mesh>
+        {textures.length !== 0 ? GroundTile : null}
+        
+      </group>
+    </>
+  )
 }
 
 export default Ground

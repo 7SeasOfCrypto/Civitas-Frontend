@@ -12,7 +12,7 @@ const Ground = ({ capture = false, setHover }) => {
     
     const [floor1,floor2] = useLoader(THREE.TextureLoader, ['/Textures/floor.webp','/Textures/floor2.webp'])
     const mats=[
-        new THREE.MeshStandardMaterial( {color:0xfff000 }),
+        new THREE.MeshPhysicalMaterial( {color:0xfff000 }),
         new THREE.MeshStandardMaterial( { map: floor2} ),
         new THREE.MeshStandardMaterial( { map: floor1 } ),
         new THREE.MeshStandardMaterial( { map: floor2} ),
