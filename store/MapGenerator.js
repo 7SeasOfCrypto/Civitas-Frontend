@@ -31,20 +31,6 @@ const isPositionAvailable = (array,builds) => {
 
     return tempArray
 }
-/*const isPositionAvailable = (array,builds) => {
-    let tempArray = [...array]
-    const positions = builds.map((build,i) => {
-        let x = build.x;
-        let y = build.y;
-        for(let j = x; j < build.row + x; j++){
-            for(let k = y; k < build.col + y; k++){
-                tempArray[j][k] = 1;
-            }
-        }
-    })
-
-    return tempArray
-}*/
 
 
 
@@ -74,12 +60,6 @@ const EmptyMap=(row,col)=>{
     return new Array(row).fill().map((value,index)=> new Array(col).fill(0))
 }
 
-const testBuilds = [
-    {x:0,y:0,Id:1,id_model:0,level:0,completed:true,size:3},
-    {x:4,y:3,Id:2,id_model:0,level:0,completed:true,size:3},
-    {x:0,y:8,Id:3,id_model:0,level:0,completed:true,size:3},
-    {x:20,y:20,Id:4,id_model:1,level:0,completed:true,size:3},
-]
 
 export const mapGenerator=(row,col)=>{
 

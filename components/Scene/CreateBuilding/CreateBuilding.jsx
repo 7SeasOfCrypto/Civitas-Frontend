@@ -1,7 +1,7 @@
 import { useState,useEffect } from 'react'
 import { CELL_SIZE } from 'constants'
 import { useStore } from 'store'
-
+import SMCastle from '@/models/SMCastle'
 import * as THREE from 'three'
 
 
@@ -62,9 +62,8 @@ const createNewMap=({cursorPoint,map,rotation,size})=>{
         {
             if(bottom+i>=0 && bottom+i<=49 && left+j>=0 && left+i<=49 )
             {
-                n   
+                newMap[bottom+i][left+j]=1
             }
-            
         }
     }
     return newMap
@@ -73,11 +72,10 @@ const createNewMap=({cursorPoint,map,rotation,size})=>{
 
 const CreateBuilding = ({ cellHover }) => {
     const { map } = useStore(state=>state.maps)
-    
+    const {hasPlaceMarker} = useStore()
     const [size,setSize]=useState({ width: 3, height: 3 })
     const [collision,setCollision]=useState(new Array(size.width).fill().map((value,index)=>new Array(size.height).fill(false) ))
     const [cursorPoint,setCursorPoint]=useState({x:2,z:2})
-
     useEffect(()=>{
         const minposX = width % 2 === 0 ? (width - 2) / 2 : (width - 1) / 2
         const maxposX= width % 2 === 0 ? 49-(width - 2) / 2 : 49-(width - 1) / 2
@@ -92,7 +90,6 @@ const CreateBuilding = ({ cellHover }) => {
     },[cellHover,height,width ])
 
     
-
     const { isAdding, model } = useStore(state => state.placeBuilding)
     const {addBuilding,updateMap}=useStore()
 
@@ -106,6 +103,8 @@ const CreateBuilding = ({ cellHover }) => {
     const maxposZ= height % 2 === 0 ? 49-(height - 2) / 2 : 49-(height - 1) / 2
     const pivotX = cellHover.x < minposX ? minposX * CELL_SIZE + CELL_SIZE / 2 : cellHover.x>maxposX? maxposX* CELL_SIZE+CELL_SIZE / 2: cellHover.x * CELL_SIZE + CELL_SIZE / 2
     const pivotZ = cellHover.z < minposZ ? minposZ * CELL_SIZE + CELL_SIZE / 2 : cellHover.z>maxposZ? maxposZ*CELL_SIZE+CELL_SIZE/2 :cellHover.z * CELL_SIZE + CELL_SIZE / 2
+    
+    const Model = SMCastle
     
     useEffect(() =>{
         
@@ -125,7 +124,7 @@ const CreateBuilding = ({ cellHover }) => {
         }
     }
 
-
+    
     if (isAdding)
         return (
             <>
