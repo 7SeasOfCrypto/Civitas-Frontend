@@ -20,16 +20,18 @@ const Ground = ({ capture = false, setHover }) => {
 
 
   const [difuse, grass] = useLoader(THREE.TextureLoader, ['/Textures/floorTile.webp', '/Textures/Grass.webp'])
-  
+ 
+  difuse.wrapS = difuse.wrapT = THREE.RepeatWrapping
+  difuse.repeat.set(.5, .5)
 
   useEffect(() => {
       const Textures = colors.map((value, index) => {
         if (index !== 0) {
           const newTexture = difuse.clone()
-          newTexture.wrapS = difuse.wrapT = THREE.RepeatWrapping
+          
         
-          newTexture.repeat.set(1 / 8, 1)
-          newTexture.offset.set(index / 8, 0)
+          newTexture.repeat.set(1 / 8, 1.2)
+          newTexture.offset.set(index / 8, .1)
           newTexture.needsUpdate = true
           return newTexture
         }
@@ -45,7 +47,13 @@ const Ground = ({ capture = false, setHover }) => {
 
   }, [difuse,grass])
 
-  const materials = colors.map((value, index) => new THREE.MeshPhysicalMaterial({ map:index!==0? textures[index]:grass }))
+  const materials = colors.map((value, index) =>{ 
+    const newMat=new THREE.MeshPhysicalMaterial({ map:index!==0? textures[index]:grass,precision:"highp" })
+  
+    return newMat
+})
+
+
   const GroundTile = mapMaterial.map((value, index) => index !== 0 ? <InstancedFloor key={index} matMap={value} material={materials[index]} index={index} /> : null)
   return (
     <>

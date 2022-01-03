@@ -12,6 +12,7 @@ const Scene = () => {
     const {isAdding}= useStore(state => state.placeBuilding)
     return (
         <>
+        
             <Suspense fallback={null}>
                 <Buildings></Buildings>
             </Suspense>
