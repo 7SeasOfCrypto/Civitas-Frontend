@@ -3,7 +3,7 @@ import Player from './Widgets/Player'
 import Build from './Widgets/Build'
 import Shop from './Widgets/Shop'
 import Token from './Widgets/Token'
-import Modal from './Widgets/Modal'
+import ShopModal from './Widgets/ShopModal'
 import {useState} from 'react'
 const ScreenUI = () => {
     const [isShopOpen,setShopOpen] = useState(false);
@@ -15,7 +15,7 @@ const ScreenUI = () => {
             <Token></Token>
             {
                 isShopOpen 
-                ? <Modal/>
+                ? <ShopModal/>
                 : ''
             }
         </div>

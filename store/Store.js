@@ -15,7 +15,15 @@ const enterAddMode=(set)=>{
 
 export const useStore = create(set => ({
   listBuild:[],
-
+  myBuildings:[{
+    id: '0x00000',
+  },
+  {
+    id: '0x21341',
+  },
+  {
+    id: '0x33333',
+  }],
   maps:mapGenerator(50,50),
   placeBuilding:{isAdding:false,isPlaced:false,model:0},
   enterAddMode:()=>enterAddMode(set),
@@ -30,15 +38,6 @@ export const useStore = create(set => ({
     completed:false
 
   }]})),
-  myBuildings:[{
-    
-  },
-  {
-
-  },
-  {
-
-  }]
 }))
 
 /*
