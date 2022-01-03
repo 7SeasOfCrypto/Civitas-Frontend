@@ -6,15 +6,19 @@ import Buildings from './Buildings'
 import Level from '@/models/level'
 import FloorController from './FloorController'
 import {Sky} from '@react-three/drei'
+import {useStore} from '@/store/Store'
 
 const Scene = () => {
+    const {isAdding}= useStore(state => state.placeBuilding)
     return (
         <>
             <Suspense fallback={null}>
                 <Buildings></Buildings>
             </Suspense>
             <Suspense fallback={null}>
-                <FloorController/>
+                {isAdding?
+                    <FloorController/>:null
+                }
                 <Ground></Ground>
                 
                 </Suspense>

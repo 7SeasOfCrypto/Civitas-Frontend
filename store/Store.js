@@ -2,19 +2,24 @@ import create from 'zustand'
 import {mapGenerator,materialGenerator} from './MapGenerator'
 
 
+const enterAddMode=(set)=>{
+
+  set(state=>{
+        console.log(state)
+    return({placeBuilding:{isAdding:true,isPlaced:false,model:0}})
+  })
+
+
+}
+
 
 export const useStore = create(set => ({
-  listBuild:[
-    
+  listBuild:[],
 
-
-  ],
-
-
-
-  
   maps:mapGenerator(50,50),
-  placeBuilding:{isAdding:true,model:0},
+  placeBuilding:{isAdding:false,isPlaced:false,model:0},
+  enterAddMode:()=>enterAddMode(set),
+  leaveAddMode:()=>set(state=> ({placeBuilding:{isAdding:false,isPlaced:false,model:0}})),
   updateMap: (newMap)=>set({ maps:{map:newMap,mapMaterial:materialGenerator(newMap)} }),
   addBuilding: (coords) => set(state => ({listBuild: [...state.listBuild,{
     x:coords.x, 
@@ -22,7 +27,7 @@ export const useStore = create(set => ({
     id:2,
     id_model:0,
     level:0,
-    completed:true
+    completed:false
 
   }]}))
 }))

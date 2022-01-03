@@ -18,11 +18,8 @@ const Buildings = () => {
         const posZ= height%2===0? ( y)*CELL_SIZE   : (.5 +y)*CELL_SIZE
         return (
             <group key={index}>
-            <mesh  position={[posZ,0,posX]} >
-                <boxGeometry args={[.4, 20, .4]} />
-                <meshStandardMaterial color='red' transparent opacity={1} />
-            </mesh>
-            <Model  position={[posZ,0,posX]} key={index} /> 
+
+            <Model  position={[posZ,.44,posX]} key={index} /> 
 
             </group>)
     })

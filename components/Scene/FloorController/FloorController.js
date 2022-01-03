@@ -53,11 +53,17 @@ const FloorController = ({ capture = false, setHover }) => {
         <>
         <group renderOrder={1}>
             <CreateBuilding cellHover={cellHover} />
-            <instancedMesh ref={meshRef} args={[null, null, 2500]} onPointerMove={cellHoverHandler} >
+            <instancedMesh ref={meshRef} args={[null, null, 2500]} onPointerMove={cellHoverHandler} visible={false} >
                 <planeGeometry args={[CELL_SIZE,  CELL_SIZE]}>
                 </planeGeometry>
                 <meshPhongMaterial vertexColors={THREE.VertexColors}  />
             </instancedMesh>
+            <gridHelper
+                    position={[CELL_SIZE * 25, .3, CELL_SIZE * 25]}
+                    args={[CELL_SIZE * 50, 50, `white`, `gray`]}
+                    scale={1}
+                    divisions={50}
+                />
             </group>
         </>
     )

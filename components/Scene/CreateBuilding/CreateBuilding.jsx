@@ -1,7 +1,9 @@
-import { useRef, useState,useEffect } from 'react'
-import { ORIGIN_GRID, GRID_COL, GRID_ROW, CELL_SIZE } from 'constants'
+import { useState,useEffect } from 'react'
+import { CELL_SIZE } from 'constants'
 import { useStore } from 'store'
-import { hoverAction } from '@use-gesture/react'
+
+import * as THREE from 'three'
+
 
 const placeMarker = (size,map,collision) => {
     const { width, height } = size
@@ -14,9 +16,10 @@ const placeMarker = (size,map,collision) => {
     const CollFlat=collision.flat()
 
     return arrayPos.flat().map((value, index) =>
-        <mesh position={[value[0] * CELL_SIZE, .4, value[1] * CELL_SIZE]} key={index}>
+        <mesh position={[value[0] * CELL_SIZE, .5, value[1] * CELL_SIZE]} key={index} side={THREE.FrontSide}>
             <boxGeometry args={[3, .7, 3]} />
-            <meshStandardMaterial color={CollFlat[index]!==0?'red':'blue'} transparent opacity={1} />
+
+            <meshStandardMaterial color={CollFlat[index]!==0?'red':'green'} transparent opacity={.7} />
         </mesh>)
 
 
