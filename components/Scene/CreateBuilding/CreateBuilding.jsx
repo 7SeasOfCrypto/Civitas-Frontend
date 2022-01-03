@@ -46,14 +46,24 @@ const createNewMap=({cursorPoint,map,rotation,size})=>{
     const bottom= size.width%2===0?  (cursorPoint.x -(size.width)/2):(cursorPoint.x -(size.width-1)/2)
     const left= size.height%2===0?(cursorPoint.z - (size.height-2)/2):(cursorPoint.z - (size.height-1)/2)
     const collision=new Array(size.width).fill().map((value,index)=>new Array(size.height).fill(false) )
-
     let newMap= [...map]
-    for (let i=0;i<3;i++)
+    /*
+    for (let i=0;i<size.width;i++)
     {
-        for(let j=0;j<3;j++)
+        for(let j=0;j<size.height;j++)
         {
-            collision[i][j]=map[bottom+i][j+left]
+            
             newMap[bottom+i][left+j]=3
+        }
+    }*/
+    for (let i=-1;i<=size.width;i++)
+    {
+        for(let j=-1;j<=size.height;j++)
+        {
+            if(bottom+i>=0 && bottom+i<=49 && left+j>=0 && left+i<=49 )
+            {
+                newMap[bottom+i][left+j]=1
+            }
         }
     }
     return newMap
@@ -118,8 +128,12 @@ const CreateBuilding = ({ cellHover }) => {
     if (isAdding)
         return (
             <>
-                <group position={[pivotX, 0, pivotZ]} onPointerDown={onAddBuilding}>
-                    {hasPlaceMarker ? gridl : null}
+                <group position={[pivotX, 0, pivotZ]} onPointerDown={(e) => {
+                    e.button === 0 
+                    ? onAddBuilding()
+                    : null
+                }}>
+                    {gridl}
                 </group>
                 
             </>
