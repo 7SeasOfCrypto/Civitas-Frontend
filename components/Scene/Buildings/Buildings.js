@@ -19,7 +19,7 @@ const Buildings = () => {
         const Model = model
         const posX = width % 2 === 0 ? (x) * CELL_SIZE : (.5 + x) * CELL_SIZE
         const posZ = height % 2 === 0 ? (y) * CELL_SIZE : (.5 + y) * CELL_SIZE
-        const percent=75
+        const percent=50
         return (
             <group key={index} position={[posZ, 0, posX]}>
                 <Billboard

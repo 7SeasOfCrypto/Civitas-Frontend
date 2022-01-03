@@ -15,7 +15,7 @@ const Ground = ({ capture = false, setHover }) => {
 
   const { map, mapMaterial } = useStore(state => state.maps)
   const maps = useStore(state => state.maps)
-  const textures = useLoader(THREE.TextureLoader, ['/Textures/grass.webp', '/Textures/grass.webp', '/Textures/grass.webp', '/Textures/grass.webp', '/Textures/grass.webp', '/Textures/grass.webp', '/Textures/grass.webp'])
+  const textures = useLoader(THREE.TextureLoader, ['/Textures/grass.webp', '/Textures/swalk.webp', '/Textures/road.webp', '/Textures/grass.webp', '/Textures/ph.webp', '/Textures/decor.webp', '/Textures/grass.webp'])
 
   for (let x = 0; x < textures.length; x++) {
     textures[x].wrapS = textures[x].wrapT = THREE.RepeatWrapping
