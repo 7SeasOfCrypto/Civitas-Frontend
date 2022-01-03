@@ -60,12 +60,6 @@ const EmptyMap=(row,col)=>{
     return new Array(row).fill().map((value,index)=> new Array(col).fill(0))
 }
 
-const testBuilds = [
-    {x:0,y:0,Id:1,id_model:0,level:0,completed:true,size:3},
-    {x:4,y:3,Id:2,id_model:0,level:0,completed:true,size:3},
-    {x:0,y:8,Id:3,id_model:0,level:0,completed:true,size:3},
-    {x:20,y:20,Id:4,id_model:1,level:0,completed:true,size:3},
-]
 
 export const mapGenerator=(row,col)=>{
 

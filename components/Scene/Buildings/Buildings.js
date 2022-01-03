@@ -5,7 +5,7 @@ import {CELL_SIZE} from 'constants'
 import {useGesture } from '@use-gesture/react'
 const Buildings = () => {
     const { listBuild } = useStore()
-    
+    console.log(listBuild)
     const ArrayBuild= listBuild.map((value,index)=> {
         const {x,y,Id,id_model,level,completed}=value
         

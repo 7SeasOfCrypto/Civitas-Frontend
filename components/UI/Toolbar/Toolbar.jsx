@@ -3,7 +3,7 @@ import {useStore} from 'store'
 const Toolbar = () => {
     const {hasPlaceMarker,showPlaceMarker} = useStore()
 
-   
+   console.log(hasPlaceMarker)
     const buildHouse = (value) => {
         showPlaceMarker(value)
     }

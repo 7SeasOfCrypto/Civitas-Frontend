@@ -1,4 +1,4 @@
-import isPositionAvailable from '../utils/isPositionAvailable'
+
 import styles from '../styles/Home.module.css'
 import Toolbar from '@/components/UI/Toolbar'
 import Head from 'next/head'
