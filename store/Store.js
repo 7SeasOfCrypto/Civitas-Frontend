@@ -17,7 +17,8 @@ export const useStore = create(set => ({
   listBuild:[
     {x:4,y:1,Id:2,id_model:0,completed:0},
     {x:8,y:1,Id:3,id_model:0,completed:1},
-    {x:12,y:1,Id:4,id_model:0,completed:2}],
+    {x:12,y:1,Id:4,id_model:0,completed:2}
+            ],
   myBuildings:[{
     id: '0x00000',
   },

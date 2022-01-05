@@ -7,6 +7,7 @@ import Level from '@/models/level'
 import FloorController from './FloorController'
 import {Sky} from '@react-three/drei'
 import {useStore} from '@/store/Store'
+import Stronghold from './Stronghold'
 
 const Scene = () => {
     const {isAdding}= useStore(state => state.placeBuilding)
@@ -22,6 +23,7 @@ const Scene = () => {
                 }
                 <Ground></Ground>
                 <Level></Level>
+                <Stronghold></Stronghold>
                 
                 </Suspense>
                 <Sky distance={45000} sunPosition={[0, 1, 0]} inclination={0} azimuth={0.5}    />
