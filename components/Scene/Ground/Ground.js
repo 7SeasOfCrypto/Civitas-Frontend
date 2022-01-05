@@ -32,7 +32,7 @@ const Ground = ({ capture = false, setHover }) => {
       <group renderOrder={1}>
         <mesh position={[CELL_SIZE * 25, 0, CELL_SIZE * 25]} material={materials[0]}>
 
-          <boxGeometry args={[CELL_SIZE * 50, .5, CELL_SIZE * 50]}>
+          <boxGeometry args={[CELL_SIZE * 50+.1, .5, CELL_SIZE * 50+.1]}>
           </boxGeometry>
 
 

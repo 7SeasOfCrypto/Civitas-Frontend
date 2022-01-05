@@ -11,6 +11,7 @@ export const models=[
         size:{width:3,height:3},
         complete:{model:Castle,colored:true},
         build:{model:[Castle0,Castle1], colored:false},
+        buildTime:[10,180,0],
         stage:0,
         rotation:0,
         
@@ -21,6 +22,7 @@ export const models=[
         size:{width:3,height:3},
         complete:{model:Archery,colored:true},
         build:{model:[Archery0,Archery1], colored:false},
+        buildTime:[10,180,0],
         rotation:0,
     }
         

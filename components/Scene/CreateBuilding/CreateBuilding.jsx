@@ -1,7 +1,6 @@
 import { useState,useEffect } from 'react'
 import { CELL_SIZE } from 'constants'
 import { useStore } from 'store'
-import SMCastle from '@/models/SMCastle'
 import * as THREE from 'three'
 
 
@@ -104,7 +103,7 @@ const CreateBuilding = ({ cellHover }) => {
     const pivotX = cellHover.x < minposX ? minposX * CELL_SIZE + CELL_SIZE / 2 : cellHover.x>maxposX? maxposX* CELL_SIZE+CELL_SIZE / 2: cellHover.x * CELL_SIZE + CELL_SIZE / 2
     const pivotZ = cellHover.z < minposZ ? minposZ * CELL_SIZE + CELL_SIZE / 2 : cellHover.z>maxposZ? maxposZ*CELL_SIZE+CELL_SIZE/2 :cellHover.z * CELL_SIZE + CELL_SIZE / 2
     
-    const Model = SMCastle
+    
     
     useEffect(() =>{
         

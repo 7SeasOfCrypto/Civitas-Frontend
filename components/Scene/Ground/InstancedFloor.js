@@ -3,7 +3,7 @@ import { ORIGIN_GRID, GRID_COL, GRID_ROW, CELL_SIZE } from 'constants'
 import { extend, useFrame, useLoader } from "@react-three/fiber"
 import * as THREE from 'three'
 import * as Nodes from "three/examples/jsm/nodes/Nodes.js"
-import { useStore } from '@/store/Store'
+
 extend(Nodes)
 
 
