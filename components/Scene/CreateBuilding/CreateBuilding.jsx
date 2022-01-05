@@ -61,6 +61,7 @@ const createNewMap=({cursorPoint,map,rotation,size})=>{
         {
             if(bottom+i>=0 && bottom+i<=49 && left+j>=0 && left+i<=49 )
             {
+
                 newMap[bottom+i][left+j]=1
             }
         }
