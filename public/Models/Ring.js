@@ -7,7 +7,7 @@ import { useGLTF } from '@react-three/drei'
 
 export default function Model(props) {
   const group = useRef()
-  const { nodes, materials } = useGLTF('/ring-transformed.glb')
+  const { nodes, materials } = useGLTF('/ring.glb')
   return (
     <group ref={group} {...props} dispose={null}>
       <mesh geometry={nodes.Cylinder.geometry} material={nodes.Cylinder.material} scale={1.2} />
@@ -15,4 +15,4 @@ export default function Model(props) {
   )
 }
 
-useGLTF.preload('/ring-transformed.glb')
+useGLTF.preload('/ring.glb')

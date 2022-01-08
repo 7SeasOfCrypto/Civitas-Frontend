@@ -15,8 +15,8 @@ const tempUV = new THREE.Vector2()
 //const colors = [0xA0A0A0, 0x006CFF, 0xFF0000, 0x2AFF00, 0x00FFCD, 0xFF00E8, 0xFFC100, 0xA200FF]
 const colors = [0xffffff, 0xffffff, 0xffffff, 0xffffff, 0xffffff, 0xffffff, 0xffffff, 0xffffff]
 
-const FloorController = ({ capture = false, setHover }) => {
-    
+const FloorController = () => {
+    const {isAdding,isPlaced}= useStore(state => state.placeBuilding)
     const [cellHover, setCellHover] = useState({ x: 0, z: 0 })
     const { map } = useStore()
     useEffect(() => {
@@ -52,8 +52,11 @@ const FloorController = ({ capture = false, setHover }) => {
     return (
         <>
         <group renderOrder={1}>
-            <CreateBuilding cellHover={cellHover} />
-            <instancedMesh ref={meshRef} args={[null, null, 2500]} onPointerMove={cellHoverHandler} visible={false} >
+            {isAdding?
+                <CreateBuilding cellHover={cellHover} />
+                :null
+            }
+            <instancedMesh ref={meshRef} args={[null, null, 2500]} onPointerMove={!isPlaced?cellHoverHandler:null} visible={false} >
                 <planeGeometry args={[CELL_SIZE,  CELL_SIZE]}>
                 </planeGeometry>
                 <meshPhongMaterial vertexColors={THREE.VertexColors}  />

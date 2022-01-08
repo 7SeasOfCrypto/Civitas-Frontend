@@ -7,7 +7,7 @@ import { useGLTF } from '@react-three/drei'
 
 export default function Model({ ...props }) {
   const group = useRef()
-  const { nodes, materials } = useGLTF('/Map-v0.2.3-transformed.glb')
+  const { nodes, materials } = useGLTF('/Map-v0.2.3.glb')
   return (
     <group ref={group} {...props} dispose={null}>
       <mesh geometry={nodes.PipoIsland.geometry} material={materials.PipoMaterial} position={[0, 1, -1]} />
@@ -15,4 +15,4 @@ export default function Model({ ...props }) {
   )
 }
 
-useGLTF.preload('/Map-v0.2.3-transformed.glb')
+useGLTF.preload('/Map-v0.2.3.glb')

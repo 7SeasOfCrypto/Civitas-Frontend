@@ -6,7 +6,15 @@ const enterAddMode=(set)=>{
 
   set(state=>{
         
-    return({placeBuilding:{isAdding:true,isPlaced:false,model:0}})
+    return({placeBuilding:{isAdding:true,isPlaced:false,model:(state.placeBuilding.model+1)%14}})
+  })
+
+}
+const enterRotateMode=(set)=>{
+
+  set(state=>{
+        
+    return({placeBuilding:{isAdding:true,isPlaced:true,model:0}})
   })
 
 }
@@ -44,7 +52,7 @@ const evolveBuilding=(set)=>{
 
 const [useStore ,api]= create(set => ({
   timer:createTimer(set),
-
+  enterRotateMode:(coord)=>set(state=> ({placeBuilding:{isAdding:true,isPlaced:true,model:state.placeBuilding.model,x:coord.x,y:coord.y}})),
   listBuild:[
     ],
   myBuildings:[{
@@ -58,10 +66,10 @@ const [useStore ,api]= create(set => ({
   }],
   colors:{roof:0xff0000,flag1:0x00ff00,flag2:0x0000ff},
   maps:mapGenerator(50,50),
-  placeBuilding:{isAdding:false,isPlaced:false,model:0},
+  placeBuilding:{isAdding:false,isPlaced:false,model:2},
   evolveBuilding: ()=>evolveBuilding(set),
   enterAddMode:()=>enterAddMode(set),
-  leaveAddMode:()=>set(state=> ({placeBuilding:{isAdding:false,isPlaced:false,model:0}})),
+  leaveAddMode:()=>set(state=> ({placeBuilding:{isAdding:false,isPlaced:false,model:state.placeBuilding.model}})),
   updateMap: (newMap)=>set({ maps:{map:newMap,mapMaterial:materialGenerator(newMap)} }),
   addBuilding: (coords) => set(state => ({listBuild: [...state.listBuild,{
     x:coords.x, 
@@ -93,17 +101,3 @@ function createTimer(){
 
 
 export {useStore}
-
-/*
-    {x:3,y:3,Id:2,id_model:0,completed:true},
-    {x:1,y:4,Id:3,id_model:0,completed:true},
-    {x:20,y:20,Id:4,id_model:1,completed:true},
-
-
-
-
-    {x:4,y:1,Id:2,id_model:0,completed:0,timeCreated:1641304401093},
-    {x:8,y:1,Id:3,id_model:0,completed:1,timeCreated:1641304401093},
-    {x:12,y:1,Id:4,id_model:0,completed:2,timeCreated:1641304401093}
-
-  */

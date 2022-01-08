@@ -1,8 +1,12 @@
-
+import {Suspense} from 'react'
 import { Canvas } from '@react-three/fiber'
+import Preloader from '../Preloader'
+import { useProgress } from '@react-three/drei'
 import Scene from '@/components/Scene'
-import { GizmoHelper, GizmoViewcube, GizmoViewport } from '@react-three/drei'
 const Stage = () => {
+    
+    const {progress}=useProgress()
+    
     return (
         <Canvas
             camera={{
@@ -20,25 +24,16 @@ const Stage = () => {
                 shadow-mapSize-width={1024}
                 shadow-mapSize-height={1024}
             />
+{progress===10?
+            <Suspense fallback={null}>
+                <Preloader></Preloader>
+            </Suspense>:
+            <Suspense fallback={null}>
+
             <Scene></Scene>
-            <GizmoHelper
-                alignment='bottom-middle'
-                margin={[800,50]}
-                
-            >
-
-                <GizmoViewcube
-                    faces={['Right', 'Left', 'Top', 'Bottom', 'Front', 'Back']}
-                    opacity={1}
-                    color={ 'white'}
-                    strokeColor={ 'gray'}
-                    textColor={ 'black'}
-                    hoverColor={ 'lightgray'}
-                />
-
-
-
-            </GizmoHelper>
+        </Suspense>
+}
+            
         </Canvas>
     )
 }

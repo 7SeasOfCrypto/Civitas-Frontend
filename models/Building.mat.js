@@ -5,8 +5,8 @@ import * as Nodes from "three/examples/jsm/nodes/Nodes.js"
 
 
 const Material = ({colors}) => {
-
-    const [difuse, mixchannels, flag, logo, opacity = 1] = useLoader(THREE.TextureLoader, ['/Textures/BuildingTexture.webp', '/Textures/Texture_b_mix.webp', '/Textures/Flag.webp', '/Textures/Logo1.webp'])
+    
+    const [difuse, mixchannels, flag, logo, opacity = 1] = useLoader(THREE.TextureLoader, ['/Textures/BuildingTexture.webp', '/Textures/BuildingMix.webp', '/Textures/Flag.webp', '/Textures/Logo1.webp'])
     const boxHeight = 2
     const {roof,flag1,flag2}=colors? colors: {roof:0xff0000,flag1:0x00ff00,flag2:0xff00ff}
 

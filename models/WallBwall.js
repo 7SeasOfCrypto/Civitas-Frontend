@@ -8,7 +8,7 @@ import { BuildingMat } from './Building.mat'
 
 export default function Model({ ...props }) {
   const group = useRef()
-  const { nodes, materials } = useGLTF('/Models/Buildings/WallBwall.glb')
+  const { nodes, materials } = useGLTF('/models/Buildings/WallBwall.glb')
   return (
     <group ref={group} {...props} dispose={null}>
       <mesh geometry={nodes.SM_Wall_B_wall.geometry}
@@ -20,5 +20,5 @@ export default function Model({ ...props }) {
   )
 }
 
-useGLTF.preload('/Models/Buildings/WallBwall.glb')
+useGLTF.preload('/models/Buildings/WallBwall.glb')
 

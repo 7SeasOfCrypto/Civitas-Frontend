@@ -10,7 +10,7 @@ extend(Nodes)
 
 const tempObject = new THREE.Object3D()
 
-const InstancedFloor = ({ material, matMap, index }) => {
+const InstancedFloor = ({ Material, matMap, index }) => {
 
     const [difuse] = useLoader(THREE.TextureLoader, ['/Textures/floor.webp'])
     difuse.wrapS = difuse.wrapT = THREE.RepeatWrapping
@@ -28,9 +28,10 @@ const InstancedFloor = ({ material, matMap, index }) => {
     return (
         <>
             <group>
-                <instancedMesh ref={meshRef} args={[null, null, matMap.length]} material={material} receiveShadow>
+                <instancedMesh ref={meshRef} args={[null, null, matMap.length]} receiveShadow>
                     <boxGeometry args={[CELL_SIZE, 1, CELL_SIZE]}>
                     </boxGeometry>
+                    {Material}
                 </instancedMesh>
             </group>
         </>

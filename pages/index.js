@@ -1,8 +1,8 @@
 
 import styles from '../styles/Home.module.css'
-import Toolbar from '@/components/UI/Toolbar'
 import Head from 'next/head'
 export default function Home() {
+  
   return (
     <div className={styles.container}>
       <Head>
@@ -14,7 +14,7 @@ export default function Home() {
       
         
 
-      <Toolbar/>
+      
     </div>
   )
 }

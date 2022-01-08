@@ -8,7 +8,7 @@ import { useStore } from '@/store/Store'
 import { CELL_SIZE } from 'constants'
 export default function Model(props) {
   const {mapMaterial}=useStore(state=>state.maps)
-  const { nodes, materials } = useGLTF('/Models/Decoration/FlowerPot-transformed.glb')
+  const { nodes, materials } = useGLTF('/Models/Decoration/FlowerPot.glb')
   
     return (
       <Merged meshes={nodes}>
@@ -33,4 +33,4 @@ export default function Model(props) {
     )*/
 }
 
-useGLTF.preload('/Models/Decoration/FlowerPot-transformed.glb')
+useGLTF.preload('/Models/Decoration/FlowerPot.glb')
