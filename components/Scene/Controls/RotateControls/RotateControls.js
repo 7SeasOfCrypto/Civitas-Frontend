@@ -1,20 +1,19 @@
 import { useRef, useMemo } from 'react'
 
 import { CELL_SIZE } from 'constants'
-import { models } from 'models'
+import { modelsBuild } from 'models'
 import { useStore } from '@/store/Store'
 import { useMatcapTexture, useTexture } from '@react-three/drei'
 import Arrow from '@/models/Arrow'
 import ArrowRotate from '@/models/ArrowRotate'
 
 
-const createNewMap = () => {
-    //{cursorPoint,map,rotation,size}
+const createNewMap = ({Pivot,map,size}) => {
+    //{Pivot,map,rotation,size}
 
 
-    const bottom = size.width % 2 === 0 ? (cursorPoint.x - (size.width) / 2) : (cursorPoint.x - (size.width - 1) / 2)
-    const left = size.height % 2 === 0 ? (cursorPoint.z - (size.height - 2) / 2) : (cursorPoint.z - (size.height - 1) / 2)
-    const collision = new Array(size.width).fill().map((value, index) => new Array(size.height).fill(false))
+    const bottom = size.width % 2 === 0 ? (Pivot.x - (size.width) / 2) : (Pivot.x - (size.width - 1) / 2)
+    const left = size.height % 2 === 0 ? (Pivot.z - (size.height - 2) / 2) : (Pivot.z - (size.height - 1) / 2)
     let newMap = [...map]
 
     for (let i = 0; i < size.width; i++) {
@@ -29,16 +28,12 @@ const createNewMap = () => {
 }
 
 
-const SetRotation = () => {
+const RotateControl = () => {
     const group = useRef(null)
-    const { geoCenter, rotation, owned } = useStore(state => state.addMode)
-    const { id, type } = owned
-    const { rotateRight,rotateLeft } = useStore(state => state.actions)
-
-
-
-    //const [matcap1, matcap2] = useTexture(['matcap-1.png', 'matcap-2.png'])
-
+    const { rotateRight,rotateLeft,updateMap,addBuilding } = useStore(state => state.actions)
+    const {map}=useStore(state=>state.maps)
+    const { id, type ,Pivot, geoCenter,size ,rotation} = useStore(state => state.rotateMode)
+    
     const [matcapIsNotValid] = useMatcapTexture('E80404_B50404_CB0404_FC3333')
     const [matcapIsValid] = useMatcapTexture('D1AC04_F8E50A_EDD004_B38D04')
 
@@ -48,13 +43,17 @@ const SetRotation = () => {
     const onRotateBuildingR = () => {
         rotateRight()
     }
+    
     const onPlaceBuilding = () => {
-        //addBuilding({x:cursorPoint.z,y:cursorPoint.x})
-        //updateMap(createNewMap({cursorPoint, map,size}))
+        const completed=0
+        console.log(geoCenter)
+        addBuilding({Pivot,id,type,completed,rotation,geoCenter,size,rotation})
+        updateMap(createNewMap({Pivot, map,size}))
         //leaveAddMode()
     }
+    
     const Model = useMemo(() => {
-        const typeModels = models.find((modeldata, index) => modeldata.type = type)
+        const typeModels = modelsBuild.find((modeldata, index) => modeldata.type = type)
         return typeModels.models[2]
     }, [type])
 
@@ -71,4 +70,4 @@ const SetRotation = () => {
             </group>
     )
 }
-export default SetRotation
+export default RotateControl

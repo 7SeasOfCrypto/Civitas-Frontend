@@ -9,7 +9,8 @@ import { useStore } from '@/store/Store'
 const tempObject = new THREE.Object3D()
 const FloorController = () => {
     const {setHoverTile}= useStore(state => state.actions)
-    //const {isCapturing,tileX,tileY} =useStore(state => state.hoverTile)
+    
+
     useEffect(() => {
         let i = 0
         for (let j = 0; j < GRID_COL; j++) {

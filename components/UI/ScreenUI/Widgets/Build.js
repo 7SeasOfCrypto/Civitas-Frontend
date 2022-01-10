@@ -4,14 +4,13 @@ import {useState,useEffect} from 'react'
 
 
 const Build = () => {
-    const {enterAddMode}=useStore(state=>state.actions)
-    const {isActive}=useStore(state=>state.addMode)
+    const {enterMove}=useStore(state=>state.actions)
+    const {isActive}=useStore(state=>state.moveMode)
 
     const clickBuild=()=>{
-        if(isActive)
-            leaveAddMode(1)
-        else
-            enterAddMode(1)
+                    enterMove({id:2})
+        
+            
     }
     return (
         <div className={styles.build} onClick={clickBuild}>

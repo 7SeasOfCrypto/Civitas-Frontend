@@ -1,11 +1,24 @@
-import { models } from 'models'
+import { modelsBuild } from 'models'
 import { useStore } from 'store'
 import Progress from './Progress'
 import { CELL_SIZE } from 'constants'
 import { useGesture } from '@use-gesture/react'
 
 const Buildings = () => {
-    const { placeBuilding } = useStore()
+    const placedBuildings  = useStore(state=>state.placedBuildings)
+
+
+
+    const ArrayBuild = placedBuildings.map((property, index) => {
+        const { x, y, BuildId, type, level, completed,timeCreated,rotation,geoCenter,size } = property
+        const typeData=modelsBuild.find((modelItem)=>modelItem.type===type )
+        const {  maxlevel, models, buildTime } = typeData
+        const { width, height } = size
+        const Model=models[2]
+        return (<Model position={[geoCenter.x,1,geoCenter.z]} rotation={[0, Math.PI / 2 * rotation, 0]} key={BuildId}></Model>)
+        
+    })
+
     
 /*
     const ArrayBuild = listBuild.map((value, index) => {
@@ -31,9 +44,9 @@ const Buildings = () => {
             
             )
             
-    })
-    return (ArrayBuild)*/
-    return null
+    })*/
+    return (ArrayBuild)
+    
 
 }
 export default Buildings

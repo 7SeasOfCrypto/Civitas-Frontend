@@ -1,10 +1,10 @@
-import {useCallback,useMemo} from 'react'
+import {useCallback,useMemo,Suspense} from 'react'
 
 import {useMatcapTexture} from '@react-three/drei'
 import { CELL_SIZE } from 'constants'
 import { useStore } from '@/store/Store'
 import ArrowMove from '@/models/ArrowMove'
-import {models} from 'models'
+import {modelsBuild} from 'models'
 
 
 
@@ -30,15 +30,16 @@ const Marker = (size,collision) => {
 }
 
 const MoveControls = () => {
-    const { Pivot, geoCenter,size } = useStore(state => state.hoverData)
+
+    
+    const { Pivot, geoCenter,size,type } = useStore(state => state.moveMode)
     const {collisionArray,isCollision} = useStore(state=>state.collision)
-    const {enterRotateMode} = useStore(state=>state.actions)
-    const {type}=useStore(state=>state.addMode.owned)
+    const {enterRotate}=useStore(state=>state.actions)
     const [matcapIsNotValid] = useMatcapTexture('E80404_B50404_CB0404_FC3333')
     const [matcapIsValid] = useMatcapTexture('D1AC04_F8E50A_EDD004_B38D04')
 
     const Model=useMemo(() =>{
-        const typeModels=models.find((modeldata,index)=>modeldata.type=type)
+        const typeModels=modelsBuild.find((modeldata,index)=>modeldata.type=type)
         return typeModels.models[2]
     },[type])
     const placeMarker=Marker(size,collisionArray)
@@ -46,18 +47,21 @@ const MoveControls = () => {
     const confirmPosition=(e)=>{
         if(!isCollision &&e.button===0)
         {
-            enterRotateMode()
+            enterRotate()
         }
     }
     return (
         <>
 
             <group position={[geoCenter.x, 0, geoCenter.z]} >
-                <ArrowMove position={[0,.3,0]} />
+                <Suspense>
+                
                 {placeMarker}
+                <ArrowMove position={[0,.5,0]} />
                 <Model onPointerDown={confirmPosition} position={[0,.3,0]} >
                     <meshMatcapMaterial attach="material" matcap={isCollision ? matcapIsNotValid : matcapIsValid} transparent opacity={isCollision ? .4 : 1} />
                 </Model>
+                </Suspense>
     
             </group>
         </>

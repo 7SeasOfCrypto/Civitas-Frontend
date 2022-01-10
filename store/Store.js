@@ -1,8 +1,8 @@
 import create from 'zustand'
-import { mapGenerator } from './MapGenerator'
+import { mapGenerator,materialGenerator } from './MapGenerator'
 import { calcCollision } from './calcCollision'
 import { CELL_SIZE } from 'constants'
-import {models} from '/models/'
+import {modelsBuild} from '/models/'
 const enterAddMode = (set) => {
 
   set(state => {
@@ -55,102 +55,103 @@ const [useStore] = create((set, get) => ({
   shouldUpdate: false,
   ownedBuildings: [{ id: 1, type: 1, completed: 0 }, { id: 2, type: 2, completed: 0 }],
   placedBuildings: [
-    { x: 3, y: 1, buildId: 1, model: 0, level: 0, completes: 1, timeCreated: null, lastCollect: null, ROI: 10, chanceBreak: 10, }
+    {
+   
+          Pivot: {x: 1,z: 6},
+          BuildId: 1,
+          type: 1,
+          timeCreated:new Date().getTime(),
+          lastCollect:new Date().getTime(),
+          Roi:10,
+          chanceBreak:30,
+          buildTime:10,
+          completed: 0,
+          geoCenter: {x: 4.9999995,z:21.666664500000003},
+          size:{width: 3,height:3},
+          rotation: 0
+      }
   ],
   finishedBuildings: [],
-  hoverData: { isCapturing: false, tile: { x: 0, z: 0 }, Pivot: { x: 0, z: 0 }, geoCenter: { x: 0, y: 0 },size:{width:1,height:1} },
-  editMode: {
-    isActive: false,
-    isPlaced: false,
-    buildID: null,
-    rotation: 0,
-    size: { width: 1, height: 1 },
-  },
-
-  addMode: {
-    isActive: false,
-    isPlaced: false,
-    owned:{id:1,type:0} ,
-    Pivot: { x: 0, z: 0 },
-    geoCenter:{x:0,z:0},
-    rotation: 0,
-    size: { width: 3, height: 3 },
-  },
-
-  moveWidget:{isActive:false,Pivot:{x:0,y:0},geoCenter:{x:0,z:0},size:{width:3,height:3}},
-  rotateWitget:{isActive:false,Pivot:{x:0,y:0},geoCenter:{x:0,z:0},size:{width:3,height:3},rotation:0},
-
-
-
-
+  moveMode:{isActive:false,tile:{x:0,z:0},Pivot:{x:0,z:0},geoCenter:{x:0,z:0},size:{width:3,height:3},id:-1,type:0},
+  rotateMode:{isActive:false,Pivot:{x:0,z:0},geoCenter:{x:0,z:0},size:{width:3,height:3},id:-1,type:0,rotation:0},
   collision: {
       collisionArray: [],
       isCollision:false
-  },
 
+  },
   actions: {
     initMap() {
-
       set((state) => ({ maps: mapGenerator(50, 50) }))
     },
-    setPositionWidgets({tile}) {
-      const widgetData=get().widgetData
-      const map=get().maps.map
-      const drawData = calcDrawData({ tile, size })
-      const Pivot=drawData.Pivot
-      if(tile.x!==Pivot.x || tile.y!==Pivot.y)
-      {
-        
-      }
-
-    },
     setHoverTile({ tile }) {
-      const hoverData = get().hoverData
+      const moveData = get().moveMode
       const map=get().maps.map
-      const addMode = get().addMode
-      const editMode = get().editMode
-      if (tile.x !== hoverData.tile.x || tile.z !== hoverData.tile.z) {
-        let size = { width: 1, height: 1 }
-        if (editMode.isActive)
-          size = addMode.size
-        else
-          size = addMode.size
+      if (tile.x !== moveData.tile.x || tile.z !== moveData.tile.z) {
+        const {size}=moveData
         const drawData = calcDrawData({ tile, size })
-
-        set({ hoverData: { ...hoverData, tile: { x: tile.x, z: tile.z }, ...drawData } })
-        
+        set({ moveMode: { ...moveData, tile: { x: tile.x, z: tile.z }, ...drawData } })
         set({collision:calcCollision(map,drawData.Pivot,size)})
-
       }
     },
-
-    enterAddMode({ Id }) {
+    enterMove({id}) {
       const owned = get().ownedBuildings
-      const buildData = owned[owned.findIndex((building, index) => building.Id === Id)]
-      const modelData = models[models.findIndex(model => model.type === buildData.type)]
+      const buildData = owned[owned.findIndex((building, index) => building.id === id)]
+      set({rotateMode:{isActive:false}})      
+      const modelData = modelsBuild[modelsBuild.findIndex(model => model.type === buildData.type)]
+      set({moveMode:{isActive:true,tile:{x:0,z:0},Pivot:{x:0,z:0},geoCenter:{x:0,z:0},id:id,type:buildData.type,size:modelData.size}})
+      
+    },
+    enterRotate(){
+      const moveData= get().moveMode
+      set({moveMode:{isActive:false}})
+      set({rotateMode:{isActive:true,Pivot:moveData.Pivot,geoCenter:moveData.geoCenter,id:moveData.id,type:moveData.type,size:moveData.size,rotation:0}})
+    },
 
-      //set({addMode:{ isActive:true,isPlace:false,owned:{id:1,type:buildData.type}, Pivot:{x:0,z:0},center:{x:0,z:0},rotation:0,size:modelData.size}})
-      //set({hoverData:{...get().hoverData,isCapturing:true,size:modelData.size}})
-    }, 
-    enterRotateMode(){
-      const addMode=get().addMode
-      const hoverData=get().hoverData
-
-      set({addMode:{...addMode,isPlaced:true,Pivot:hoverData.Pivot,geoCenter:hoverData.geoCenter}})
-      set({hoverData: {isCapturing: false, tile: { x: 0, z: 0 }, Pivot: { x: 0, z: 0 }, geoCenter: { x: 0, z: 0 },size:{width:1,height:1}}})
-    }, 
     rotateLeft(){
       console.log('rotateleft')
-      const addMode=get().addMode
-      set({addMode:{...addMode,rotation:(addMode.rotation+1)%4}})
+      const rotateMode=get().rotateMode
+      set({rotateMode:{...rotateMode,rotation:(rotateMode.rotation+1)%4}})
     },
     rotateRight(){
-      const addMode=get().addMode
-      set({addMode:{...addMode,rotation:(addMode.rotation-1)%4}})
-    }
+      const rotateMode=get().rotateMode
+      set({rotateMode:{...rotateMode,rotation:(rotateMode.rotation-1)%4}})
+    },
+    updateMap(newMap){
+      set({ maps:{map:newMap,mapMaterial:materialGenerator(newMap)} })
+    },
+    exitMoveMode(){
+      set({moveMode:{isActive:false}})
+    },
+    addBuilding({Pivot,id,type,completed,geoCenter,size,rotation})
+    {
+      const placedBuildings=get().placedBuildings
+      set({rotateMode:{isActive:false}})
+
+      set({
+          placedBuildings:[...placedBuildings,{
+            Pivot:Pivot,
+            buildId:id,
+            type:type,
+            level:0,
+            timeCreated:new Date().getTime(),
+            lastCollect:null,
+            Roi:10, 
+            chanceBreak:30,
+            buildTime:10,
+            completed:completed,
+            rotation:rotation,
+            geoCenter:geoCenter,
+            size:size
+
+          }]
+        }
+      )
+    },
+  //{ x: 3, y: 1, buildId: 1, model: 0, level: 0, completed: 1,rotation:0, timeCreated: null, lastCollect: null, ROI: 10, chanceBreak: 10, }
+
+
+
   }
-
-
 
 }))
 
@@ -172,7 +173,24 @@ function calcDrawData({ tile, size }) {
 
 }
 
+/*
 
+    enterAddMode({ Id }) {
+      const owned = get().ownedBuildings
+      const buildData = owned[owned.findIndex((building, index) => building.Id === Id)]
+      const modelData = models[models.findIndex(model => model.type === buildData.type)]
+
+      set({addMode:{size:modelData.size}})
+      set({hoverData:{...get().hoverData,isCapturing:true,size:modelData.size}})
+    }, 
+    enterRotateMode(){
+      const addMode=get().addMode
+      const hoverData=get().hoverData
+
+      set({addMode:{...addMode,isPlaced:true,Pivot:hoverData.Pivot,geoCenter:hoverData.geoCenter}})
+      set({hoverData: {isCapturing: false, tile: { x: 0, z: 0 }, Pivot: { x: 0, z: 0 }, geoCenter: { x: 0, z: 0 },size:{width:1,height:1}}})
+    }, 
+    */
 
 
 
@@ -263,7 +281,7 @@ const [useStore ,api]= create(set => ({
   evolveBuilding: ()=>evolveBuilding(set),
   enterAddMode:()=>enterAddMode(set),
   leaveAddMode:()=>set(state=> ({placeBuilding:{isAdding:false,isPlaced:false,model:state.placeBuilding.model}})),
-  updateMap: (newMap)=>set({ maps:{map:newMap,mapMaterial:materialGenerator(newMap)} }),
+  
   addBuilding: (coords) => set(state => ({listBuild: [...state.listBuild,{
     x:coords.x, 
     y:coords.y,

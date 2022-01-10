@@ -1,4 +1,4 @@
-
+import {useEffect} from 'react'
 import { useLoader } from "@react-three/fiber"
 import * as THREE from 'three'
 import { useStore } from '@/store/Store'
@@ -13,13 +13,14 @@ const colors = [0x006CFF, 0xFF0000, 0x2AFF00, 0x00FFCD, 0xFF00E8, 0xFFC100, 0xA2
 const Floor = () => {
     const { mapMaterial } = useStore(state => state.maps)
     const textures = useLoader(THREE.TextureLoader, ['/Textures/Grass.webp', '/Textures/swalk.webp', '/Textures/road.webp', '/Textures/grass.webp', '/Textures/ph.webp', '/Textures/decor.webp', '/Textures/grass.webp'])
+    useEffect(() => {
     for (let x = 0; x < textures.length; x++) {
         textures[x].wrapS = textures[x].wrapT = THREE.RepeatWrapping
         if (x === 0) {
             textures[x].repeat.set(20, 20)
         }
-    }
-
+        }
+    },[textures])
     const materials = colors.map((value, index) => (<meshStandardMaterial map={textures[index]} key={index} />))
     const GroundTile = mapMaterial.map((value, index) => index !== 0 ? <InstancedFloor key={index} matMap={value} Material={materials[index]} index={index} /> : null)
 

@@ -1,7 +1,5 @@
 import Castle from './Castle'
-
 import Archery from './Archery'
-
 import Barracks from './Barracks'
 import BlackSmith from './Blacksmith'
 import Farm from './Farm'
@@ -17,13 +15,13 @@ import Temple from './Temple'
 import Workshop from './Workshop'
 
 
-export const models = [
+export const modelsBuild = [
     {
         type: 0,
         maxlevel: 2,
         size: { width: 3, height: 3 },
         models: Castle,
-        buildTime: [10, 180, 0],
+        buildTime:10,
         stage: 0,
         rotation: 0,
     },
@@ -32,7 +30,7 @@ export const models = [
         maxlevel: 2,
         size: { width: 3, height: 3 },
         models: Archery,
-        buildTime: [10, 180, 0],
+        buildTime:10,
         rotation: 0,
     },
     {
@@ -40,7 +38,7 @@ export const models = [
         maxlevel: 2,
         size: { width: 3, height: 3 },
         models: Barracks,
-        buildTime: [10, 180, 0],
+        buildTime:10,
         rotation: 0,
     },
     {
@@ -48,7 +46,7 @@ export const models = [
         maxlevel: 2,
         size: { width: 3, height: 3 },
         models: BlackSmith,
-        buildTime: [10, 180, 0],
+        buildTime:10,
         rotation: 0,
     },
     {
@@ -56,7 +54,7 @@ export const models = [
         maxlevel: 2,
         size: { width: 3, height: 3 },
         models: Farm,
-        buildTime: [10, 180, 0],
+        buildTime:10,
         rotation: 0,
     },
     {
@@ -64,7 +62,7 @@ export const models = [
         maxlevel: 2,
         size: { width: 2, height: 2 },
         models: Granary,
-        buildTime: [10, 180, 0],
+        buildTime:10,
         rotation: 0,
     },
     {
@@ -72,7 +70,7 @@ export const models = [
         maxlevel: 2,
         size: { width: 2, height: 2 },
         models: House,
-        buildTime: [10, 180, 0],
+        buildTime:10,
         rotation: 0,
     },
     {
@@ -80,7 +78,7 @@ export const models = [
         maxlevel: 2,
         size: { width: 3, height: 3 },
         models: Keep,
-        buildTime: [10, 180, 0],
+        buildTime:10,
         rotation: 0,
     },
     {
@@ -88,7 +86,7 @@ export const models = [
         maxlevel: 2,
         size: { width: 3, height: 3 },
         models: Library,
-        buildTime: [10, 180, 0],
+        buildTime:10,
         rotation: 0,
     },
     {
@@ -96,7 +94,7 @@ export const models = [
         maxlevel: 2,
         size: { width: 3, height: 3 },
         models: LumberMill,
-        buildTime: [10, 180, 0],
+        buildTime:10,
         rotation: 0,
     },
     {
@@ -104,7 +102,7 @@ export const models = [
         maxlevel: 2,
         size: { width: 3, height: 3 },
         models: MageTower,
-        buildTime: [10, 180, 0],
+        buildTime:10,
         rotation: 0,
     },
     {
@@ -112,7 +110,7 @@ export const models = [
         maxlevel: 2,
         size: { width: 3, height: 3 },
         models: Market,
-        buildTime: [10, 180, 0],
+        buildTime:10,
         rotation: 0,
     },
     {
@@ -120,7 +118,7 @@ export const models = [
         maxlevel: 2,
         size: { width: 3, height: 3 },
         models: Stables,
-        buildTime: [10, 180, 0],
+        buildTime:10,
         rotation: 0,
     },
     {
@@ -128,7 +126,7 @@ export const models = [
         maxlevel: 2,
         size: { width: 3, height: 3 },
         models: Temple,
-        buildTime: [10, 180, 0],
+        buildTime:10,
         rotation: 0,
     },
     {
@@ -136,7 +134,7 @@ export const models = [
         maxlevel: 2,
         size: { width: 3, height: 3 },
         models: Workshop,
-        buildTime: [10, 180, 0],
+        buildTime:10,
         rotation: 0,
     }
 ]

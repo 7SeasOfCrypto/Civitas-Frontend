@@ -16,7 +16,7 @@ const InstancedFloor = ({ Material, matMap, index }) => {
     difuse.wrapS = difuse.wrapT = THREE.RepeatWrapping
     difuse.repeat.set(.5, .5)
     const meshRef = useRef(undefined)
-    useEffect (() => {
+    useLayoutEffect (() => {
         let i = 0
         for (let j = 0; j < matMap.length; j++) {
             tempObject.position.set(CELL_SIZE / 2 + matMap[j].x * CELL_SIZE, 0, CELL_SIZE / 2 + matMap[j].z * CELL_SIZE)
