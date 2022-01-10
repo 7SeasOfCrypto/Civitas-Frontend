@@ -1,16 +1,20 @@
 import {useEffect} from 'react'
 import { Plane, Sphere,useTexture } from '@react-three/drei'
 import {TexturesList} from 'constants'
-const Preloader = () => {
-    
+import {useObjects} from '@/store/StoreObjects'
+const Preloader = ({percent}) => {
+    const value=useObjects()
     const TexturesArray=Object.keys(TexturesList).map((keyObject,index1)=> Object.keys( TexturesList[keyObject]).map((keyMaterial,index2)=>({keyObject:keyObject,keyMaterial:keyMaterial,src:TexturesList[keyObject][keyMaterial]})) )
     const Texturesload=TexturesArray.flat().map(value=>value.src)
-    console.log(Texturesload)
+    
     const Texturesloaded = useTexture(Texturesload)
     useEffect(() => {
-        console.log(Texturesloaded)
-        
-    },[Texturesloaded])
+
+        if(percent===100) 
+        {
+
+        }
+    },[Texturesloaded,percent])
 
     return (
         <>

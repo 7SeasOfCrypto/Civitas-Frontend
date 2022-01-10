@@ -24,15 +24,14 @@ const Stage = () => {
                 shadow-mapSize-width={1024}
                 shadow-mapSize-height={1024}
             />
-{progress===10?
+
             <Suspense fallback={null}>
-                <Preloader></Preloader>
+                <Preloader percent={progress}></Preloader>
             </Suspense>:
             <Suspense fallback={null}>
 
             <Scene></Scene>
         </Suspense>
-}
             
         </Canvas>
     )
