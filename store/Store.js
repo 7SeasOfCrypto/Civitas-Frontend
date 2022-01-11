@@ -53,7 +53,7 @@ const evolveBuilding = (set) => {
 const [useStore] = create((set, get) => ({
   maps: { map: [], mapMaterial: [] },
   shouldUpdate: false,
-  ownedBuildings: [{ id: 1, type: 1, completed: 0 }, { id: 2, type: 2, completed: 0 }],
+  ownedBuildings: [{ id: 1, type: 6, completed: 0 }, { id: 2, type: 5, completed: 0 }],
   placedBuildings: [
     {
    
@@ -72,8 +72,8 @@ const [useStore] = create((set, get) => ({
       }
   ],
   finishedBuildings: [],
-  moveMode:{isActive:false,tile:{x:0,z:0},Pivot:{x:0,z:0},geoCenter:{x:0,z:0},size:{width:3,height:3},id:-1,type:0},
-  rotateMode:{isActive:false,Pivot:{x:0,z:0},geoCenter:{x:0,z:0},size:{width:3,height:3},id:-1,type:0,rotation:0},
+  moveMode:{isActive:false},
+  rotateMode:{isActive:false},
   collision: {
       collisionArray: [],
       isCollision:false
@@ -94,11 +94,16 @@ const [useStore] = create((set, get) => ({
       }
     },
     enterMove({id}) {
+      console.log(modelsBuild)
       const owned = get().ownedBuildings
-      const buildData = owned[owned.findIndex((building, index) => building.id === id)]
+      const buildData = owned.find((building, index) => building.id === id)
+      
       set({rotateMode:{isActive:false}})      
-      const modelData = modelsBuild[modelsBuild.findIndex(model => model.type === buildData.type)]
-      set({moveMode:{isActive:true,tile:{x:0,z:0},Pivot:{x:0,z:0},geoCenter:{x:0,z:0},id:id,type:buildData.type,size:modelData.size}})
+      const modelData = modelsBuild.find(model => model.type === buildData.type)
+      console.log("*************")
+      console.log(modelData)
+      console.log("*************")
+      set({moveMode:{isActive:true,tile:{x:0,z:0},Pivot:{x:1,z:1},geoCenter:{x:modelData.size.width===2?CELL_SIZE:CELL_SIZE*1.5,z:modelData.size.height===2?CELL_SIZE:CELL_SIZE*1.5},id:id,type:buildData.type,size:modelData.size}})
       
     },
     enterRotate(){
@@ -166,7 +171,7 @@ function calcDrawData({ tile, size }) {
   const PivoteZ = tile.z < minposZ ? minposZ : tile.z > maxposZ ? maxposZ : tile.z
   const center = { x: PivoteX * CELL_SIZE + CELL_SIZE / 2, z: PivoteZ * CELL_SIZE + CELL_SIZE / 2 }
   const geomCenter = { x: center.x + (width + 1) % 2 * .5 * CELL_SIZE, z: center.z + (height + 1) % 2 * .5 * CELL_SIZE }
-
+  
 
 
   return ({ Pivot: { x: PivoteX, z: PivoteZ }, geoCenter: geomCenter })

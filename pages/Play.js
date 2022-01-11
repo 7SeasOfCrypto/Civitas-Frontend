@@ -1,3 +1,4 @@
+import {useEffect} from 'react'
 import Head from 'next/head'
 import Stage from '@/components/Stage'
 import styles from '../styles/Play.module.css'
@@ -6,7 +7,11 @@ import {Stats} from '@react-three/drei'
 import {useStore} from '@/store/Store'
 export default function Play() {
   const {initMap}= useStore(state=>state.actions)
-  initMap()
+  useEffect(()=>{
+    initMap()
+
+  })
+  
   return (
     <div className={styles.container}>
       <Head>

@@ -12,7 +12,7 @@ const createNewMap = ({Pivot,map,size}) => {
     //{Pivot,map,rotation,size}
 
 
-    const bottom = size.width % 2 === 0 ? (Pivot.x - (size.width) / 2) : (Pivot.x - (size.width - 1) / 2)
+    const bottom = size.width % 2 === 0 ? (Pivot.x - (size.width-2) / 2) : (Pivot.x - (size.width - 1) / 2)
     const left = size.height % 2 === 0 ? (Pivot.z - (size.height - 2) / 2) : (Pivot.z - (size.height - 1) / 2)
     let newMap = [...map]
 
@@ -46,14 +46,14 @@ const RotateControl = () => {
     
     const onPlaceBuilding = () => {
         const completed=0
-        console.log(geoCenter)
+        
         addBuilding({Pivot,id,type,completed,rotation,geoCenter,size,rotation})
         updateMap(createNewMap({Pivot, map,size}))
-        //leaveAddMode()
+        
     }
     
     const Model = useMemo(() => {
-        const typeModels = modelsBuild.find((modeldata, index) => modeldata.type = type)
+        const typeModels = modelsBuild.find((modeldata, index) => modeldata.type === type)
         return typeModels.models[2]
     }, [type])
 

@@ -62,7 +62,7 @@ export const modelsBuild = [
         maxlevel: 2,
         size: { width: 2, height: 2 },
         models: Granary,
-        buildTime:10,
+        buildTime:11,
         rotation: 0,
     },
     {
