@@ -3,18 +3,30 @@ import { useStore } from "@/store/Store";
 
 const Build = () => {
   const {
-    enterAddMode,
-    leaveAddMode,
-    placeBuilding,
+    
+    moveMode,
+    rotateMode,
+    
     isBuildActive,
     setBuildState,
     ownedBuildings,
-    listBuild,
+    
   } = useStore();
+  const {enterMove,exitMoveMode,
+    exitRotateMode,}= useStore(state=>state.actions)
 
-  const clickBuild = () => {
-    if (placeBuilding.isAdding) leaveAddMode();
-    else enterAddMode();
+  const clickBuild = (e) => {
+    if (moveMode.isActive || rotateMode.isActive)
+      {
+          exitMoveMode()
+          exitRotateMode()
+
+
+      }
+      else 
+      {
+        enterMove({id:e});
+      }
   };
 
   return (
@@ -45,13 +57,13 @@ const Build = () => {
           isBuildActive ? styles.listShow : styles.listHidden
         }`}
       >
-        {ownedBuildings.map((building) => (
+        {ownedBuildings.filter(value=>value.isPlaced===false).map((building) => (
           <li
             className={`${styles.listItem} `}
             key={building.id}
             onClick={(event) => {
               event.stopPropagation();
-              clickBuild();
+              clickBuild(building.id);
             }}
           >
             <h5>Type:{building.type}</h5>
@@ -65,3 +77,4 @@ const Build = () => {
 };
 
 export default Build;
+

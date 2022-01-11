@@ -15,7 +15,7 @@ const Buildings = () => {
         const {  maxlevel, models, buildTime } = typeData
         const { width, height } = size
         const Model=models[2]
-        return (<Model position={[geoCenter.x,1,geoCenter.z]} rotation={[0, Math.PI / 2 * rotation, 0]} key={BuildId}></Model>)
+        return (<Model position={[geoCenter.x,.3,geoCenter.z]} rotation={[0, Math.PI / 2 * rotation, 0]} key={BuildId}></Model>)
         
     })
 

@@ -3,22 +3,6 @@ import { mapGenerator,materialGenerator } from './MapGenerator'
 import { calcCollision } from './calcCollision'
 import { CELL_SIZE } from 'constants'
 import {modelsBuild} from '/models/'
-const enterAddMode = (set) => {
-
-  set(state => {
-
-    return ({ placeBuilding: { isAdding: true, isPlaced: false, model: (state.placeBuilding.model + 1) % 14 } })
-  })
-
-}
-const enterRotateMode = (set) => {
-
-  set(state => {
-
-    return ({ placeBuilding: { isAdding: true, isPlaced: true, model: 0 } })
-  })
-
-}
 const evolveBuilding = (set) => {
 
   const listBuild = api.getState().listBuild
@@ -53,13 +37,31 @@ const evolveBuilding = (set) => {
 const [useStore] = create((set, get) => ({
   maps: { map: [], mapMaterial: [] },
   shouldUpdate: false,
-  ownedBuildings: [{ id: 1, type: 6, completed: 0 }, { id: 2, type: 5, completed: 0 }],
+  ownedBuildings: [
+    { id: 1, type: 1, completed: 0,isPlaced:false }, 
+    { id: 2, type: 2, completed: 0,isPlaced:false },
+    { id: 3, type: 3, completed: 0,isPlaced:false }, 
+    { id: 4, type: 4, completed: 0,isPlaced:false }, 
+    { id: 5, type: 5, completed: 0,isPlaced:false },
+    { id: 6, type: 6, completed: 0,isPlaced:false }, 
+    { id: 7, type: 7, completed: 0,isPlaced:false },
+    { id: 8, type: 8, completed: 0,isPlaced:false }, 
+    { id: 9, type: 9, completed: 0,isPlaced:false },
+    { id: 10, type: 10, completed: 0,isPlaced:false }, 
+    { id: 11, type:11, completed: 0,isPlaced:false },
+    { id: 12, type: 12, completed: 0,isPlaced:false }, 
+    { id: 13, type: 13, completed: 0,isPlaced:false },
+    { id: 14, type: 14, completed: 0,isPlaced:false }, 
+    
+  
+  
+  ],
   placedBuildings: [
     {
    
           Pivot: {x: 1,z: 6},
           BuildId: 1,
-          type: 1,
+          type: 7,
           timeCreated:new Date().getTime(),
           lastCollect:new Date().getTime(),
           Roi:10,
@@ -84,9 +86,17 @@ const [useStore] = create((set, get) => ({
 
   },
   actions: {
+    checkBuilding(){
+      console.log('check')
+      
+    },
+
     initMap() {
       set((state) => ({ maps: mapGenerator(50, 50) }))
+      
     },
+
+  
     setHoverTile({ tile }) {
       const moveData = get().moveMode
       const map=get().maps.map
@@ -97,6 +107,7 @@ const [useStore] = create((set, get) => ({
         set({collision:calcCollision(map,drawData.Pivot,size)})
       }
     },
+
     enterMove({id}) {
       console.log(modelsBuild)
       const owned = get().ownedBuildings
@@ -131,6 +142,9 @@ const [useStore] = create((set, get) => ({
     exitMoveMode(){
       set({moveMode:{isActive:false}})
     },
+    exitRotateMode(){
+      set({rotateMode:{isActive:false}})
+    },
     addBuilding({Pivot,id,type,completed,geoCenter,size,rotation})
     {
       const placedBuildings=get().placedBuildings
@@ -155,6 +169,8 @@ const [useStore] = create((set, get) => ({
           }]
         }
       )
+      const newOwned= get().ownedBuildings.map((value)=>value.id!==id? value: {...value,isPlaced:true})
+      set ({ownedBuildings:newOwned})
     },
   //{ x: 3, y: 1, buildId: 1, model: 0, level: 0, completed: 1,rotation:0, timeCreated: null, lastCollect: null, ROI: 10, chanceBreak: 10, }
 
@@ -181,26 +197,6 @@ function calcDrawData({ tile, size }) {
   return ({ Pivot: { x: PivoteX, z: PivoteZ }, geoCenter: geomCenter })
 
 }
-
-/*
-
-    enterAddMode({ Id }) {
-      const owned = get().ownedBuildings
-      const buildData = owned[owned.findIndex((building, index) => building.Id === Id)]
-      const modelData = models[models.findIndex(model => model.type === buildData.type)]
-
-      set({addMode:{size:modelData.size}})
-      set({hoverData:{...get().hoverData,isCapturing:true,size:modelData.size}})
-    }, 
-    enterRotateMode(){
-      const addMode=get().addMode
-      const hoverData=get().hoverData
-
-      set({addMode:{...addMode,isPlaced:true,Pivot:hoverData.Pivot,geoCenter:hoverData.geoCenter}})
-      set({hoverData: {isCapturing: false, tile: { x: 0, z: 0 }, Pivot: { x: 0, z: 0 }, geoCenter: { x: 0, z: 0 },size:{width:1,height:1}}})
-    }, 
-    */
-
 
 
 function createTimer() {
