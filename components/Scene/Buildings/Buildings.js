@@ -14,8 +14,14 @@ const Buildings = () => {
         const typeData=modelsBuild.find((modelItem)=>modelItem.type===type )
         const {  maxlevel, models, buildTime } = typeData
         const { width, height } = size
-        const Model=models[2]
-        return (<Model position={[geoCenter.x,.3,geoCenter.z]} rotation={[0, Math.PI / 2 * rotation, 0]} key={BuildId}></Model>)
+        const Model=models[completed]
+        return (<>
+        <group position={[geoCenter.x,.3,geoCenter.z]}>
+        <Model key={BuildId}  rotation={[0, Math.PI / 2 * rotation, 0]} />
+            <Progress timeCreated={timeCreated}buildTime={buildTime*1000}></Progress>
+        
+        </group>
+        </>)
         
     })
 

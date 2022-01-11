@@ -3,10 +3,11 @@ import { Billboard, Plane } from '@react-three/drei'
 import * as THREE from 'three'
 import { useFrame, useLoader } from '@react-three/fiber'
 
-const Progress = ({ timeCreated, buildTime, percent, icon }) => {
+const Progress = ({ timeCreated, buildTime }) => {
+    console.log(timeCreated,buildTime)
     const barRef = useRef(null)
     const hamerRef = useRef(null)
-    const texture = useLoader(THREE.TextureLoader, '/images/Hammer.webp')
+    const texture = useLoader(THREE.TextureLoader, '/images/Hammer2.webp')
     
     useFrame((state,delta) => {
 

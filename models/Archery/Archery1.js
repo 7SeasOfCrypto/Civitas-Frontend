@@ -24,7 +24,7 @@ export default function Model({colors,...props}) {
   const { nodes} = useGLTF('/models/Construction/Archery1.glb')
   return (
     <group ref={group} {...props} dispose={null}>
-      <mesh geometry={nodes.SM_Archery_1.geometry} castShadow transparent receiveShadow >
+      <mesh geometry={nodes.SM_Archery_1.geometry} castShadow receiveShadow >
         <BuildingMat></BuildingMat>
       </mesh>
     </group>

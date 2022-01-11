@@ -36,6 +36,7 @@ const evolveBuilding = (set) => {
 
 const [useStore] = create((set, get) => ({
   maps: { map: [], mapMaterial: [] },
+  timer: null,
   shouldUpdate: false,
   ownedBuildings: [
     { id: 1, type: 1, completed: 0,isPlaced:false }, 
@@ -66,7 +67,7 @@ const [useStore] = create((set, get) => ({
           lastCollect:new Date().getTime(),
           Roi:10,
           chanceBreak:30,
-          buildTime:10,
+          buildTime:50,
           completed: 0,
           geoCenter: {x: 4.9999995,z:21.666664500000003},
           size:{width: 3,height:3},
@@ -87,8 +88,32 @@ const [useStore] = create((set, get) => ({
   },
   actions: {
     checkBuilding(){
-      console.log('check')
       
+      const placedBuildings=get().placedBuildings
+      
+  
+    let hasChange=false
+      const evolvedBuildList= placedBuildings.map((value,index)=>{
+    
+    const {timeCreated,completed,buildTime}=value
+    if (completed===2)
+      return value
+    
+    const timeElapsed =(new Date().getTime()-timeCreated) 
+    const percent=timeElapsed<buildTime*1000? (timeElapsed*100)/(buildTime*1000):100
+    
+    const evolveState= percent<50?0:percent<100?1:2
+    if(evolveState!==completed)
+      hasChange=true
+
+    return {...value,completed:evolveState,percent:percent}
+  })
+  if(hasChange)
+  {
+    set({placedBuildings:evolvedBuildList})
+  }
+  
+  console.log(placedBuildings[0].completed)
     },
 
     initMap() {
@@ -109,15 +134,13 @@ const [useStore] = create((set, get) => ({
     },
 
     enterMove({id}) {
-      console.log(modelsBuild)
+      
       const owned = get().ownedBuildings
       const buildData = owned.find((building, index) => building.id === id)
       
       set({rotateMode:{isActive:false}})      
       const modelData = modelsBuild.find(model => model.type === buildData.type)
-      console.log("*************")
-      console.log(modelData)
-      console.log("*************")
+      
       set({moveMode:{isActive:true,tile:{x:0,z:0},Pivot:{x:1,z:1},geoCenter:{x:modelData.size.width===2?CELL_SIZE:CELL_SIZE*1.5,z:modelData.size.height===2?CELL_SIZE:CELL_SIZE*1.5},id:id,type:buildData.type,size:modelData.size}})
       
     },
@@ -128,7 +151,7 @@ const [useStore] = create((set, get) => ({
     },
 
     rotateLeft(){
-      console.log('rotateleft')
+      
       const rotateMode=get().rotateMode
       set({rotateMode:{...rotateMode,rotation:(rotateMode.rotation+1)%4}})
     },
@@ -145,9 +168,15 @@ const [useStore] = create((set, get) => ({
     exitRotateMode(){
       set({rotateMode:{isActive:false}})
     },
+    tick(){
+      get().actions.checkBuilding()
+      setTimeout(()=>get().actions.tick(),1000)
+    },
     addBuilding({Pivot,id,type,completed,geoCenter,size,rotation})
     {
       const placedBuildings=get().placedBuildings
+      setTimeout(()=>get().actions.tick(),1000)
+      
       set({rotateMode:{isActive:false}})
 
       set({

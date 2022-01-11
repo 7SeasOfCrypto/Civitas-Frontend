@@ -21,7 +21,7 @@ const Material = ({colors}) => {
         []
     )
     return (
-        <standardNodeMaterial side={THREE.DoubleSide} castShadow>
+        <standardNodeMaterial side={THREE.DoubleSide} castShadow receiveShadow shadowSide={THREE.FrontSide} >
         <mathNode attach={"color"} method={Nodes.MathNode.MIX} >
           <textureNode attach={"b"} value={logo} />
           <mathNode attach={"a"} method={Nodes.MathNode.MIX} >
