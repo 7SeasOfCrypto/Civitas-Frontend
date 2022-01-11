@@ -71,6 +71,10 @@ const [useStore] = create((set, get) => ({
           rotation: 0
       }
   ],
+  isShopOpen: false,
+  setShopOpen: (value) => set(() => ({isShopOpen:value})),
+  isBuildActive:false,
+  setBuildState: (value) => set(() => ({isBuildActive:value})),
   finishedBuildings: [],
   moveMode:{isActive:false,tile:{x:0,z:0},Pivot:{x:0,z:0},geoCenter:{x:0,z:0},size:{width:3,height:3},id:-1,type:0},
   rotateMode:{isActive:false,Pivot:{x:0,z:0},geoCenter:{x:0,z:0},size:{width:3,height:3},id:-1,type:0,rotation:0},

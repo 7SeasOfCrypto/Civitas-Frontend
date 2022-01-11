@@ -1,190 +1,254 @@
-
-
-
-
 @mixin text-3d($hue) {
   $ts: ();
   @for $i from 1 through 10 {
-    $ts: $ts, $i*2px $i*2px hsl($hue + $i*1, 100%, 50% - $i);            
+    $ts: $ts, $i * 2px $i * 2px hsl($hue + $i * 1, 100%, 50% - $i);
   }
   text-shadow: $ts, 0 0 10px, 0 0 15px;
 }
 
 .build {
-  position:absolute;
-  left:0px;
-  bottom:0px;
-  
-  
-  
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  display:flex;
 }
 .badge {
-    z-index: 1;
-    transform: scale(.8);
-    pointer-events: all;
-    transition:transform .2s ease-out;
-    cursor:pointer;
-    &:hover{
-      transition:transform .2s ease-out;
-      transform:scale(.9);
-      img{
-        transition:transform .2s ease-out;
-        transform:scale(1.3)
-      }
-      
-      .playerCenter{
-        transition:background-position .2s ease-out;
-        background-position: 0% 100%;
-      }
+  z-index: 1;
+  transform: scale(0.8);
+  pointer-events: all;
+  transition: transform 0.2s ease-out;
+  cursor: pointer;
+  &:hover {
+    transition: transform 0.2s ease-out;
+    transform: scale(0.9);
+    img {
+      transition: transform 0.2s ease-out;
+      transform: scale(1.3);
     }
-    img{
-      transition:transform .4s ease-out;
+
+    .playerCenter {
+      transition: background-position 0.2s ease-out;
+      background-position: 0% 100%;
     }
-    margin:10px;
-    position:relative;
-    display: block;
-    font-family: "CivitaShape";
-    span{
-        font-size: 8rem;
-        content:'hex';
-    
-    
-        text-shadow:     0 1px 0 hsl(174,5%,80%),
-        0 2px 0 hsl(174,5%,75%),
-        0 3px 0 hsl(174,5%,70%),
-        0 4px 0 hsl(174,5%,66%),
-        0 5px 0 hsl(174,5%,64%),
-        0 6px 0 hsl(174,5%,62%),
-        0 7px 0 hsl(174,5%,61%),
-        0 8px 0 hsl(174,5%,60%),
-    
-        0 0    5px  rgba(0,0,0,.05),
-        0 1px  3px  rgba(0,0,0,.2),
-        0 3px  5px  rgba(0,0,0,.2),
-        0 5px  10px rgba(0,0,0,.2),
-        0 10px 10px rgba(0,0,0,.2),
-        0 20px 20px rgba(0,0,0,.3);
-    }
-    
-    
+  }
+  img {
+    transition: transform 0.4s ease-out;
+  }
+  margin: 10px;
+  position: relative;
+  display: block;
+  font-family: "CivitaShape";
+  span {
+    font-size: 8rem;
+    content: "hex";
+
+    text-shadow: 0 1px 0 hsl(174, 5%, 80%), 0 2px 0 hsl(174, 5%, 75%),
+      0 3px 0 hsl(174, 5%, 70%), 0 4px 0 hsl(174, 5%, 66%),
+      0 5px 0 hsl(174, 5%, 64%), 0 6px 0 hsl(174, 5%, 62%),
+      0 7px 0 hsl(174, 5%, 61%), 0 8px 0 hsl(174, 5%, 60%),
+      0 0 5px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.2),
+      0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.2),
+      0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.3);
+  }
 }
 
 .playerCenter {
-
-    position:absolute;
-    font-size: 7.6rem;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    top:0;
-    left:0;
-    background: #FDC830;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(-180deg, rgba(243,115,53,1) 0%,rgba(253,200,48,1)  33%, rgba(178,255,138,1) 66%, rgb(8, 153, 1) 100%);
-    background: linear-gradient(-180deg, rgba(243,115,53,1) 0%,rgba(253,200,48,1)  33%, rgba(178,255,138,1) 66%, rgb(8, 153, 1) 100%);
-    background-size:100% 300%;
-    background-position:0% 0%;
-    transition:background-position .2s ease-out;
-    overflow: hidden;
-    color:transparent;
-    height:100%;
-    width:100%;
-    background-clip: text;
-    
-    
+  position: absolute;
+  font-size: 7.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  background: #fdc830; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    -180deg,
+    rgba(243, 115, 53, 1) 0%,
+    rgba(253, 200, 48, 1) 33%,
+    rgba(178, 255, 138, 1) 66%,
+    rgb(8, 153, 1) 100%
+  );
+  background: linear-gradient(
+    -180deg,
+    rgba(243, 115, 53, 1) 0%,
+    rgba(253, 200, 48, 1) 33%,
+    rgba(178, 255, 138, 1) 66%,
+    rgb(8, 153, 1) 100%
+  );
+  background-size: 100% 300%;
+  background-position: 0% 0%;
+  transition: background-position 0.2s ease-out;
+  overflow: hidden;
+  color: transparent;
+  height: 100%;
+  width: 100%;
+  background-clip: text;
 }
-.playerContent{
-    
-    width:100%;
-    height:100%;
-    display:flex;
-    padding:1rem;
-    position:absolute;
-    div{
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        width:100%;
-        height:100%;
-        font-family:Arial, Helvetica, sans-serif;
-        font-weight:700;
-        color:white;
-        span{
-            font-size:4rem;
-        }
+.playerContent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding: 1rem;
+  position: absolute;
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    color: white;
+    span {
+      font-size: 4rem;
     }
-    
+  }
 }
 
-.playerInfo{
-    font-family: 'Carter One', cursive;
-    font-size: 1.5rem;
-    display:flex;
-    flex-direction: column;
-    position:absolute;
-    top:21px;
-    left:5rem;
-    padding: 4px 25px 4px 25px ;
-    height:5rem;
-    background-color:rgba(0,0,0,.5);
-    .coinInfo{
-        display:flex;
-        gap:10px;
-        align-items: center;
-        font-family: 'Carter One', cursive;
-        font-size: 1.2rem;
-        
-    }
+.playerInfo {
+  font-family: "Carter One", cursive;
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 21px;
+  left: 5rem;
+  padding: 4px 25px 4px 25px;
+  height: 5rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  .coinInfo {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-family: "Carter One", cursive;
+    font-size: 1.2rem;
+  }
 }
-.expBar{
-    position:absolute;
-    left:30px;
-    bottom:-5px;
-    width:14.5rem;
-    height:10px;
-    
-    
+.expBar {
+  position: absolute;
+  left: 30px;
+  bottom: -5px;
+  width: 14.5rem;
+  height: 10px;
 }
-
 
 .progress {
-    pointer-events:all;
-    width:100%;
-    padding: 4px;
-    background: rgba(0, 0, 0, 1);
-    border-radius: 6px;
-    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08);
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08);
-  }
-  
-  .progressBar {
-      
-    height: 10px;
-    border-radius: 4px;
-      background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
-    background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
-    background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
-    -webkit-transition: 0.4s linear;
-    -moz-transition: 0.4s linear;
-    -o-transition: 0.4s linear;
-    transition: 0.4s linear;
-    -webkit-transition-property: width, background-color;
-    -moz-transition-property: width, background-color;
-    -o-transition-property: width, background-color;
-    transition-property: width, background-color;
-    -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.25), inset 0 1px rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.25), inset 0 1px rgba(255, 255, 255, 0.1);
-   
+  pointer-events: all;
+  width: 100%;
+  padding: 4px;
+  background: rgba(0, 0, 0, 1);
+  border-radius: 6px;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25),
+    0 1px rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25),
+    0 1px rgba(255, 255, 255, 0.08);
+}
+
+.progressBar {
+  height: 10px;
+  border-radius: 4px;
+  background-image: -webkit-linear-gradient(
+    top,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.05)
+  );
+  background-image: -moz-linear-gradient(
+    top,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.05)
+  );
+  background-image: -o-linear-gradient(
+    top,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.05)
+  );
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.05)
+  );
+  -webkit-transition: 0.4s linear;
+  -moz-transition: 0.4s linear;
+  -o-transition: 0.4s linear;
+  transition: 0.4s linear;
+  -webkit-transition-property: width, background-color;
+  -moz-transition-property: width, background-color;
+  -o-transition-property: width, background-color;
+  transition-property: width, background-color;
+  -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.25),
+    inset 0 1px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.25),
+    inset 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.buildingList {
+  position: absolute;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  list-style: none;
+  color: black;
+  text-align: center;
+  gap: 0.2rem;
+  .listItem {
+    border-radius: 0.5rem;
+    border: 1px solid black;
+    cursor: pointer;
+    img {
+      width: 7rem;
+      display: block;
+    }
   }
 
+  .listItem:hover img {
+    animation: shake 2s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  }
+}
 
+.listHidden {
+  left: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+}
+
+.listShow {
+  left: 9rem;
+  pointer-events: auto;
+  opacity: 1;
+  transition: all 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(0, -1px, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(0, 2px, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(0, -4px, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(0, 4px, 0);
+  }
+}
+
+.buildInUse {
+  background-color: red;
+}
 
 //background: #FDC830;  /* fallback for old browsers */
 //background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
 //background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
-
 
 //background: #FDC830;  /* fallback for old browsers */
 //background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
