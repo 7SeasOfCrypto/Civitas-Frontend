@@ -38,7 +38,7 @@ const MoveControls = () => {
     const {enterRotate}=useStore(state=>state.actions)
     const [matcapIsNotValid] = useMatcapTexture('E80404_B50404_CB0404_FC3333')
     const [matcapIsValid] = useMatcapTexture('D1AC04_F8E50A_EDD004_B38D04')
-    console.log(size)
+    
     const Model=useMemo(() =>{
         const typeModels=modelsBuild.find((modeldata,index)=>modeldata.type===type)
         return typeModels.models[2]

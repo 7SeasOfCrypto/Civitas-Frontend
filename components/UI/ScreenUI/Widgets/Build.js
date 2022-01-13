@@ -25,7 +25,7 @@ const Build = () => {
       }
       else 
       {
-        enterMove({id:e});
+        enterMove({BuildId:e});
       }
   };
 
@@ -57,17 +57,18 @@ const Build = () => {
           isBuildActive ? styles.listShow : styles.listHidden
         }`}
       >
-        {ownedBuildings.filter(value=>value.isPlaced===false).map((building) => (
+        {ownedBuildings.filter(value=>value.isPlaced===false &&value.level>0).map((building) => (
           <li
             className={`${styles.listItem} `}
-            key={building.id}
+            key={building.BuildId}
             onClick={(event) => {
               event.stopPropagation();
-              clickBuild(building.id);
+              
+              clickBuild(building.BuildId);
             }}
           >
-            <h5>Type:{building.type}</h5>
-            <span>Id:{building.id}</span>
+            <h5>{"⭐".repeat(building.level)}</h5>
+            <span>{building.name}</span>
             <img src="/images/render.png" />
           </li>
         ))}

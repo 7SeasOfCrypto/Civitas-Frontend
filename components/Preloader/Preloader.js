@@ -18,9 +18,9 @@ const Preloader = ({percent}) => {
 
     return (
         <>
-            <Plane args={[2, 2]} />
-            <Sphere>
-                <meshBasicMaterial attach="material" color="hotpink" />
+            
+            <Sphere args={[2]}>
+                <meshStandardMaterial attach="material" color="hotpink" metallness={1} roughness={0} opacity={1} transparent/>
             </Sphere>
             
         </>

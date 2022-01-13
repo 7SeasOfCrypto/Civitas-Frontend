@@ -1,0 +1,26 @@
+.cursorContainer{
+    position:fixed;
+    top:0;
+    left:0;
+    display: block;
+    width:100vw;
+    height:100vh;
+    overflow: hidden;
+    cursor:none;
+    pointer-events:none;
+}
+.cursor{
+    position:absolute;
+    display:block;
+    width:40px;
+    height:40px;
+    top:50%;
+    left:0;
+    z-index:1999;
+    
+    img{
+        width:90px;
+        height:90px;
+    }
+
+}

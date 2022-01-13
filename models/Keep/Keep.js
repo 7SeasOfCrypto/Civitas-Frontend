@@ -8,9 +8,9 @@ export default function Model({colors,...props}) {
   return (
 
     <group ref={group} {...props} dispose={null}>
-        <mesh geometry={nodes.SM_Keep.geometry} material={materials.M_Buildings_Parent} castShadow receiveShadow>
+        <mesh geometry={nodes.SM_Keep.geometry} castShadow receiveShadow>
         {!props.children?
-          <BuildingMat></BuildingMat>
+          <BuildingMat attack={'material'}></BuildingMat>
         : props.children
         }
       </mesh>

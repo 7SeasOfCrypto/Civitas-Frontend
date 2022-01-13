@@ -18,6 +18,7 @@ const Floor = () => {
         textures[x].wrapS = textures[x].wrapT = THREE.RepeatWrapping
         if (x === 0) {
             textures[x].repeat.set(20, 20)
+            
         }
         }
     

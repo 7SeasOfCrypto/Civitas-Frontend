@@ -1,27 +1,34 @@
 import { modelsBuild } from 'models'
 import { useStore } from 'store'
 import Progress from './Progress'
+import ProgressCollect from './ProgressCollect'
 import { CELL_SIZE } from 'constants'
 import { useGesture } from '@use-gesture/react'
 
 const Buildings = () => {
     const placedBuildings  = useStore(state=>state.placedBuildings)
 
-
+    
 
     const ArrayBuild = placedBuildings.map((property, index) => {
-        const { x, y, BuildId, type, level, completed,timeCreated,rotation,geoCenter,size } = property
+        const { x, y, BuildId, type, level, completed,timeCreated,rotation,geoCenter,size,percent } = property
         const typeData=modelsBuild.find((modelItem)=>modelItem.type===type )
         const {  maxlevel, models, buildTime } = typeData
         const { width, height } = size
         const Model=models[completed]
-        return (<>
-        <group position={[geoCenter.x,.3,geoCenter.z]}>
-        <Model key={BuildId}  rotation={[0, Math.PI / 2 * rotation, 0]} />
-            <Progress timeCreated={timeCreated}buildTime={buildTime*1000}></Progress>
+        
+        return (
+        <group position={[geoCenter.x,.3,geoCenter.z]} key={BuildId} >
+            <Model  rotation={[0, Math.PI / 2 * rotation, 0]}  />
+            {percent!==101?
+                <Progress timeCreated={timeCreated} buildTime={buildTime*1000} percent={percent}/>
+                :
+                <ProgressCollect BuildId={BuildId}></ProgressCollect>
+
+            }
         
         </group>
-        </>)
+        )
         
     })
 
