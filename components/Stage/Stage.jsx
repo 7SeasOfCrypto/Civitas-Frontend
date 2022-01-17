@@ -4,6 +4,9 @@ import Preloader from '../Preloader'
 import { Environment, useProgress } from '@react-three/drei'
 import Scene from '@/components/Scene'
 const Stage = ({pre}) => {
+
+    const {progress} = useProgress()
+
     return (
         <Canvas style={{cursor:"none"}}
             camera={{
