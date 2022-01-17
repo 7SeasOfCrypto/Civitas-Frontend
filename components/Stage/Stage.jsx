@@ -2,6 +2,7 @@
 import { Canvas } from '@react-three/fiber'
 import Scene from '@/components/Scene'
 import { GizmoHelper, GizmoViewcube, GizmoViewport } from '@react-three/drei'
+
 const Stage = () => {
     return (
         <Canvas
@@ -13,18 +14,30 @@ const Stage = () => {
                 far: 500,
 
             }}
-            orthographic={true}>
+            
+            orthographic={1}>
+
+              {
+                <ambientLight intensity={0.25}
+                />
+                
+              } 
             <directionalLight
+                color={0xffffff}  
+                instensity={3}
                 position={[-5, 5, 5]}
                 castShadow
                 shadow-mapSize-width={1024}
                 shadow-mapSize-height={1024}
             />
+            
+             
+              
             <Scene></Scene>
+             {/*
             <GizmoHelper
                 alignment='bottom-middle'
                 margin={[800,50]}
-                
             >
 
                 <GizmoViewcube
@@ -39,9 +52,11 @@ const Stage = () => {
 
 
             </GizmoHelper>
+             */} 
         </Canvas>
     )
 }
+
 
 export default Stage
 /*

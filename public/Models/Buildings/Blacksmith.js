@@ -7,7 +7,7 @@ import { useGLTF } from '@react-three/drei'
 
 export default function Model({ ...props }) {
   const group = useRef()
-  const { nodes, materials } = useGLTF('/SM_Blacksmith-transformed.glb')
+  const { nodes, materials } = useGLTF('/Models/Buildings/Blacksmith.glb')
   return (
     <group ref={group} {...props} dispose={null}>
       <mesh geometry={nodes.SM_Blacksmith.geometry} material={materials.M_Buildings_Parent} />
@@ -15,4 +15,4 @@ export default function Model({ ...props }) {
   )
 }
 
-useGLTF.preload('/SM_Blacksmith-transformed.glb')
+useGLTF.preload('/Models/Buildings/Blacksmith.glb')

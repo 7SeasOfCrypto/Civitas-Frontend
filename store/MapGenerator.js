@@ -57,7 +57,7 @@ const drawPoint=(array,point,material)=>{
 }
 
 const EmptyMap=(row,col)=>{
-    return new Array(row).fill().map((value,index)=> new Array(col).fill(0))
+    return new Array(row).fill().map((value,index)=> new Array(col).fill(1))
 }
 
 
@@ -80,10 +80,10 @@ export const mapGenerator=(row,col)=>{
     //maproad=drawRect(map,{x:0,y:0},{x:7,y:7},1)
     //maproad=drawLine(maproad,{x:1,y:1},{x:1,y:10},2)
     
-    //0
+    //0 grass
     let maproad=drawRect(map,{x:0,y:0},{x:49,y:49},0)         
 
-    //1
+    //1 swalk
     maproad=drawRect(maproad,{x:5,y:0},{x:8,y:44},1)    //Línea horizontal inferior
     maproad=drawRect(maproad,{x:3,y:1},{x:10,y:3},1)    //Línea horizontal inferior Ala izq - 1
     maproad=drawLine(maproad,{x:2,y:2},{x:11,y:2},1)    //Línea horizontal inferior Ala izq - 2
@@ -96,12 +96,11 @@ export const mapGenerator=(row,col)=>{
     maproad=drawRect(maproad,{x:30,y:29},{x:43,y:31},1) //Línea vertical 3
     maproad=drawRect(maproad,{x:30,y:39},{x:37,y:41},1) //Línea vertical 4
     maproad=drawRect(maproad,{x:9,y:42},{x:27,y:47},1)  //Línea vertical 5
-    maproad=drawRect(maproad,{x:25,y:41},{x:27,y:41},1)  //Línea vertical 5 lateral arriba
+    maproad=drawRect(maproad,{x:25,y:41},{x:27,y:41},1) //Línea vertical 5 lateral arriba
     maproad=drawRect(maproad,{x:9,y:41},{x:11,y:41},1)  //Línea vertical 5 lateral abajo
 
     maproad=drawRect(maproad,{x:15,y:0},{x:21,y:4},1)   //ED izq 
     maproad=drawRect(maproad,{x:13,y:6},{x:23,y:16},1)  //Plaza Izq
-    maproad=drawLine(maproad,{x:12,y:8},{x:12,y:10},1)  //Plaza Izq-abajo
     maproad=drawRect(maproad,{x:14,y:8},{x:22,y:18},1)  //Plaza Izq-der
     maproad=drawLine(maproad,{x:15,y:19},{x:21,y:19},1) //Plaza Izq-der 2
     maproad=drawRect(maproad,{x:39,y:5},{x:47,y:13},1)  //Plaza Sup Izq 
@@ -133,9 +132,9 @@ export const mapGenerator=(row,col)=>{
 
     maproad=drawRect(maproad,{x:2,y:21},{x:4,y:29},1)   //Ed Inferior
     maproad=drawLine(maproad,{x:1,y:22},{x:1,y:28},1)   //Ed Inferior Abajo
-    maproad=drawRect(maproad,{x:0,y:46},{x:49,y:49},1)  //Parte Final
+ 
 
-    //2
+    //2 road
     maproad=drawRect(maproad,{x:6,y:0},{x:7,y:44},2)    //Road Horizontal
     maproad=drawRect(maproad,{x:29,y:13},{x:30,y:30},2) //Road Horizontal medio
     maproad=drawLine(maproad,{x:29,y:31},{x:29,y:41},2) //Road Horizontal medio 2
@@ -149,9 +148,11 @@ export const mapGenerator=(row,col)=>{
     maproad=drawLine(maproad,{x:37,y:41},{x:37,y:44},2) //Road Vertical 4 conector
     maproad=drawRect(maproad,{x:25,y:42},{x:29,y:44},2) //Road Vertical 5 Superior Línea 1
     maproad=drawRect(maproad,{x:23,y:43},{x:24,y:44},2) //Road Vertical 5 Superior Línea 2
-    maproad=drawLine(maproad,{x:14,y:43},{x:22,y:43},2) //Road Vertical 5 Línea media
+    maproad=drawRect(maproad,{x:14,y:43},{x:22,y:44},2) //Road Vertical 5 Línea media
+    maproad=drawLine(maproad,{x:15,y:42},{x:21,y:42},2) //Road Vertical 5 Línea media 2
     maproad=drawRect(maproad,{x:8,y:42},{x:11,y:44},2)  //Road Vertical 5 Inferior Línea 1
     maproad=drawRect(maproad,{x:12,y:43},{x:13,y:44},2) //Road Vertical 5 Inferior Línea 2
+    
 
     maproad=drawRect(maproad,{x:40,y:6},{x:43,y:12},2)  //Road plaza superior izquierda
     maproad=drawRect(maproad,{x:39,y:30},{x:43,y:40},2) //Road plaza superior derecha
@@ -163,22 +164,24 @@ export const mapGenerator=(row,col)=>{
     maproad=drawRect(maproad,{x:14,y:35},{x:22,y:37},2) //Road plaza derecha superior inferior
     maproad=drawRect(maproad,{x:16,y:39},{x:20,y:44},2) //Road plaza derecha - derecha
     
-    //4
+    //4 ph
     maproad=drawRect(maproad,{x:16,y:0},{x:20,y:3},4)   //Ed Izquierda
     maproad=drawRect(maproad,{x:44,y:6},{x:47,y:12},4)  //Ed Superior Izquierdo
     maproad=drawRect(maproad,{x:2,y:22},{x:4,y:28},4)   //Ed Inferior
     maproad=drawRect(maproad,{x:39,y:41},{x:43,y:43},4) //Ed Superior Derecho
 
-    //5
+    //5 decor
     maproad=drawLine(maproad,{x:3,y:2},{x:5,y:2},5)     //Inicio 1
     maproad=drawLine(maproad,{x:5,y:3},{x:5,y:5},5)     //Inicio 2
     maproad=drawLine(maproad,{x:8,y:2},{x:10,y:2},5)    //Inicio 3
     maproad=drawLine(maproad,{x:8,y:3},{x:8,y:5},5)     //Inicio 4
     maproad=drawRect(maproad,{x:16,y:4},{x:17,y:5},5)   //Ed izquierda Abajo
     maproad=drawRect(maproad,{x:19,y:4},{x:20,y:5},5)   //Ed izquierda Arriba
-    maproad=drawRect(maproad,{x:13,y:7},{x:16,y:8},5)   //Plaza Izq Abajo 1
-    maproad=drawLine(maproad,{x:13,y:9},{x:13,y:11},5)  //Plaza Izq Abajo 2
-    maproad=drawRect(maproad,{x:20,y:7},{x:22,y:8},5)   //Plaza Izq Arriba
+    maproad=drawRect(maproad,{x:14,y:7},{x:16,y:8},5)   //Plaza Izq Abajo 1
+    maproad=drawLine(maproad,{x:14,y:9},{x:14,y:11},5)  //Plaza Izq Abajo 2
+    maproad=drawRect(maproad,{x:20,y:7},{x:22,y:8},5)   //Plaza Izq Arriba 1
+    maproad=drawLine(maproad,{x:22,y:9},{x:22,y:11},5)  //Plaza Izq Arriba 2
+
     //======
     //Plaza Izq conector derecha
     maproad=drawLine(maproad,{x:19,y:21},{x:19,y:21},5) //Arriba 1
@@ -204,21 +207,32 @@ export const mapGenerator=(row,col)=>{
     maproad=drawLine(maproad,{x:28,y:42},{x:28,y:42},5) //Frente Camino Castillo Superior
     maproad=drawRect(maproad,{x:8,y:42},{x:8,y:42},5) //Frente Camino Castillo Inferior
     
-    maproad=drawRect(maproad,{x:20,y:43},{x:20,y:43},5) //Camino Castillo Arriba 1
+    maproad=drawRect(maproad,{x:20,y:44},{x:20,y:44},5) //Camino Castillo Arriba 1
     maproad=drawRect(maproad,{x:20,y:46},{x:20,y:46},5) //Camino Castillo Arriba 2
     maproad=drawRect(maproad,{x:20,y:49},{x:20,y:49},5) //Camino Castillo Arriba 3
-    maproad=drawRect(maproad,{x:16,y:43},{x:16,y:43},5) //Camino Castillo Abajo 1
+    maproad=drawRect(maproad,{x:16,y:44},{x:16,y:44},5) //Camino Castillo Abajo 1
     maproad=drawRect(maproad,{x:16,y:46},{x:16,y:46},5) //Camino Castillo Abajo 2
     maproad=drawRect(maproad,{x:16,y:49},{x:16,y:49},5) //Camino Castillo Abajo 3
 
 
 
-    //6
+    //6 frontier
     maproad=drawLine(maproad,{x:0,y:45},{x:49,y:45},6)  //Línea final
+    maproad=drawRect(maproad,{x:0,y:46},{x:49,y:49},6)  //Parte Final
+
+    //extra
+    maproad=drawRect(maproad,{x:15,y:45},{x:21,y:49},1) //Final Stone linea
+    maproad=drawRect(maproad,{x:16,y:46},{x:20,y:47},5) //Decor
+    maproad=drawLine(maproad,{x:16,y:49},{x:20,y:49},5) //Decor
+    maproad=drawLine(maproad,{x:6,y:45},{x:29,y:45},1)  //Final Stone cRoad
 
 
-    //3
+
+    //3 cRoad
     maproad=drawRect(maproad,{x:17,y:44},{x:19,y:49},3) //Camino Castillo
+
+
+
     const mapMaterial=materialGenerator(maproad)    
     
     return {map:maproad,mapMaterial:mapMaterial}
