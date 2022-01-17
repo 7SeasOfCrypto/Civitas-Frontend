@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import Castle from '/models/Castle'
+import Castle from '/models/Castle/Castle'
 import TowerC from '/models/TowerC'
 import WallBcorner from '/models/WallBcorner'
 import WallBgate from '/models/WallBgate'

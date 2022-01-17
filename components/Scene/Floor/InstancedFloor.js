@@ -8,7 +8,7 @@ const tempObject = new THREE.Object3D()
 
 const InstancedFloor = ({ Material, matMap, index }) => {
 
-    const [difuse] = useLoader(THREE.TextureLoader, ['/Textures/floor.webp'])
+    const [difuse] = useLoader(THREE.TextureLoader, ['/Textures/grass.webp'])
     difuse.wrapS = difuse.wrapT = THREE.RepeatWrapping
     difuse.repeat.set(.5, .5)
     const meshRef = useRef(undefined)

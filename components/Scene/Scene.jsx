@@ -4,15 +4,13 @@ import Controller from './Controller'
 import Floor from './Floor'
 import Buildings from './Buildings'
 import Level from '@/models/level'
-import FloorController from './FloorController'
 import {Sky} from '@react-three/drei'
-import {useStore} from '@/store/Store'
 import Stronghold from './VIPBuildings/Stronghold'
 import Market from './VIPBuildings/Market'
 import TownCenter from './VIPBuildings/TownCenter'
 import Blacksmith from './VIPBuildings/Blacksmith'
 import Trees from './VIPBuildings/Trees'
-import controls from './controls'
+import Controls from './Controls'
 
 const Scene = () => {
     
@@ -27,10 +25,6 @@ const Scene = () => {
                 <Buildings></Buildings>
             </Suspense>
             <Suspense fallback={null}>
-                {isAdding?
-                    <FloorController/>:null
-                }
-                <Ground></Ground>
                 <Level></Level>
                 <Stronghold></Stronghold>
                 <Market></Market>
