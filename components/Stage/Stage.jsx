@@ -14,8 +14,17 @@ const Stage = ({pre}) => {
                 far: 500,
 
             }}
-            orthographic={true}>
+            
+            orthographic={1}>
+
+              {
+                <ambientLight intensity={0.25}
+                />
+                
+              } 
             <directionalLight
+                color={0xffffff}  
+                instensity={3}
                 position={[-5, 5, 5]}
                 castShadow
                 shadow-mapSize-width={1024}
@@ -34,6 +43,7 @@ const Stage = ({pre}) => {
         </Canvas>
     )
 }
+
 
 export default Stage
 /*

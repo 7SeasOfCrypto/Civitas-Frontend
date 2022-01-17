@@ -12,9 +12,12 @@ const tempObject = new THREE.Object3D()
 
 const InstancedFloor = ({ Material, matMap, index }) => {
 
-    const [difuse] = useLoader(THREE.TextureLoader, ['/Textures/floor.webp'])
-    difuse.wrapS = difuse.wrapT = THREE.RepeatWrapping
-    difuse.repeat.set(.5, .5)
+
+    if (index === 6)
+    {
+        return (null)
+    }
+
     const meshRef = useRef(undefined)
     useEffect (() => {
         let i = 0
@@ -25,6 +28,7 @@ const InstancedFloor = ({ Material, matMap, index }) => {
         }
         meshRef.current.instanceMatrix.needsUpdate = true
     }, [matMap])
+
     return (
         <>
             <group>
