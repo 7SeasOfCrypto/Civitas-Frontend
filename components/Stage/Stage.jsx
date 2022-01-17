@@ -3,10 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import Preloader from '../Preloader'
 import { Environment, useProgress } from '@react-three/drei'
 import Scene from '@/components/Scene'
-const Stage = () => {
-    
-    const {progress}=useProgress()
-    
+const Stage = ({pre}) => {
     return (
         <Canvas style={{cursor:"none"}}
             camera={{
@@ -35,7 +32,7 @@ const Stage = () => {
             />
 
             <Suspense fallback={null}>
-                <Preloader percent={progress}></Preloader>
+                <Preloader color='blue' percent={progress}></Preloader>
             </Suspense>:
             <Suspense fallback={null}>
                 <Scene></Scene>

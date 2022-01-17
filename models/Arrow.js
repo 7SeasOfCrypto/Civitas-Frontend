@@ -12,6 +12,7 @@ export default function Model(props) {
 
   const group = useRef()
   const { nodes, materials } = useGLTF('/Models/Arrow.glb')
+  console.log(nodes)
   return (
     <group ref={group} {...props} dispose={null}>
       

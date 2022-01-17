@@ -4,26 +4,27 @@ import { calcCollision } from './calcCollision'
 import { CELL_SIZE } from 'constants'
 import { modelsBuild } from '/models/'
 
-const COLLECT_TIME= 60
+const COLLECT_TIME = 60
 const [useStore] = create((set, get) => ({
   maps: { map: [], mapMaterial: [] },
   timer: null,
   shouldUpdate: false,
+  player: { level: 0, Token: 0, wallet: '0xE0FADWEDGCAA424AF' },
 
   ownedBuildings: [
-    { BuildId: 1, type: 0, completed: 0, isPlaced: false,name:"Castle", level:2 },
-    { BuildId: 2, type: 1, completed: 0, isPlaced: false,name:"Archery", level:2 },
-    { BuildId: 3, type: 2, completed: 0, isPlaced: false,name:"Barracks", level:1 },
-    { BuildId: 4, type: 5, completed: 0, isPlaced: false,name:"Granary", level:1 },
-    { BuildId: 5, type: 6, completed: 0, isPlaced: false,name:"House", level:1 },
-    { BuildId: 6, type: 7, completed: 0, isPlaced: false,name:"Keep", level:3 },
-    { BuildId: 7, type: 8, completed: 0, isPlaced: false,name:"Library", level:3 },
-    { BuildId: 8, type: 10, completed: 0, isPlaced: false,name:"Mage Tower", level:3 },
-    { BuildId: 9, type: 12, completed: 0, isPlaced: false,name:"Stables", level:2 },
-    { BuildId: 10, type: 13, completed: 0, isPlaced: false,name:"Temple", level:3 },
-    { BuildId: 11, type: 14, completed: 0, isPlaced: false,name:"Town Hall", level:2 },
-    { BuildId: 12, type: 15, completed: 0, isPlaced: false,name:"Workshop", level:1 },
-    
+    { BuildId: 1, type: 0, completed: 0, isPlaced: false, name: "Castle", level: 2 },
+    { BuildId: 2, type: 1, completed: 0, isPlaced: false, name: "Archery", level: 2 },
+    { BuildId: 3, type: 2, completed: 0, isPlaced: false, name: "Barracks", level: 1 },
+    { BuildId: 4, type: 5, completed: 0, isPlaced: false, name: "Granary", level: 1 },
+    { BuildId: 5, type: 6, completed: 0, isPlaced: false, name: "House", level: 1 },
+    { BuildId: 6, type: 7, completed: 0, isPlaced: false, name: "Keep", level: 3 },
+    { BuildId: 7, type: 8, completed: 0, isPlaced: false, name: "Library", level: 3 },
+    { BuildId: 8, type: 10, completed: 0, isPlaced: false, name: "Mage Tower", level: 3 },
+    { BuildId: 9, type: 12, completed: 0, isPlaced: false, name: "Stables", level: 2 },
+    { BuildId: 10, type: 13, completed: 0, isPlaced: false, name: "Temple", level: 3 },
+    { BuildId: 11, type: 14, completed: 0, isPlaced: false, name: "Town Hall", level: 2 },
+    { BuildId: 12, type: 15, completed: 0, isPlaced: false, name: "Workshop", level: 1 },
+
   ],
   placedBuildings: [
     /*
@@ -43,7 +44,7 @@ const [useStore] = create((set, get) => ({
       isCollecting:false,
     }*/
   ],
-  collectBuilding:[],
+  collectBuilding: [],
   isShopOpen: false,
   setShopOpen: (value) => set(() => ({ isShopOpen: value })),
   isBuildActive: false,
@@ -68,48 +69,65 @@ const [useStore] = create((set, get) => ({
 
     },
     checkBuilding() {
-      const collectBuilding=get().collectBuilding
+      const collectBuilding = get().collectBuilding
       const placedBuildings = get().placedBuildings
-      const buildsToAdd=[]
+      const buildsToAdd = []
       const evolvedBuildList = placedBuildings.map((value, index) => {
-        const { timeCreated, completed, buildTime } = value
+        const { timeCreated, completed, buildTime, name, level } = value
 
-        if (completed === 2)
-        {
-         if(value.isCollecting)
-          return {...value,percent:101}
-         else
-         buildsToAdd=[...buildsToAdd,value]
-          return {...value,percent:101,isCollecting:true}
+        if (completed === 2) {
+          if (value.isCollecting)
+            return { ...value, percent: 101 }
+          else
+            buildsToAdd = [...buildsToAdd, value]
+          return { ...value, percent: 101, isCollecting: true }
         }
-          const timeElapsed = (new Date().getTime() - timeCreated)
+        const timeElapsed = (new Date().getTime() - timeCreated)
         const percent = timeElapsed < buildTime * 1000 ? (timeElapsed * 100) / (buildTime * 1000) : 100
 
         const evolveState = percent < 50 ? 0 : percent < 100 ? 1 : 2
 
-        return { ...value, completed: evolveState, percent: percent }
+        return { ...value, completed: evolveState, percent: percent, name: name, level: level }
       })
-      if(buildsToAdd.length>0)
-      {
-        const AddBuilds=buildsToAdd.map((newCollect, index) =>{
-          const {BuildId,Roi} = newCollect
-          return {BuildId,Roi,dateStart:new Date().getTime(),lastCollect:new Date().getTime(),timeToCollect:0,percentCollect:0 }
+
+      if (buildsToAdd.length > 0) {
+        const AddBuilds = buildsToAdd.map((newCollect, index) => {
+          const { BuildId, Roi, type,name,level } = newCollect
+          return { BuildId, Roi, dateStart: new Date().getTime(), lastCollect: new Date().getTime(), timeToCollect: 0, percentCollect: 0, type: type,name:name,level:level }
         })
-        set({collectBuilding:[...collectBuilding, ...AddBuilds]})
+        set({ collectBuilding: [...collectBuilding, ...AddBuilds] })
       }
 
-        set({ placedBuildings: evolvedBuildList })
+      set({ placedBuildings: evolvedBuildList })
     },
-    checkCollect() {
-      const collectList= get().collectBuilding
-      const updateCollect=collectList.map((build,index)=>{
-        const newTimeToCollect=(COLLECT_TIME+build.lastCollect/1000-   new Date().getTime()/1000)
-        const newPercentCollect= 100-newTimeToCollect/COLLECT_TIME*100
-        
-        return {...build,timeToCollect:newTimeToCollect,percentCollect:newPercentCollect>100?100:newPercentCollect}
-      })
-      set ({collectBuilding:updateCollect})
+    /*
+        {
     
+          Pivot: { x: 1, z: 6 },
+          BuildId: -11,
+          type: 7,
+          timeCreated: new Date().getTime(),
+          Roi: 10,
+          buildTime: 10,
+          completed: 0,
+          geoCenter: { x: 4.9999995, z: 21.666664500000003 },
+          size: { width: 3, height: 3 },
+          rotation: 0,
+          percent: 0,
+          isCollecting:false,
+        }*/
+
+
+    checkCollect() {
+      const collectList = get().collectBuilding
+      const updateCollect = collectList.map((build, index) => {
+        const newTimeToCollect = (COLLECT_TIME + build.lastCollect / 1000 - new Date().getTime() / 1000)
+        const newPercentCollect = 100 - newTimeToCollect / COLLECT_TIME * 100
+
+        return { ...build, timeToCollect: newTimeToCollect, percentCollect: newPercentCollect > 100 ? 100 : newPercentCollect }
+      })
+      set({ collectBuilding: updateCollect })
+
     },
 
     setHoverTile({ tile }) {
@@ -124,20 +142,17 @@ const [useStore] = create((set, get) => ({
     },
 
     enterMove({ BuildId }) {
-
       const owned = get().ownedBuildings
       const buildData = owned.find((building, index) => building.BuildId === BuildId)
-
       set({ rotateMode: { isActive: false } })
       const modelData = modelsBuild.find(model => model.type === buildData.type)
-
-      set({ moveMode: { isActive: true, tile: { x: 0, z: 0 }, Pivot: { x: 1, z: 1 }, geoCenter: { x: modelData.size.width === 2 ? CELL_SIZE : CELL_SIZE * 1.5, z: modelData.size.height === 2 ? CELL_SIZE : CELL_SIZE * 1.5 }, BuildId: BuildId, type: buildData.type, size: modelData.size } })
+      set({ moveMode: { isActive: true, tile: { x: 0, z: 0 }, Pivot: { x: 1, z: 1 }, geoCenter: { x: modelData.size.width === 2 ? CELL_SIZE : CELL_SIZE * 1.5, z: modelData.size.height === 2 ? CELL_SIZE : CELL_SIZE * 1.5 }, BuildId: BuildId, type: buildData.type, size: modelData.size, name: modelData.name, level: modelData.level } })
 
     },
     enterRotate() {
       const moveData = get().moveMode
-      set({ moveMode: { isActive: false,tile:{x:0,z:0} } })
-      set({ rotateMode: { isActive: true, Pivot: moveData.Pivot, geoCenter: moveData.geoCenter, BuildId: moveData.BuildId, type: moveData.type, size: moveData.size, rotation: 0 } })
+      set({ moveMode: { isActive: false, tile: { x: 0, z: 0 } } })
+      set({ rotateMode: { isActive: true, Pivot: moveData.Pivot, geoCenter: moveData.geoCenter, BuildId: moveData.BuildId, type: moveData.type, size: moveData.size, rotation: 0, name: moveData.name, level: moveData.level } })
     },
 
     rotateLeft() {
@@ -159,7 +174,7 @@ const [useStore] = create((set, get) => ({
       set({ rotateMode: { isActive: false } })
     },
 
-    addBuilding({ Pivot, BuildId, type, completed, geoCenter, size, rotation }) {
+    addBuilding({ Pivot, BuildId, type, completed, geoCenter, size, rotation, name, level }) {
       const placedBuildings = get().placedBuildings
       setTimeout(() => get().actions.tick(), 1000)
 
@@ -179,16 +194,18 @@ const [useStore] = create((set, get) => ({
           completed: completed,
           rotation: rotation,
           geoCenter: geoCenter,
-          size: size
+          size: size,
+          name: name,
+          level: level
 
         }]
       }
       )
       const newOwned = get().ownedBuildings.map((value) => value.BuildId !== BuildId ? value : { ...value, isPlaced: true })
-      
+
       set({ ownedBuildings: newOwned })
     },
-    
+
 
 
 

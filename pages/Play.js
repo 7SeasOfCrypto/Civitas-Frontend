@@ -2,11 +2,12 @@ import {useEffect} from 'react'
 import Head from 'next/head'
 import Stage from '@/components/Stage'
 import styles from '../styles/Play.module.css'
-import ScreenUI from '@/components/UI/ScreenUI'
+import UI from '@/components/UI/'
 import {Stats} from '@react-three/drei'
 import {useStore} from '@/store/Store'
 import { useStoreUI } from '@/store/StoreUI'
 import Cursor from '@/components/UI/Cursor'
+import Modal from '@/components/UI/Modal'
 export default function Play() {
   const {initMap}= useStore(state=>state.actions)
   const {cursorMove}=useStoreUI(state=>state.actions)
@@ -15,9 +16,7 @@ export default function Play() {
     initMap()
 
   })
-  const onCursorMove=(e)=>{
-    console.log("move")
-  }
+  
   useEffect(() => {
     document.addEventListener("mousemove", cursorMove);
 
@@ -28,6 +27,7 @@ export default function Play() {
 
 
   return (
+    <>
     <div className={styles.container}>
       <Head>
         <title>Civitas Crypto Games</title>
@@ -37,9 +37,12 @@ export default function Play() {
       <div className={styles.canvasContainer}>
         <Stage></Stage>
       </div>
-      <Cursor></Cursor>
+      <UI></UI>
       <Stats showPanel={0} className="stats"  />
-      <ScreenUI></ScreenUI>
+      
+      <Cursor></Cursor>
+      
     </div>
+    <Modal></Modal></>
   )
 }

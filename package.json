@@ -8,10 +8,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/react": "^1.7.4",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
     "@react-spring/three": "^9.3.1",
     "@react-three/drei": "^8.3.0",
     "@react-three/fiber": "^7.0.24",
     "@use-gesture/react": "^10.2.4",
+    "framer-motion": "^5",
     "next": "12.0.7",
     "next-i18next": "^10.0.1",
     "react": "17.0.2",

@@ -1,25 +1,35 @@
+import {useState,useEffect,useCallback} from 'react'
 import { modelsBuild } from 'models'
 import { useStore } from 'store'
 import Progress from './Progress'
 import ProgressCollect from './ProgressCollect'
+import {useStoreUI} from '@/store/StoreUI'
 import { CELL_SIZE } from 'constants'
 import { useGesture } from '@use-gesture/react'
 
+ 
 const Buildings = () => {
     const placedBuildings  = useStore(state=>state.placedBuildings)
+    const {openModal}=useStoreUI(state=>state.actions)
+ 
+    const onClick=(e,BuildId,percent,completed)=>
+    {
+        if( completed===2)
+            openModal(BuildId)
 
-    
-
+    }
+    console.log("***********")
+    console.log(placedBuildings)
     const ArrayBuild = placedBuildings.map((property, index) => {
         const { x, y, BuildId, type, level, completed,timeCreated,rotation,geoCenter,size,percent } = property
         const typeData=modelsBuild.find((modelItem)=>modelItem.type===type )
         const {  maxlevel, models, buildTime } = typeData
-        const { width, height } = size
-        const Model=models[completed]
         
+        const Model=models[completed]
+        console.log(BuildId)
         return (
         <group position={[geoCenter.x,.3,geoCenter.z]} key={BuildId} >
-            <Model  rotation={[0, Math.PI / 2 * rotation, 0]}  />
+            <Model  rotation={[0, Math.PI / 2 * rotation, 0]} onPointerDown={(e)=>onClick(e,BuildId,percent,completed)}/>
             {percent!==101?
                 <Progress timeCreated={timeCreated} buildTime={buildTime*1000} percent={percent}/>
                 :
@@ -32,34 +42,35 @@ const Buildings = () => {
         
     })
 
-    
-/*
-    const ArrayBuild = listBuild.map((value, index) => {
-        const { x, y, Id, id_model, level, completed,timeCreated } = value
-        const { id, maxlevel, complete, build, size,buildTime } = models[id_model]
-        const { width, height } = size
-        const model = completed === 2 ? complete.model : build.model[completed]
-        const Model = model
-        const posX = width % 2 === 0 ? (x) * CELL_SIZE : (.5 + x) * CELL_SIZE
-        const posZ = height % 2 === 0 ? (y) * CELL_SIZE : (.5 + y) * CELL_SIZE
-        
-        
-        return (
-            
-            <group key={index} position={[posZ, 0, posX]}>
-                {completed!==2?
-                    <Progress timeCreated={timeCreated} buildTime={buildTime[level]*1000}></Progress>
-                    : null
-                }
-                <Model position={[0, .44, 0]} key={index} />
-                
-            </group>
-            
-            )
-            
-    })*/
+   
     return (ArrayBuild)
     
 
 }
 export default Buildings
+
+/*
+
+    const [timer,setTimer]=useState(0)
+    const [pressTime,setPressTime]=useState(0)
+    
+    const mouseHold = useCallback(
+        (e,BuildId) => {
+          console.log("holded ",e)
+        },
+        [],
+      );
+
+      
+    const onClick=(e,BuildId)=>{
+            const newTimer= setTimeout(()=>mouseHold(e),1000)
+            setTimer(newTimer)
+            console.log(e)
+    }
+    const onRelease=(e)=>{
+        clearInterval(timer)
+        setTimer(null)
+        console.log(e)
+}
+
+*/
