@@ -3,10 +3,9 @@ import Player from './Widgets/Player'
 import Build from './Widgets/Build'
 import Shop from './Widgets/Shop'
 import Token from './Widgets/Token'
-import ShopModal from './Widgets/ShopModal'
-import {useState} from 'react'
+import {useStore} from '@/store/Store'
 const ScreenUI = () => {
-    const [isShopOpen,setShopOpen] = useState(false);
+    const {isShopOpen} = useStore()
     return (
         <div className={styles.overlay}>
             <Player></Player>

@@ -3,7 +3,7 @@ import { ORIGIN_GRID, GRID_COL, GRID_ROW, CELL_SIZE } from 'constants'
 import { extend, useFrame, useLoader } from "@react-three/fiber"
 import * as THREE from 'three'
 import * as Nodes from "three/examples/jsm/nodes/Nodes.js"
-import { useStore } from '@/store/Store'
+
 extend(Nodes)
 
 
@@ -19,7 +19,7 @@ const InstancedFloor = ({ Material, matMap, index }) => {
     }
 
     const meshRef = useRef(undefined)
-    useLayoutEffect (() => {
+    useEffect (() => {
         let i = 0
         for (let j = 0; j < matMap.length; j++) {
             tempObject.position.set(CELL_SIZE / 2 + matMap[j].x * CELL_SIZE, 0, CELL_SIZE / 2 + matMap[j].z * CELL_SIZE)

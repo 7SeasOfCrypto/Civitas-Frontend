@@ -5,21 +5,20 @@ import * as three from 'three'
 
 export default function Model(props) {
   const group = useRef()
-  const { nodes, materials } = useGLTF('/models/map.glb')
+  const { nodes, materials } = useGLTF('/models/map22.glb')
   materials.PipoMaterial.side = three.DoubleSide
   return (
     <group ref={group} {...props} position={[158, -13.7, 45]} dispose={null}>
       <group rotation={[0, Math.PI / 4 * 6, 0]} >
         <group scale={[1.06, 1, 1.06]}>
           <mesh geometry={nodes.PipoIsland.geometry} material={materials.PipoMaterial} />
-          
         </group>
       </group>
     </group>
   )
 }
 
-useGLTF.preload('/models/levelmap.glb')
+useGLTF.preload('/models/levelmap22.glb')
 
 
 

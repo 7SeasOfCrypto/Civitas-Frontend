@@ -1,11 +1,14 @@
-
+import {Suspense} from 'react'
 import { Canvas } from '@react-three/fiber'
+import Preloader from '../Preloader'
+import { Environment, useProgress } from '@react-three/drei'
 import Scene from '@/components/Scene'
-import { GizmoHelper, GizmoViewcube, GizmoViewport } from '@react-three/drei'
-
 const Stage = () => {
+    
+    const {progress}=useProgress()
+    
     return (
-        <Canvas
+        <Canvas style={{cursor:"none"}}
             camera={{
                 position: [-106, 81, -68],
                 rotation: [-2.27, -0.78, -2.44],
@@ -30,29 +33,16 @@ const Stage = () => {
                 shadow-mapSize-width={1024}
                 shadow-mapSize-height={1024}
             />
+
+            <Suspense fallback={null}>
+                <Preloader percent={progress}></Preloader>
+            </Suspense>:
+            <Suspense fallback={null}>
+                <Scene></Scene>
+                <Environment preset="warehouse" background={true}/>
+            </Suspense>
             
-             
-              
-            <Scene></Scene>
-             {/*
-            <GizmoHelper
-                alignment='bottom-middle'
-                margin={[800,50]}
-            >
 
-                <GizmoViewcube
-                    faces={['Right', 'Left', 'Top', 'Bottom', 'Front', 'Back']}
-                    opacity={1}
-                    color={ 'white'}
-                    strokeColor={ 'gray'}
-                    textColor={ 'black'}
-                    hoverColor={ 'lightgray'}
-                />
-
-
-
-            </GizmoHelper>
-             */} 
         </Canvas>
     )
 }
@@ -68,4 +58,6 @@ axisColors={[
 ]}
 labelColor={color('labelColor', 'black', 'ViewPort')}
 hideNegativeAxes={boolean('hideNegativeAxes', false, 'ViewPort')}
+
+<Sky distance={45000} sunPosition={[0, 1, 0]} inclination={0} azimuth={0.5} />
 />*/
