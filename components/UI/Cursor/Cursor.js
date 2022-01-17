@@ -7,7 +7,7 @@ const Cursor = () => {
     return (
         <div className={styles.cursorContainer}>
             <div className={styles.cursor} style={{top:`${cursorPos.y}px`,left:`${cursorPos.x}px`}}>
-            <img src={cursorType==='Pointer'?'/Cursors/Pointer.webp':'/Cursors/PlaceCursor.webp'} alt='cursor'></img>
+            <img src={cursorType==='Pointer'?'/Cursors/Pointer.webp':'/Cursors/PlaceCursor.webp'} alt='cursor' height='90px' width='90px'></img>
             </div>
         </div>
     );

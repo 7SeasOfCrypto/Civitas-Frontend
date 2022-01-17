@@ -1,4 +1,4 @@
-import {useEffect} from 'react'
+import {useEffect,Suspense} from 'react'
 import { useLoader } from "@react-three/fiber"
 import * as THREE from 'three'
 import { useStore } from '@/store/Store'
@@ -28,6 +28,8 @@ const Floor = () => {
     return (
         <>
             <group renderOrder={1}>
+       
+                
                 <mesh position={[CELL_SIZE * 25, 0, CELL_SIZE * 25]}   castShadow   receiveShadow>
                     <boxGeometry args={[CELL_SIZE * 50 + .1, .5, CELL_SIZE * 50 + .1]}>
                     </boxGeometry>

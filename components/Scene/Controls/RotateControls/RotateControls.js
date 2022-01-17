@@ -34,7 +34,7 @@ const RotateControl = () => {
     const group = useRef(null)
     const { rotateRight,rotateLeft,updateMap,addBuilding } = useStore(state => state.actions)
     const {map}=useStore(state=>state.maps)
-    const { BuildId, type ,Pivot, geoCenter,size ,rotation} = useStore(state => state.rotateMode)
+    const { BuildId, type ,Pivot, geoCenter,size ,rotation,name,level} = useStore(state => state.rotateMode)
     
     const [matcapIsNotValid] = useMatcapTexture('E80404_B50404_CB0404_FC3333')
     const [matcapIsValid] = useMatcapTexture('D1AC04_F8E50A_EDD004_B38D04')
@@ -49,7 +49,7 @@ const RotateControl = () => {
     const onPlaceBuilding = () => {
         const completed=0
         cursorChange('Pointer')
-        addBuilding({Pivot,BuildId,type,completed,rotation,geoCenter,size,rotation})
+        addBuilding({Pivot,BuildId,type,completed,rotation,geoCenter,size,rotation,name,level})
         updateMap(createNewMap({Pivot, map,size}))
         
     }
