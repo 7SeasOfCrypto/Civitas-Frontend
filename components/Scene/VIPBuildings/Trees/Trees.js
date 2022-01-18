@@ -124,6 +124,17 @@ const Trees = () => {
                     <Floresitas2 position = {[2.2,0,0]}></Floresitas2>
                     </group>
                 </group>
+
+                <group position = {[124.9,1.1,148.6]} scale = {[3,3,3]}>    {/*Flores decoración Edificio Derecha*/}
+                <Bush1 position = {[3.35,0,0]}></Bush1>
+                <Bush1 position = {[0,0,0]}></Bush1>
+                <Bush1 position = {[-0.75,0,0]}></Bush1>
+                <Bush1 position = {[4.1,0,0]}></Bush1>
+                    <group position = {[0,0,0]}>
+                    <Bush1 position = {[3.35,0,0]}></Bush1>
+                
+                    </group>
+                </group>
                 
                 <group position = {[51.65,0,25.325]} scale = {[3,3,3]}>    {/*Flores decoración Plaza Mercado*/}
                 <Floresitas2 color={FlowerPurple} position = {[0,0,0]}></Floresitas2>

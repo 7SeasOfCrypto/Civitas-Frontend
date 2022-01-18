@@ -7,7 +7,7 @@ import { useGLTF } from '@react-three/drei'
 
 export default function Model({berry = 0xFFFF00, wood = 0x60200F, leaf = 0x38610B, ...props }) {
   const group = useRef()
-  const { nodes, materials } = useGLTF('models/BushDec-transformed.glb')
+  const { nodes, materials } = useGLTF('/models/BushDec.glb')
   return (
     <group ref={group} {...props} dispose={null}>
       <group rotation={[-Math.PI / 180 * 90, 0, 0]} scale={0.1}>
@@ -25,4 +25,4 @@ export default function Model({berry = 0xFFFF00, wood = 0x60200F, leaf = 0x38610
   )
 }
 
-useGLTF.preload('models/BushDec-transformed.glb')
+useGLTF.preload('/models/BushDec.glb')

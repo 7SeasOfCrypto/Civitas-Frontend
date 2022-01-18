@@ -7,7 +7,7 @@ import { useGLTF } from '@react-three/drei'
 
 export default function Model({grass=0x25ff25,tree1=0x60200F,tree2=0xCF922E,rock=0xa0a0a0a0, ...props }) {
   const group = useRef()
-  const { nodes, materials } = useGLTF('models/TreeRuined-transformed.glb')
+  const { nodes, materials } = useGLTF('/models/TreeRuined.glb')
   return (
     <group ref={group} {...props} dispose={null}>
       <mesh geometry={nodes.Cube010.geometry}>
@@ -26,4 +26,4 @@ export default function Model({grass=0x25ff25,tree1=0x60200F,tree2=0xCF922E,rock
   )
 }
 
-useGLTF.preload('models/TreeRuined-transformed.glb')
+useGLTF.preload('/models/TreeRuined.glb')

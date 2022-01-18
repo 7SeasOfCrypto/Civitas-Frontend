@@ -7,7 +7,7 @@ import { useGLTF } from '@react-three/drei'
 
 export default function Model({color=0xa0a0a0, ...props }) {
   const group = useRef()
-  const { nodes, materials } = useGLTF('models/RockGrassBig-transformed.glb')
+  const { nodes, materials } = useGLTF('/models/RockGrassBig.glb')
   return (
     <group ref={group} {...props} dispose={null}>
       <mesh geometry={nodes.rock.geometry}>
@@ -17,4 +17,4 @@ export default function Model({color=0xa0a0a0, ...props }) {
   )
 }
 
-useGLTF.preload('models/RockGrassBig-transformed.glb')
+useGLTF.preload('/models/RockGrassBig.glb')

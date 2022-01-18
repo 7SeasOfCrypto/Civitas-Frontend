@@ -10,7 +10,7 @@ import { extend, useFrame, useLoader } from "@react-three/fiber"
 export default function Model({ ...props }) {
   const group = useRef()
   const hweapons = useLoader(THREE.TextureLoader, '/Textures/TUnitsBlue.webp')
-  const { nodes, materials } = useGLTF('/Models/HWeapons/CatapultLl2.glb')
+  const { nodes, materials } = useGLTF('/models/HWeapons/CatapultLl2.glb')
   return (
     <group ref={group} {...props} dispose={null}>
       <skinnedMesh
@@ -24,4 +24,4 @@ export default function Model({ ...props }) {
   )
 }
 
-useGLTF.preload('/Models/HWeapons//CatapultLl2.glb')
+useGLTF.preload('/models/HWeapons/CatapultLl2.glb')

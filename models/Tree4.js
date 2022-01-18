@@ -8,7 +8,7 @@ import { useGLTF } from '@react-three/drei'
 export default function Model({ color1,color2,...props }) {
   const group = useRef()
 
-  const { nodes, materials } = useGLTF('models/Tree4-transformed.glb')
+  const { nodes, materials } = useGLTF('/models/Tree4.glb')
   return (
     <group ref={group} {...props} dispose={null}>
       <group rotation={[1.56, 0.02, 2.45]} scale = {[1,1,1]}>
@@ -25,4 +25,4 @@ export default function Model({ color1,color2,...props }) {
   )
 }
 
-useGLTF.preload('models/Tree4-transformed.glb')
+useGLTF.preload('/models/Tree4.glb')

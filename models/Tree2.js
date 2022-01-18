@@ -7,7 +7,7 @@ import { useGLTF } from '@react-three/drei'
 
 export default function Model({ ...props }) {
   const group = useRef()
-  const { nodes, materials } = useGLTF('models/tree2-transformed.glb')
+  const { nodes, materials } = useGLTF('/models/tree2.glb')
   return (
     <group ref={group} {...props} dispose={null}>
       <group position={[0, 33.43, 0]} rotation={[Math.PI / 2, 0, -1.48]}>
@@ -22,4 +22,4 @@ export default function Model({ ...props }) {
   )
 }
 
-useGLTF.preload('models/tree2-transformed.glb')
+useGLTF.preload('/models/tree2.glb')

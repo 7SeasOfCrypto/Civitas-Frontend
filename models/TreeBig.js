@@ -7,7 +7,7 @@ import { useGLTF } from '@react-three/drei'
 
 export default function Model({ ...props }) {
   const group = useRef()
-  const { nodes, materials } = useGLTF('models/TreeBig-transformed.glb')
+  const { nodes, materials } = useGLTF('/models/TreeBig.glb')
   return (
     <group ref={group} {...props} dispose={null}>
       <mesh geometry={nodes.lowpoly_tree_04_Plane005.geometry}>
@@ -20,4 +20,4 @@ export default function Model({ ...props }) {
   )
 }
 
-useGLTF.preload('models/TreeBig-transformed.glb')
+useGLTF.preload('/models/TreeBig.glb')

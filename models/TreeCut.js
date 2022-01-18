@@ -7,7 +7,7 @@ import { useGLTF } from '@react-three/drei'
 
 export default function Model({tree1=0x60200F,tree2=0xCF922E,rock= 0x8f8f8a,grass= 0x4FBD34,...props }) {
   const group = useRef()
-  const { nodes, materials } = useGLTF('models/TreeCut-transformed.glb')
+  const { nodes, materials } = useGLTF('/models/TreeCut.glb')
   return (
     <group ref={group} {...props} dispose={null}>
       <group position={[3.23, 0.02, -4.77]} rotation={[Math.PI / 2, 0, 2.57]} scale={[0.47, 0.47, 0.47]}>
@@ -28,4 +28,4 @@ export default function Model({tree1=0x60200F,tree2=0xCF922E,rock= 0x8f8f8a,gras
   )
 }
 
-useGLTF.preload('models/TreeCut-transformed.glb')
+useGLTF.preload('/models/TreeCut.glb')

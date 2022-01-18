@@ -18,8 +18,6 @@ const Buildings = () => {
             openModal(BuildId)
 
     }
-    console.log("***********")
-    console.log(placedBuildings)
     const ArrayBuild = placedBuildings.map((property, index) => {
         const { x, y, BuildId, type, level, completed,timeCreated,rotation,geoCenter,size,percent } = property
         const typeData=modelsBuild.find((modelItem)=>modelItem.type===type )

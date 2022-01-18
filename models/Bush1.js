@@ -7,7 +7,7 @@ import { useGLTF } from '@react-three/drei'
 
 export default function Model({color1=0x35652B, ...props }) {
   const group = useRef()
-  const { nodes, materials } = useGLTF('models/Bush1-transformed.glb')
+  const { nodes, materials } = useGLTF('/models/Bush1.glb')
   return (
     <group ref={group} {...props} dispose={null}>
       <mesh
@@ -22,4 +22,4 @@ export default function Model({color1=0x35652B, ...props }) {
   )
 }
 
-useGLTF.preload('models/Bush1-transformed.glb')
+useGLTF.preload('/models/Bush1.glb')

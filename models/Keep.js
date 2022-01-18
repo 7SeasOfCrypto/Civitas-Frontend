@@ -4,7 +4,7 @@ import { BuildingMat } from './Building.mat'
 
 export default function Model({ ...props }) {
   const group = useRef()
-  const { nodes, materials } = useGLTF('/Models/Buildings/Keep.glb')
+  const { nodes, materials } = useGLTF('/models/Buildings/Keep.glb')
   return (
     <group ref={group} {...props} dispose={null}>
       <mesh geometry={nodes.SM_Keep.geometry}
@@ -16,4 +16,4 @@ export default function Model({ ...props }) {
   )
 }
 
-useGLTF.preload('/Models/Buildings/Keep.glb')
+useGLTF.preload('/models/Buildings/Keep.glb')

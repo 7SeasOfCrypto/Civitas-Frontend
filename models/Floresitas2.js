@@ -12,7 +12,7 @@ export default function Model({color='Textures/FlowerOrange.webp', ...props }) {
   const group = useRef()
   const flower = useLoader(THREE.TextureLoader, color)
 
-  const { nodes, materials } = useGLTF('models/Floresitas2-transformed.glb')
+  const { nodes, materials } = useGLTF('/models/Floresitas2.glb')
   return (
     <group ref={group} {...props} dispose={null}>
       <mesh
@@ -26,4 +26,4 @@ export default function Model({color='Textures/FlowerOrange.webp', ...props }) {
   )
 }
 
-useGLTF.preload('models/Floresitas2-transformed.glb')
+useGLTF.preload('/models/Floresitas2.glb')
