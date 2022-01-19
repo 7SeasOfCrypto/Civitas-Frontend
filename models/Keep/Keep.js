@@ -10,7 +10,7 @@ export default function Model({colors,...props}) {
     <group ref={group} {...props} dispose={null}>
         <mesh geometry={nodes.SM_Keep.geometry} castShadow receiveShadow>
         {!props.children?
-          <BuildingMat attack={'material'}></BuildingMat>
+          <BuildingMat attach={'material'}></BuildingMat>
         : props.children
         }
       </mesh>
