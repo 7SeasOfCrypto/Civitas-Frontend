@@ -28,7 +28,7 @@ const Ground = ({ capture = false, setHover }) => {
 //textures[2].repeat.set(1,.5)
 
 const materials = colors.map((value, index) =>(<meshStandardMaterial  map={textures[index]} key={index} />) ) 
-  const GroundTile = mapMaterial.map((value, index) => index !== 0 ? <InstancedFloor key={index} matMap={value} Material={materials[index]} index={index} /> : null)
+const GroundTile = mapMaterial.map((value, index) => index !== 0 ? <InstancedFloor key={index} matMap={value} Material={materials[index]} index={index} /> : null)
   
   return (
     <>

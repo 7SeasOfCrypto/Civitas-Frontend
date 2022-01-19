@@ -20,19 +20,20 @@ const Stage = ({pre}) => {
             
             orthographic={1}>
 
-              {
+              {/* {
                 <ambientLight intensity={0.25}
                 />
                 
-              } 
-            <directionalLight
+              }  */}
+
+            {/* <directionalLight
                 color={0xffffff}  
-                instensity={3}
+                instensity={0.2}
                 position={[-5, 5, 5]}
                 castShadow
                 shadow-mapSize-width={1024}
                 shadow-mapSize-height={1024}
-            />
+            /> */}
 
             <Suspense fallback={null}>
                 <Preloader color='blue' percent={progress}></Preloader>

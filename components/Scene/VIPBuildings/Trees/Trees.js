@@ -1,8 +1,6 @@
 import { Suspense } from 'react'
-import Tree from '/models/Tree'
 import Tree3 from '/models/Tree3'
 import Tree4 from '/models/Tree4'
-import Floresitas from '/models/Floresitas'
 import Floresitas2 from '/models/Floresitas2'
 import TreeBig from '/models/TreeBig'
 import TreeRuined from '/models/TreeRuined'
@@ -100,7 +98,7 @@ const Trees = () => {
                 <Tree4 position = {[35.5,0,0]}></Tree4>
                 </group>
                 
-                <group position = {[54.8,1.8,25]} scale = {[2,2,2]}>                    {/*Arbustos decoración Plaza Mercado*/}
+                <group position = {[54.8,1.8,25]} scale = {[2,2,2]}>                      {/*Arbustos decoración Plaza Mercado*/}
                 <BushDec position = {[0,0,0]}></BushDec>
                 <BushDec position = {[6.7,0,0]}></BushDec>
                     <group position = {[0,0,1.6]}>
@@ -116,7 +114,7 @@ const Trees = () => {
                 </group>
 
 
-                <group position = {[55,0,21.9]} scale = {[3,3,3]}>    {/*Flores decoración Edificio Izquierda*/}
+                <group position = {[55,0,21.9]} scale = {[3,3,3]}>                        {/*Flores decoración Edificio Izquierda*/}
                 <Floresitas2 position = {[4.45,0,-1.1]}></Floresitas2>
                 <Floresitas2 position = {[0,0,-1.1]}></Floresitas2>
                     <group position = {[1.1,0,-1.1]}>
@@ -125,14 +123,38 @@ const Trees = () => {
                     </group>
                 </group>
 
-                <group position = {[124.9,1.1,148.6]} scale = {[3,3,3]}>    {/*Flores decoración Edificio Derecha*/}
+                <group position = {[124.9,1.1,148]} scale = {[3,3,3]}>                  {/*Flores decoración Edificio Derecha*/}
                 <Bush1 position = {[3.35,0,0]}></Bush1>
                 <Bush1 position = {[0,0,0]}></Bush1>
                 <Bush1 position = {[-0.75,0,0]}></Bush1>
                 <Bush1 position = {[4.1,0,0]}></Bush1>
-                    <group position = {[0,0,0]}>
-                    <Bush1 position = {[3.35,0,0]}></Bush1>
-                
+                    <group position = {[0,0,0.75]}>
+                    <Bush1 position = {[4.1,0,0]}></Bush1>
+                    <Bush1 position = {[-0.75,0,0]}></Bush1>
+                        <group position = {[0,0,0.75]}>
+                        <Bush1 position = {[4.1,0,0]}></Bush1>
+                        <Bush1 position = {[-0.75,0,0]}></Bush1>
+                        <group position = {[0,0,0.75]}>
+                            <Bush1 position = {[4.1,0,0]}></Bush1>
+                            <Bush1 position = {[-0.75,0,0]}></Bush1>        
+                            <group position = {[0,0,0.75]}>
+                                <Bush1 position = {[4.1,0,0]}></Bush1>
+                                <Bush1 position = {[-0.75,0,0]}></Bush1>
+                                    <group position = {[0.06,0,0.35]}>
+                                    <Bush1 position = {[3.3,0,0]}></Bush1>
+                                    <Bush1 position = {[2.5,0,0]}></Bush1>
+                                    <Bush1 position = {[1.65,0,0]}></Bush1>
+                                    <Bush1 position = {[0.8,0,0]}></Bush1>
+                                    <Bush1 position = {[0,0,0]}></Bush1>
+                                
+                                    </group>
+                                </group>
+                            </group>
+
+
+
+                        </group>
+
                     </group>
                 </group>
                 
