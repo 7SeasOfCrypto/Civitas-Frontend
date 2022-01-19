@@ -219,6 +219,44 @@ export const mapGenerator=(row,col)=>{
     //6 frontier
     maproad=drawLine(maproad,{x:0,y:45},{x:49,y:45},6)  //Línea final
     maproad=drawRect(maproad,{x:0,y:46},{x:49,y:49},6)  //Parte Final
+        //========
+        //Árboles obstaculizadores
+        maproad=drawPoint(maproad,{x:1,y:9},6)  //Abajo Izquierda 1
+        maproad=drawPoint(maproad,{x:1,y:13},6) //Abajo Izquierda 2
+        maproad=drawPoint(maproad,{x:1,y:17},6) //Abajo Izquierda 3
+        maproad=drawPoint(maproad,{x:1,y:21},6) //Abajo Izquierda 4
+
+        maproad=drawPoint(maproad,{x:1,y:29},6) //Abajo Derecha 1
+        maproad=drawPoint(maproad,{x:1,y:33},6) //Abajo Derecha 2
+        maproad=drawPoint(maproad,{x:1,y:37},6) //Abajo Derecha 3
+        maproad=drawPoint(maproad,{x:1,y:41},6) //Abajo Derecha 4
+
+        maproad=drawPoint(maproad,{x:12,y:21},6) //Centro Abajo 1
+        maproad=drawPoint(maproad,{x:12,y:25},6) //Centro Abajo 2
+        maproad=drawPoint(maproad,{x:12,y:29},6) //Centro Abajo 3
+
+        maproad=drawPoint(maproad,{x:24,y:21},6) //Centro Arriba 1
+        maproad=drawPoint(maproad,{x:24,y:25},6) //Centro Arriba 2
+        maproad=drawPoint(maproad,{x:24,y:29},6) //Centro Arriba 3
+
+        maproad=drawPoint(maproad,{x:13,y:1},6)  //Lado Izquierdo 1
+        maproad=drawPoint(maproad,{x:23,y:1},6)  //Lado Izquierdo 2
+
+        maproad=drawPoint(maproad,{x:35,y:17},6) //Superior Abajo 1
+        maproad=drawPoint(maproad,{x:35,y:21},6) //Superior Abajo 2
+        maproad=drawPoint(maproad,{x:35,y:25},6) //Superior Abajo 3
+
+        maproad=drawPoint(maproad,{x:45,y:17},6) //Superior Arriba 1
+        maproad=drawPoint(maproad,{x:45,y:21},6) //Superior Arriba 2
+        maproad=drawPoint(maproad,{x:45,y:25},6) //Superior Arriba 3
+
+        maproad=drawPoint(maproad,{x:34,y:35},6) //Superior Derecha
+
+        maproad=drawRect(maproad,{x:45,y:0},{x:48,y:4},6)   //Deco Corner Superior Izquierda
+        maproad=drawRect(maproad,{x:46,y:41},{x:49,y:44},6) //Deco Corner Superior Dercha
+
+
+    
 
     //extra
     maproad=drawRect(maproad,{x:15,y:45},{x:21,y:49},1) //Final Stone linea
