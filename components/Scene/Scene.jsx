@@ -11,13 +11,15 @@ import TownCenter from './VIPBuildings/TownCenter'
 import Blacksmith from './VIPBuildings/Blacksmith'
 import Trees from './VIPBuildings/Trees'
 import Controls from './Controls'
+import MWater from '@/models/mWater'
+import FarIsland from '@/models/farIsland'
+
 
 const Scene = () => {
-    
+
     return (
         <>
-
-<Controller></Controller>
+            <Controller/>
             <Suspense fallback={null}>
                 <Floor></Floor>
             </Suspense>
@@ -25,6 +27,8 @@ const Scene = () => {
                 <Buildings></Buildings>
             </Suspense>
             <Suspense fallback={null}>
+                <MWater></MWater>
+                <FarIsland> </FarIsland>
                 <Level></Level>
                 <Stronghold></Stronghold>
                 <Market></Market>
