@@ -51,7 +51,7 @@ const MoveControls = () => {
             enterRotate()
         }
     }
-    
+        console.log(geoCenter.x,geoCenter.z)
     return (
         <>
 

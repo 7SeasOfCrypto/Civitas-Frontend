@@ -8,7 +8,7 @@ import { extend, useFrame, useLoader } from "@react-three/fiber"
 import * as THREE from 'three'
 
 
-export default function Model({color='Textures/FlowerOrange.webp', ...props }) {
+export default function Model({color='/Textures/FlowerOrange.webp', ...props }) {
   const group = useRef()
   const flower = useLoader(THREE.TextureLoader, color)
 

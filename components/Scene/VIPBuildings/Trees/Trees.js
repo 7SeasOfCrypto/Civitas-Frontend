@@ -19,9 +19,9 @@ import WellOfAscension from '/models/Well'
 const Trees = () => {
     const TreeScale = [1.5,1.5,1.5]
     const RoyalTreeColor = 0x1A3229
-    const FlowerRed = 'Textures/FlowerRed.webp'
-    const FlowerPurple = 'Textures/FlowerPurple.webp'
-    const FlowerPink = 'Textures/FlowerPink.webp'
+    const FlowerRed = '/Textures/FlowerRed.webp'
+    const FlowerPurple = '/Textures/FlowerPurple.webp'
+    const FlowerPink = '/Textures/FlowerPink.webp'
 
     return (
         <Suspense fallback={null}>
